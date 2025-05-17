@@ -73,7 +73,7 @@
       const urlParams = new URLSearchParams(window.location.search);
       const langParam = urlParams.get('lang');
       
-      if (langParam && ['fr', 'en', 'es', 'zh', 'ar', 'hi'].includes(langParam)) {
+      if (langParam && ['fr', 'en', 'es', 'zh', 'ar', 'hi', 'de'].includes(langParam)) {
         setLanguage(langParam);
       } else {
         setLanguage(savedLanguage);
@@ -94,8 +94,6 @@
       });
     });
   </script>
-  
-
 </head>
 <body>
   <!-- Lien d'accessibilité pour passer au contenu principal -->
@@ -107,10 +105,7 @@
     <div class="language-buttons" role="group" aria-label="Sélection de langue">
       <button onclick="setLanguage('fr')" aria-label="Français" title="Passer en français">🇫🇷</button>
       <button onclick="setLanguage('en')" aria-label="English" title="Switch to English">🇬🇧</button>
-      <button onclick="setLanguage('es')" aria-label="Español" title="Cambiar a español">🇪🇸</button>
-      <button onclick="setLanguage('zh')" aria-label="中文" title="切换到中文">🇨🇳</button>
-      <button onclick="setLanguage('ar')" aria-label="العربية" title="التبديل إلى العربية">🇸🇦</button>
-      <button onclick="setLanguage('hi')" aria-label="हिंदी" title="हिंदी में स्विच करें">🇮🇳</button>
+      <button onclick="setLanguage('de')" aria-label="Deutsch" title="Auf Deutsch umschalten">DE</button>
     </div>
   </header>
 
@@ -119,9 +114,9 @@
     <a href="./FORMATION.html">FORMATIONS</a>
     <a href="./EXPERIENCE-PROJET.html">EXPERIENCES & PROJETS</a>
     <a href="./COMPETENCES.html">COMPETENCES</a>
-    <a href="./CENTRE-D'INTERET.html">CENTRES D'INTERET</a>
+    <a href="./CENTRE-D'INTERET.html">CENTRES D'INTERETS</a>
     <a class="active" href="./AMBITION.html">AMBITIONS</a>
-    <a href="./CONTACT.html">CONTACT</a>
+    <a href="./CONTACT.html">CONTACTS</a>
   </nav>
 
   <main id="main-content">
@@ -292,7 +287,7 @@
                     I plan to pursue a master's degree in cybersecurity after my Bachelor's degree, potentially in a work-study program to combine theory and professional practice.
                   </div>
                 </li>
-				<li id="ambition-social-en" onclick="event.stopPropagation(); toggleAmbitionDetail('ambition-social-en')"
+                <li id="ambition-social-en" onclick="event.stopPropagation(); toggleAmbitionDetail('ambition-social-en')"
                     onkeypress="if(event.key==='Enter') {event.stopPropagation(); toggleAmbitionDetail('ambition-social-en')}"
                     tabindex="0" role="button">
                   Contribute to socially impactful projects
@@ -353,58 +348,106 @@
       </div>
     </section>
 
-    <section class="lang es">
-      <h2>Mis ambiciones</h2>
+    <section class="lang de">
+      <h2>Meine Ambitionen</h2>
       
-      <!-- Version espagnole améliorée et interactive -->
       <div class="ambition-container">
-        <div id="ambition-short-es" class="ambition-card" onclick="toggleAmbitionCard('ambition-short-es')"
+        <div id="ambition-short-de" class="ambition-card" onclick="toggleAmbitionCard('ambition-short-de')"
              tabindex="0" role="button" aria-expanded="false"
-             onkeypress="if(event.key==='Enter') toggleAmbitionCard('ambition-short-es')">
+             onkeypress="if(event.key==='Enter') toggleAmbitionCard('ambition-short-de')">
           <div class="ambition-header">
-            <h3><span class="ambition-emoji">🎯</span> Corto plazo</h3>
+            <h3><span class="ambition-emoji">🎯</span> Kurzfristig</h3>
             <div class="status-indicator">+</div>
           </div>
           <div class="ambition-content">
             <div class="ambition-details">
               <ul>
-                <li>Adquirir experiencia en seguridad de redes</li>
-                <li>Participar en proyectos reales en empresas</li>
+                <li id="ambition-security-de" onclick="event.stopPropagation(); toggleAmbitionDetail('ambition-security-de')"
+                    onkeypress="if(event.key==='Enter') {event.stopPropagation(); toggleAmbitionDetail('ambition-security-de')}"
+                    tabindex="0" role="button">
+                  Fachwissen im Bereich Netzwerksicherheit erwerben
+                  <div class="ambition-item-detail">
+                    Ich möchte mich auf Netzwerksicherheitsprotokolle spezialisieren, indem ich zusätzliche Kurse belege und persönliche Projekte auf Plattformen wie TryHackMe oder HackTheBox durchführe.
+                  </div>
+                </li>
+                <li id="ambition-projects-de" onclick="event.stopPropagation(); toggleAmbitionDetail('ambition-projects-de')"
+                    onkeypress="if(event.key==='Enter') {event.stopPropagation(); toggleAmbitionDetail('ambition-projects-de')}"
+                    tabindex="0" role="button">
+                  Mitarbeit an konkreten Projekten im Unternehmen
+                  <div class="ambition-item-detail">
+                    Mein Ziel ist es, einen Praktikumsplatz in einem auf Cybersicherheit spezialisierten Unternehmen zu finden, um mein Wissen in die Praxis umzusetzen und konkrete Berufserfahrung zu sammeln.
+                  </div>
+                </li>
               </ul>
             </div>
           </div>
         </div>
         
-        <div id="ambition-medium-es" class="ambition-card" onclick="toggleAmbitionCard('ambition-medium-es')"
+        <div id="ambition-medium-de" class="ambition-card" onclick="toggleAmbitionCard('ambition-medium-de')"
              tabindex="0" role="button" aria-expanded="false"
-             onkeypress="if(event.key==='Enter') toggleAmbitionCard('ambition-medium-es')">
+             onkeypress="if(event.key==='Enter') toggleAmbitionCard('ambition-medium-de')">
           <div class="ambition-header">
-            <h3><span class="ambition-emoji">🚀</span> Medio plazo</h3>
+            <h3><span class="ambition-emoji">🚀</span> Mittelfristig</h3>
             <div class="status-indicator">+</div>
           </div>
           <div class="ambition-content">
             <div class="ambition-details">
               <ul>
-                <li>Especializarme en ciberseguridad</li>
-                <li>Contribuir a proyectos útiles para la sociedad</li>
+                <li id="ambition-cyber-de" onclick="event.stopPropagation(); toggleAmbitionDetail('ambition-cyber-de')"
+                    onkeypress="if(event.key==='Enter') {event.stopPropagation(); toggleAmbitionDetail('ambition-cyber-de')}"
+                    tabindex="0" role="button">
+                  Spezialisierung auf Cybersicherheit
+                  <div class="ambition-item-detail">
+                    Ich plane, nach meinem BUT einen spezialisierten Master-Abschluss in Cybersicherheit zu absolvieren, möglicherweise im dualen Studium, um Theorie und Berufspraxis zu kombinieren.
+                  </div>
+                </li>
+                <li id="ambition-social-de" onclick="event.stopPropagation(); toggleAmbitionDetail('ambition-social-de')"
+                    onkeypress="if(event.key==='Enter') {event.stopPropagation(); toggleAmbitionDetail('ambition-social-de')}"
+                    tabindex="0" role="button">
+                  Zu Projekten beitragen, die der Gesellschaft nützlich sind
+                  <div class="ambition-item-detail">
+                    Ich möchte an Projekten mitwirken, die einen positiven Einfluss auf die Gesellschaft haben, insbesondere im Bereich des Schutzes personenbezogener Daten und der Sicherheit kritischer Systeme.
+                  </div>
+                </li>
               </ul>
             </div>
           </div>
         </div>
         
-        <div id="ambition-long-es" class="ambition-card" onclick="toggleAmbitionCard('ambition-long-es')"
+        <div id="ambition-long-de" class="ambition-card" onclick="toggleAmbitionCard('ambition-long-de')"
              tabindex="0" role="button" aria-expanded="false"
-             onkeypress="if(event.key==='Enter') toggleAmbitionCard('ambition-long-es')">
+             onkeypress="if(event.key==='Enter') toggleAmbitionCard('ambition-long-de')">
           <div class="ambition-header">
-            <h3><span class="ambition-emoji">🌟</span> Largo plazo</h3>
+            <h3><span class="ambition-emoji">🌟</span> Langfristig</h3>
             <div class="status-indicator">+</div>
           </div>
           <div class="ambition-content">
             <div class="ambition-details">
               <ul>
-                <li>Convertirme en experta en ciberseguridad en defensa o industria</li>
-                <li>Fundar mi propia empresa tecnológica</li>
-                <li>Desarrollar soluciones innovadoras y de alto impacto</li>
+                <li id="ambition-expert-de" onclick="event.stopPropagation(); toggleAmbitionDetail('ambition-expert-de')"
+                    onkeypress="if(event.key==='Enter') {event.stopPropagation(); toggleAmbitionDetail('ambition-expert-de')}"
+                    tabindex="0" role="button">
+                  Cybersicherheitsexpertin im Verteidigungs- oder Industriebereich werden
+                  <div class="ambition-item-detail">
+                    Mein langfristiges Ziel ist es, mit anerkannten Zertifizierungen und fundierter Expertise im Schutz kritischer Infrastrukturen zu einem Maßstab in der Cybersicherheit zu werden.
+                  </div>
+                </li>
+                <li id="ambition-company-de" onclick="event.stopPropagation(); toggleAmbitionDetail('ambition-company-de')"
+                    onkeypress="if(event.key==='Enter') {event.stopPropagation(); toggleAmbitionDetail('ambition-company-de')}"
+                    tabindex="0" role="button">
+                  Gründung meines eigenen Technologieunternehmens
+                  <div class="ambition-item-detail">
+                    Ich träume davon, ein auf IT-Sicherheit spezialisiertes Unternehmen zu gründen, das innovative und zugängliche Lösungen anbietet, insbesondere für KMU, die oft über weniger Ressourcen verfügen, um sich zu schützen.
+                  </div>
+                </li>
+                <li id="ambition-innovation-de" onclick="event.stopPropagation(); toggleAmbitionDetail('ambition-innovation-de')"
+                    onkeypress="if(event.key==='Enter') {event.stopPropagation(); toggleAmbitionDetail('ambition-innovation-de')}"
+                    tabindex="0" role="button">
+                  Entwicklung innovativer, wirkungsvoller Lösungen
+                  <div class="ambition-item-detail">
+                    Ich möchte zu technologischen Innovationen beitragen, die sich positiv auf die Gesellschaft auswirken, wobei ich mich insbesondere auf Lösungen konzentriere, die Entwicklungsländern wie Burkina Faso zugute kommen können.
+                  </div>
+                </li>
               </ul>
             </div>
           </div>
@@ -413,206 +456,8 @@
       
       <div class="flex-container flex-center">
         <div class="float-quote">
-          <p>"Mi recorrido entre África y Europa me ha enseñado que la tecnología puede ser una gran palanca para el desarrollo. Mi ambición es utilizar mis habilidades en ciberseguridad para proteger las innovaciones que darán forma a un futuro más equitativo y seguro para todos."</p>
-          <cite>Mi visión profesional</cite>
-        </div>
-      </div>
-    </section>
-
-    <section class="lang zh">
-      <h2>我的投资</h2>
-      
-      <!-- Version chinoise améliorée et interactive -->
-      <div class="ambition-container">
-        <div id="ambition-short-zh" class="ambition-card" onclick="toggleAmbitionCard('ambition-short-zh')"
-             tabindex="0" role="button" aria-expanded="false"
-             onkeypress="if(event.key==='Enter') toggleAmbitionCard('ambition-short-zh')">
-          <div class="ambition-header">
-            <h3><span class="ambition-emoji">🎯</span> 短期</h3>
-            <div class="status-indicator">+</div>
-          </div>
-          <div class="ambition-content">
-            <div class="ambition-details">
-              <ul>
-                <li>获得网络安全的专业知识</li>
-                <li>参与公司的实际项目</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        
-        <div id="ambition-medium-zh" class="ambition-card" onclick="toggleAmbitionCard('ambition-medium-zh')"
-             tabindex="0" role="button" aria-expanded="false"
-             onkeypress="if(event.key==='Enter') toggleAmbitionCard('ambition-medium-zh')">
-          <div class="ambition-header">
-            <h3><span class="ambition-emoji">🚀</span> 中期</h3>
-            <div class="status-indicator">+</div>
-          </div>
-          <div class="ambition-content">
-            <div class="ambition-details">
-              <ul>
-                <li>在网络安全领域添加专业</li>
-                <li>贡献于社会有益的项目</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        
-        <div id="ambition-long-zh" class="ambition-card" onclick="toggleAmbitionCard('ambition-long-zh')"
-             tabindex="0" role="button" aria-expanded="false"
-             onkeypress="if(event.key==='Enter') toggleAmbitionCard('ambition-long-zh')">
-          <div class="ambition-header">
-            <h3><span class="ambition-emoji">🌟</span> 长期</h3>
-            <div class="status-indicator">+</div>
-          </div>
-          <div class="ambition-content">
-            <div class="ambition-details">
-              <ul>
-                <li>成为防守或工业领域的网络安全专家</li>
-                <li>创办我自己的科技公司</li>
-                <li>开发有创新性和影响力的解决方案</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <div class="flex-container flex-center">
-        <div class="float-quote">
-          <p>"我在非洲和欧洲之间的旅程教会了我，技术可以成为发展的巨大杠杆。我的志向是利用我的网络安全技能保护那些将塑造更公平、更安全的未来的创新。"</p>
-          <cite>我的职业愿景</cite>
-        </div>
-      </div>
-    </section>
-
-    <section class="lang ar" dir="rtl">
-      <h2>طموحاتي</h2>
-      
-      <!-- Version arabe améliorée et interactive -->
-      <div class="ambition-container">
-        <div id="ambition-short-ar" class="ambition-card" onclick="toggleAmbitionCard('ambition-short-ar')"
-             tabindex="0" role="button" aria-expanded="false"
-             onkeypress="if(event.key==='Enter') toggleAmbitionCard('ambition-short-ar')">
-          <div class="ambition-header">
-            <h3><span class="ambition-emoji">🎯</span> على المدى القصير</h3>
-            <div class="status-indicator">+</div>
-          </div>
-          <div class="ambition-content">
-            <div class="ambition-details">
-              <ul>
-                <li>اكتساب مهارة في أمان الشبكات</li>
-                <li>المشاركة في مشاريع فعلية في شركات</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        
-        <div id="ambition-medium-ar" class="ambition-card" onclick="toggleAmbitionCard('ambition-medium-ar')"
-             tabindex="0" role="button" aria-expanded="false"
-             onkeypress="if(event.key==='Enter') toggleAmbitionCard('ambition-medium-ar')">
-          <div class="ambition-header">
-            <h3><span class="ambition-emoji">🚀</span> متوسط المدى</h3>
-            <div class="status-indicator">+</div>
-          </div>
-          <div class="ambition-content">
-            <div class="ambition-details">
-              <ul>
-                <li>التخصص في أمان المعلومات</li>
-                <li>المساهمة في مشاريع تفيد المجتمع</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        
-        <div id="ambition-long-ar" class="ambition-card" onclick="toggleAmbitionCard('ambition-long-ar')"
-             tabindex="0" role="button" aria-expanded="false"
-             onkeypress="if(event.key==='Enter') toggleAmbitionCard('ambition-long-ar')">
-          <div class="ambition-header">
-            <h3><span class="ambition-emoji">🌟</span> على المدى الطويل</h3>
-            <div class="status-indicator">+</div>
-          </div>
-          <div class="ambition-content">
-            <div class="ambition-details">
-              <ul>
-                <li>أن أصبح خبيرة في أمان المعلومات لدى الدفاع أو الصناعة</li>
-                <li>إطلاق شركتي التكنولوجية</li>
-                <li>تطوير حلول مبدعة ومؤثرة</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <div class="flex-container flex-center">
-        <div class="float-quote">
-          <p>"علمتني رحلتي بين إفريقيا وأوروبا أن التكنولوجيا يمكن أن تكون رافعة هائلة للتنمية. طموحي هو استخدام مهاراتي في الأمن السيبراني لحماية الابتكارات التي ستشكل مستقبلًا أكثر إنصافًا وأمانًا للجميع."</p>
-          <cite>رؤيتي المهنية</cite>
-        </div>
-      </div>
-    </section>
-
-    <section class="lang hi">
-      <h2>मेरी अओर कांचे</h2>
-      
-      <!-- Version hindi améliorée et interactive -->
-      <div class="ambition-container">
-        <div id="ambition-short-hi" class="ambition-card" onclick="toggleAmbitionCard('ambition-short-hi')"
-             tabindex="0" role="button" aria-expanded="false"
-             onkeypress="if(event.key==='Enter') toggleAmbitionCard('ambition-short-hi')">
-          <div class="ambition-header">
-            <h3><span class="ambition-emoji">🎯</span> क्षुणकालीन लक्ष्य</h3>
-            <div class="status-indicator">+</div>
-          </div>
-          <div class="ambition-content">
-            <div class="ambition-details">
-              <ul>
-                <li>नेटवर्क सुरक्षा में कौशलता प्राप्त करना</li>
-                <li>कंपनियों में वास्तवव्य प्रोजेक्टों का ग्रहण करना</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        
-        <div id="ambition-medium-hi" class="ambition-card" onclick="toggleAmbitionCard('ambition-medium-hi')"
-             tabindex="0" role="button" aria-expanded="false"
-             onkeypress="if(event.key==='Enter') toggleAmbitionCard('ambition-medium-hi')">
-          <div class="ambition-header">
-            <h3><span class="ambition-emoji">🚀</span> मध्यम कालीन लक्ष्य</h3>
-            <div class="status-indicator">+</div>
-          </div>
-          <div class="ambition-content">
-            <div class="ambition-details">
-              <ul>
-                <li>साइबर सुरक्षा में विशेषज्ञत ज्ञान</li>
-                <li>समाज के लिए उपयोगी प्रोजेक्टों में योगदाना</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        
-        <div id="ambition-long-hi" class="ambition-card" onclick="toggleAmbitionCard('ambition-long-hi')"
-             tabindex="0" role="button" aria-expanded="false"
-             onkeypress="if(event.key==='Enter') toggleAmbitionCard('ambition-long-hi')">
-          <div class="ambition-header">
-            <h3><span class="ambition-emoji">🌟</span> दीर्घकालीन लक्ष्य</h3>
-            <div class="status-indicator">+</div>
-          </div>
-          <div class="ambition-content">
-            <div class="ambition-details">
-              <ul>
-                <li>रक्षा या औद्योगिक क्षेत्र में साइबर सुरक्षा की ज्ञानक बनना</li>
-                <li>खुद की टेक कंपनी का निर्माण करना</li>
-                <li>उच्च प्रभावावी जनकारी और उच्च प्रभावाव सोल्यूशनों का विकास करना</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <div class="flex-container flex-center">
-        <div class="float-quote">
-          <p>"अफ्रीका और यूरोप के बीच मेरी यात्रा ने मुझे सिखाया है कि प्रौद्योगिकी विकास का एक बड़ा उत्तोलक हो सकती है। मेरा लक्ष्य उन नवाचारों की रक्षा के लिए अपने साइबर सुरक्षा कौशल का उपयोग करना है जो सभी के लिए एक अधिक न्यायसंगत और सुरक्षित भविष्य का निर्माण करेंगे।"</p>
-          <cite>मेरा व्यावसायिक दृष्टिकोण</cite>
+          <p>"Auf meiner Reise zwischen Afrika und Europa habe ich gelernt, dass Technologie ein enormer Hebel für die Entwicklung sein kann. Mein Ziel ist es, meine Fähigkeiten im Bereich Cybersicherheit zu nutzen, um Innovationen zu schützen, die eine gerechtere und sicherere Zukunft für alle schaffen."</p>
+          <cite>Meine berufliche Vision</cite>
         </div>
       </div>
     </section>

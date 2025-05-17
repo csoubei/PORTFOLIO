@@ -24,7 +24,6 @@ body {
   background-color: #f8f9fa;
 }
 
-/* En-tête et pied de page */
 header, footer {
   background-color: #2c3e50;
   color: white;
@@ -43,7 +42,6 @@ header h2 {
   font-weight: normal;
 }
 
-/* Navigation */
 nav {
   background-color: #34495e;
   display: flex;
@@ -71,7 +69,6 @@ nav a.ici, nav a.active {
   background-color: rgba(241, 196, 15, 0.1);
 }
 
-/* Contenu principal */
 main {
   padding: 2em;
   max-width: 1200px;
@@ -81,7 +78,6 @@ main {
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
 }
 
-/* Sélecteur de langue */
 .language-buttons {
   margin-top: 1rem;
 }
@@ -109,7 +105,6 @@ main {
   box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
-/* Accessibilité */
 .skip-link {
   position: absolute;
   top: -40px;
@@ -149,7 +144,6 @@ a:focus, button:focus, input:focus, textarea:focus, [tabindex]:focus {
   to { opacity: 1; transform: scale(1); }
 }
 
-/* Textes */
 .message {
   text-align: center;
   font-size: 1.5em;
@@ -206,7 +200,6 @@ img {
   height: auto;
 }
 
-/* Présentations */
 .presentation-visuals {
   display: flex;
   justify-content: center;
@@ -227,7 +220,6 @@ img {
   transform: scale(1.05);
 }
 
-/* Pied de page */
 footer {
   margin-top: 2em;
   padding: 1.5em 0;
@@ -249,7 +241,6 @@ footer a:hover {
   text-decoration: underline;
 }
 
-/* Encadrés */
 aside {
   background-color: #ecf0f1;
   padding: 1em;
@@ -258,7 +249,6 @@ aside {
   border-radius: 0 4px 4px 0;
 }
 
-/* Formulaires */
 form input, form textarea {
   width: 100%;
   padding: 0.8em;
@@ -292,7 +282,6 @@ form button:hover {
   background-color: #1a252f;
 }
 
-/* Cartes & cartes de localisation */
 .map-container {
   margin: 20px 0;
   text-align: center;
@@ -311,7 +300,6 @@ form button:hover {
   margin: 10px 0;
 }
 
-/* Tableaux */
 table {
   width: 100%;
   border-collapse: collapse;
@@ -337,7 +325,6 @@ table tr:hover {
   background-color: #ecf0f1;
 }
 
-/* Citations */
 .float-quote {
   margin: 30px auto;
   padding: 25px;
@@ -359,7 +346,6 @@ table tr:hover {
   color: #333;
 }
 
-/* Styles pour les projets */
 .project-list {
   list-style: none;
   padding: 0;
@@ -418,7 +404,6 @@ table tr:hover {
   font-size: 0.9em;
 }
 
-/* Styles pour les expériences */
 .experience-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -464,7 +449,6 @@ table tr:hover {
   color: #2c3e50;
 }
 
-/* Animation améliorée pour les barres de compétences */
 .skill-bar {
   background-color: #ecf0f1;
   border-radius: 4px;
@@ -481,11 +465,10 @@ table tr:hover {
   line-height: 20px;
   padding: 0 10px;
   text-align: right;
-  width: 0; /* Sera défini par JavaScript */
+  width: 0; 
   transition: width 1s ease-in-out;
 }
 
-/* Amélioration du style des grilles d'intérêts */
 .interests-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
@@ -531,7 +514,6 @@ table tr:hover {
   border: 2px solid #3498db;
 }
 
-/* Styles pour les détails d'intérêts */
 .interest-details {
   background-color: #f8f9fa;
   border-radius: 10px;
@@ -572,7 +554,6 @@ table tr:hover {
   margin-bottom: 1em;
 }
 
-/* Styles pour la vidéo */
 .interest-detail-content video,
 .video-container video {
   max-width: 100%;
@@ -591,7 +572,6 @@ table tr:hover {
   box-shadow: 0 3px 10px rgba(0,0,0,0.2);
 }
 
-/* Styles pour les images en lazy loading */
 img.lazy-load {
   opacity: 0;
   transition: opacity 0.5s;
@@ -601,12 +581,10 @@ img.lazy-load.loaded {
   opacity: 1;
 }
 
-/* Styles pour les sections multilingues */
 .lang {
   animation: fadeIn 0.5s ease;
 }
 
-/* Ajout d'un bouton de fermeture pour les détails */
 .close-details {
   background-color: #f1c40f;
   color: #2c3e50;
@@ -623,7 +601,95 @@ img.lazy-load.loaded {
   background-color: #e1b90f;
 }
 
-/* Responsive design */
+.form-group {
+  margin-bottom: 1.5em;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5em;
+  font-weight: bold;
+}
+
+.form-control {
+  width: 100%;
+  padding: 0.8em;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1em;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-control:focus {
+  border-color: #3498db;
+  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.25);
+}
+
+.form-control:invalid {
+  border-color: #e74c3c;
+}
+
+.btn-primary {
+  background-color: #2c3e50;
+  color: white;
+  border: none;
+  padding: 0.8em 1.5em;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.btn-primary:hover {
+  background-color: #1a252f;
+  transform: translateY(-2px);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.contact-card {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 1.5em;
+  margin-bottom: 2em;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.contact-info {
+  margin-bottom: 1.5em;
+}
+
+.contact-info ul {
+  list-style: none;
+  padding: 0;
+}
+
+.contact-info li {
+  margin-bottom: 0.8em;
+  display: flex;
+  align-items: center;
+}
+
+.contact-icon {
+  margin-right: 10px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f1c40f;
+  color: #2c3e50;
+  border-radius: 50%;
+  font-size: 14px;
+}
+
+[dir="rtl"] .contact-icon {
+  margin-right: 0;
+  margin-left: 10px;
+}
+
 @media (max-width: 768px) {
   header h1 {
     font-size: 1.8em;

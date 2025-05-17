@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Expériences et projets de Christelle Vanessa SOUBEIGA, étudiante en BUT Informatique à l'IUT d'Orsay">
-  <title>Expérience & Projet – Christelle Vanessa SOUBEIGA</title>
+  <title>Expériences & Projets – Christelle Vanessa SOUBEIGA</title>
   
   <!-- Préchargement des ressources critiques -->
   <link rel="preload" href="./styles/index.css" as="style">
@@ -66,7 +66,7 @@
       const urlParams = new URLSearchParams(window.location.search);
       const langParam = urlParams.get('lang');
       
-      if (langParam && ['fr', 'en', 'es', 'zh', 'ar', 'hi'].includes(langParam)) {
+      if (langParam && ['fr', 'en', 'es', 'zh', 'ar', 'hi', 'de'].includes(langParam)) {
         setLanguage(langParam);
       } else {
         setLanguage(savedLanguage);
@@ -87,7 +87,6 @@
       });
     });
   </script>
-  
 </head>
 <body>
   <!-- Lien d'accessibilité pour passer au contenu principal -->
@@ -99,77 +98,74 @@
     <div class="language-buttons" role="group" aria-label="Sélection de langue">
       <button onclick="setLanguage('fr')" aria-label="Français" title="Passer en français">🇫🇷</button>
       <button onclick="setLanguage('en')" aria-label="English" title="Switch to English">🇬🇧</button>
-      <button onclick="setLanguage('es')" aria-label="Español" title="Cambiar a español">🇪🇸</button>
-      <button onclick="setLanguage('zh')" aria-label="中文" title="切换到中文">🇨🇳</button>
-      <button onclick="setLanguage('ar')" aria-label="العربية" title="التبديل إلى العربية">🇸🇦</button>
-      <button onclick="setLanguage('hi')" aria-label="हिंदी" title="हिंदी में स्विच करें">🇮🇳</button>
+      <button onclick="setLanguage('de')" aria-label="Deutsch" title="Auf Deutsch umschalten">DE</button>
     </div>
   </header>
 
-  <nav aria-label="Navigation principale">
+  <nav class="flex-nav" aria-label="Navigation principale">
     <a href="./PRESENTATION.html">PRESENTATION</a>
     <a href="./FORMATION.html">FORMATIONS</a>
     <a class="active" href="./EXPERIENCE-PROJET.html">EXPERIENCES & PROJETS</a>
     <a href="./COMPETENCES.html">COMPETENCES</a>
-    <a href="./CENTRE-D'INTERET.html">CENTRES D'INTERET</a>
+    <a href="./CENTRE-D'INTERET.html">CENTRES D'INTERETS</a>
     <a href="./AMBITION.html">AMBITIONS</a>
-    <a href="./CONTACT.html">CONTACT</a>
+    <a href="./CONTACT.html">CONTACTS</a>
   </nav>
 
   <main id="main-content">
-    <!-- Section française -->
-    <section class="lang fr">
+    <section class="lang fr animate-fade-in-up">
       <h2>Projets informatiques réalisés</h2>
       
       <ul class="project-list">
-        <li id="project-db" class="project-item" onclick="toggleProjectDetails('project-db')" 
+        <li id="project-s103" class="project-item" onclick="toggleProjectDetails('project-s103')" 
             tabindex="0" role="button" aria-expanded="false" 
-            onkeypress="if(event.key==='Enter') toggleProjectDetails('project-db')">
+            onkeypress="if(event.key==='Enter') toggleProjectDetails('project-s103')">
           <div class="project-title">
-            <h3>Création d'une base de données (SQLite)</h3>
+            <h3>Installation d'un poste de développement (Raspberry Pi)</h3>
             <div class="project-icon">+</div>
           </div>
           <div class="project-details">
-            <p>J'ai développé une base de données complète utilisant SQLite pour la gestion de stock et la facturation d'une petite entreprise.</p>
+            <p>J'ai participé à un projet universitaire d'installation d'une station de travail de développement sur Raspberry Pi, en collaboration avec deux autres étudiants (Mihary RAJAONARISON et Onitiana ANDRIAMIALISOA).</p>
             <ul>
-              <li>Conception du schéma de base de données</li>
-              <li>Implémentation des tables et relations</li>
-              <li>Création de requêtes SQL complexes pour l'analyse des données</li>
-              <li>Développement d'une interface simple pour l'interaction avec les données</li>
-            </ul>
-            <div class="project-tech-list">
-              <span class="tech-tag">SQLite</span>
-              <span class="tech-tag">SQL</span>
-              <span class="tech-tag">Base de données</span>
-              <span class="tech-tag">Gestion de stock</span>
-            </div>
-          </div>
-        </li>
-        
-        <li id="project-raspberry" class="project-item" onclick="toggleProjectDetails('project-raspberry')"
-            tabindex="0" role="button" aria-expanded="false"
-            onkeypress="if(event.key==='Enter') toggleProjectDetails('project-raspberry')">
-          <div class="project-title">
-            <h3>Installation d'un poste (Raspberry Pi)</h3>
-            <div class="project-icon">+</div>
-          </div>
-          <div class="project-details">
-            <p>J'ai configuré un système Raspberry Pi complet pour servir de station de travail légère et de serveur local.</p>
-            <ul>
+              <li>Configuration complète d'un Raspberry Pi 400 comme poste de développement</li>
               <li>Installation et configuration du système d'exploitation Linux</li>
-              <li>Sécurisation du système et configuration du réseau</li>
-              <li>Mise en place des services nécessaires</li>
-              <li>Automatisation des tâches administratives</li>
+              <li>Mise en place du SGBD MariaDB et création d'une base de données</li>
+              <li>Tests et validation du système avec des scripts d'évaluation</li>
+              <li>Rédaction d'un rapport technique détaillé</li>
             </ul>
             <div class="project-tech-list">
               <span class="tech-tag">Raspberry Pi</span>
               <span class="tech-tag">Linux</span>
+              <span class="tech-tag">MariaDB</span>
+              <span class="tech-tag">SQL</span>
               <span class="tech-tag">Administration système</span>
-              <span class="tech-tag">Réseaux</span>
             </div>
           </div>
         </li>
-        
+        <li id="project-mammiafore" class="project-item" onclick="toggleProjectDetails('project-mammiafore')"
+            tabindex="0" role="button" aria-expanded="false"
+            onkeypress="if(event.key==='Enter') toggleProjectDetails('project-mammiafore')">
+          <div class="project-title">
+            <h3>Conception de base de données pour Mammiafore</h3>
+            <div class="project-icon">+</div>
+          </div>
+          <div class="project-details">
+            <p>J'ai collaboré avec Miguel NONGNI pour concevoir une base de données relationnelle complète pour l'entreprise Mammiafore, incluant la gestion des clients, produits, commandes et stock.</p>
+            <ul>
+              <li>Création du Modèle Conceptuel des Données (MCD)</li>
+              <li>Élaboration du dictionnaire de données</li>
+              <li>Définition des règles de gestion non modélisables</li>
+              <li>Conception du Schéma Relationnel final</li>
+              <li>Documentation complète du processus et des résultats</li>
+            </ul>
+            <div class="project-tech-list">
+              <span class="tech-tag">Modélisation</span>
+              <span class="tech-tag">MCD</span>
+              <span class="tech-tag">SQL</span>
+              <span class="tech-tag">SGBD</span>
+            </div>
+          </div>
+        </li>
         <li id="project-game" class="project-item" onclick="toggleProjectDetails('project-game')"
             tabindex="0" role="button" aria-expanded="false"
             onkeypress="if(event.key==='Enter') toggleProjectDetails('project-game')">
@@ -205,7 +201,7 @@
             <p>J'ai conçu et développé un site web responsive en utilisant HTML, CSS et un peu de JavaScript.</p>
             <ul>
               <li>Maquettage et conception de l'interface utilisateur</li>
-              <li>Implémentation de la structure en HTML sémantique</li>
+              <li>Implémentation de la structure en HTML</li>
               <li>Stylisation avec CSS pour différents appareils</li>
               <li>Ajout d'interactivité avec JavaScript</li>
             </ul>
@@ -256,11 +252,36 @@
       </div>
     </section>
 
-    <!-- Section anglaise -->
-    <section class="lang en">
+    <section class="lang en animate-fade-in-up">
       <h2>Completed IT Projects</h2>
       
       <ul class="project-list">
+        <li id="project-s103-en" class="project-item" onclick="toggleProjectDetails('project-s103-en')" 
+            tabindex="0" role="button" aria-expanded="false" 
+            onkeypress="if(event.key==='Enter') toggleProjectDetails('project-s103-en')">
+          <div class="project-title">
+            <h3>Development Workstation Setup (S103)</h3>
+            <div class="project-icon">+</div>
+          </div>
+          <div class="project-details">
+            <p>I participated in a university project to set up a development workstation on Raspberry Pi, in collaboration with two other students (Mihary RAJAONARISON and Onitiana ANDRIAMIALISOA).</p>
+            <ul>
+              <li>Complete configuration of a Raspberry Pi 400 as a development workstation</li>
+              <li>Installation and configuration of the Linux operating system</li>
+              <li>Setting up the MariaDB DBMS and creating a database</li>
+              <li>System testing and validation with evaluation scripts</li>
+              <li>Writing a detailed technical report</li>
+            </ul>
+            <div class="project-tech-list">
+              <span class="tech-tag">Raspberry Pi</span>
+              <span class="tech-tag">Linux</span>
+              <span class="tech-tag">MariaDB</span>
+              <span class="tech-tag">SQL</span>
+              <span class="tech-tag">System Administration</span>
+            </div>
+          </div>
+        </li>
+        
         <li id="project-db-en" class="project-item" onclick="toggleProjectDetails('project-db-en')"
             tabindex="0" role="button" aria-expanded="false"
             onkeypress="if(event.key==='Enter') toggleProjectDetails('project-db-en')">
@@ -280,7 +301,31 @@
               <span class="tech-tag">SQLite</span>
               <span class="tech-tag">SQL</span>
               <span class="tech-tag">Database</span>
-              <span class="tech-tag">Inventory Management</span>
+            </div>
+          </div>
+        </li>
+
+        <li id="project-mammiafore-en" class="project-item" onclick="toggleProjectDetails('project-mammiafore-en')"
+            tabindex="0" role="button" aria-expanded="false"
+            onkeypress="if(event.key==='Enter') toggleProjectDetails('project-mammiafore-en')">
+          <div class="project-title">
+            <h3>Database Design for Mammiafore</h3>
+            <div class="project-icon">+</div>
+          </div>
+          <div class="project-details">
+            <p>I collaborated with Miguel NONGNI to design a complete relational database for Mammiafore company, including customer, product, order, and inventory management.</p>
+            <ul>
+              <li>Creation of the Conceptual Data Model (CDM)</li>
+              <li>Development of the data dictionary</li>
+              <li>Definition of non-modelable management rules</li>
+              <li>Design of the final Relational Schema</li>
+              <li>Complete documentation of the process and results</li>
+            </ul>
+            <div class="project-tech-list">
+              <span class="tech-tag">Modeling</span>
+              <span class="tech-tag">CDM</span>
+              <span class="tech-tag">SQL</span>
+              <span class="tech-tag">DBMS</span>
             </div>
           </div>
         </li>
@@ -298,13 +343,10 @@
               <li>Installation and configuration of Linux operating system</li>
               <li>System security and network configuration</li>
               <li>Setup of necessary services</li>
-              <li>Automation of administrative tasks</li>
             </ul>
             <div class="project-tech-list">
               <span class="tech-tag">Raspberry Pi</span>
               <span class="tech-tag">Linux</span>
-              <span class="tech-tag">System Administration</span>
-              <span class="tech-tag">Networks</span>
             </div>
           </div>
         </li>
@@ -344,7 +386,7 @@
             <p>I designed and developed a responsive website using HTML, CSS, and a bit of JavaScript.</p>
             <ul>
               <li>Wireframing and user interface design</li>
-              <li>Implementation of semantic HTML structure</li>
+              <li>Implementation of HTML structure</li>
               <li>CSS styling for different devices</li>
               <li>Adding interactivity with JavaScript</li>
             </ul>
@@ -394,557 +436,186 @@
         </div>
       </div>
     </section>
-
-    <!-- Section espagnole -->
-    <section class="lang es">
-      <h2>Proyectos informáticos realizados</h2>
+    
+    <section class="lang de animate-fade-in-up">
+      <h2>Abgeschlossene IT-Projekte</h2>
       
       <ul class="project-list">
-        <li id="project-db-es" class="project-item" onclick="toggleProjectDetails('project-db-es')"
-            tabindex="0" role="button" aria-expanded="false"
-            onkeypress="if(event.key==='Enter') toggleProjectDetails('project-db-es')">
+        <li id="project-s103-de" class="project-item" onclick="toggleProjectDetails('project-s103-de')" 
+            tabindex="0" role="button" aria-expanded="false" 
+            onkeypress="if(event.key==='Enter') toggleProjectDetails('project-s103-de')">
           <div class="project-title">
-            <h3>Base de datos (SQLite)</h3>
+            <h3>Entwicklungsarbeitsplatzeinrichtung (S103)</h3>
             <div class="project-icon">+</div>
           </div>
           <div class="project-details">
-            <p>Desarrollé una base de datos completa utilizando SQLite para la gestión de inventario y facturación para una pequeña empresa.</p>
+            <p>Ich habe an einem Universitätsprojekt zur Einrichtung eines Entwicklungsarbeitsplatzes auf einem Raspberry Pi teilgenommen, in Zusammenarbeit mit zwei anderen Studenten (Mihary RAJAONARISON und Onitiana ANDRIAMIALISOA).</p>
             <ul>
-              <li>Diseño del esquema de la base de datos</li>
-              <li>Implementación de tablas y relaciones</li>
-              <li>Creación de consultas SQL complejas para análisis de datos</li>
-              <li>Desarrollo de una interfaz simple para la interacción con los datos</li>
-            </ul>
-            <div class="project-tech-list">
-              <span class="tech-tag">SQLite</span>
-              <span class="tech-tag">SQL</span>
-              <span class="tech-tag">Base de datos</span>
-              <span class="tech-tag">Gestión de inventario</span>
-            </div>
-          </div>
-        </li>
-        
-        <li id="project-raspberry-es" class="project-item" onclick="toggleProjectDetails('project-raspberry-es')"
-            tabindex="0" role="button" aria-expanded="false"
-            onkeypress="if(event.key==='Enter') toggleProjectDetails('project-raspberry-es')">
-          <div class="project-title">
-            <h3>Configuración de sistema (Raspberry Pi)</h3>
-            <div class="project-icon">+</div>
-          </div>
-          <div class="project-details">
-            <p>Configuré un sistema Raspberry Pi completo para servir como estación de trabajo ligera y servidor local.</p>
-            <ul>
-              <li>Instalación y configuración del sistema operativo Linux</li>
-              <li>Seguridad del sistema y configuración de red</li>
-              <li>Configuración de servicios necesarios</li>
-              <li>Automatización de tareas administrativas</li>
+              <li>Vollständige Konfiguration eines Raspberry Pi 400 als Entwicklungsarbeitsplatz</li>
+              <li>Installation und Konfiguration des Linux-Betriebssystems</li>
+              <li>Einrichtung des MariaDB DBMS und Erstellung einer Datenbank</li>
+              <li>Systemtests und Validierung mit Bewertungsskripten</li>
+              <li>Verfassen eines detaillierten technischen Berichts</li>
             </ul>
             <div class="project-tech-list">
               <span class="tech-tag">Raspberry Pi</span>
               <span class="tech-tag">Linux</span>
-              <span class="tech-tag">Administración de sistemas</span>
-              <span class="tech-tag">Redes</span>
+              <span class="tech-tag">MariaDB</span>
+              <span class="tech-tag">SQL</span>
+              <span class="tech-tag">Systemadministration</span>
             </div>
           </div>
         </li>
         
-        <li id="project-game-es" class="project-item" onclick="toggleProjectDetails('project-game-es')"
+        <li id="project-db-de" class="project-item" onclick="toggleProjectDetails('project-db-de')"
             tabindex="0" role="button" aria-expanded="false"
-            onkeypress="if(event.key==='Enter') toggleProjectDetails('project-game-es')">
+            onkeypress="if(event.key==='Enter') toggleProjectDetails('project-db-de')">
           <div class="project-title">
-            <h3>Juego en C++</h3>
+            <h3>Datenbankerstellung (SQLite)</h3>
             <div class="project-icon">+</div>
           </div>
           <div class="project-details">
-            <p>Creé un juego 2D utilizando C++ y la biblioteca SDL2 como parte de un proyecto académico.</p>
+            <p>Ich habe eine vollständige Datenbank mit SQLite für die Bestandsverwaltung und Rechnungsstellung eines kleinen Unternehmens entwickelt.</p>
             <ul>
-              <li>Diseño de arquitectura del juego</li>
-              <li>Implementación de mecánicas y física del juego</li>
-              <li>Creación de interfaz de usuario</li>
-              <li>Gestión de eventos y detección de colisiones</li>
-            </ul>
-            <div class="project-tech-list">
-              <span class="tech-tag">C++</span>
-              <span class="tech-tag">SDL2</span>
-              <span class="tech-tag">POO</span>
-              <span class="tech-tag">Desarrollo de juegos</span>
-            </div>
-          </div>
-        </li>
-        
-        <li id="project-web-es" class="project-item" onclick="toggleProjectDetails('project-web-es')"
-            tabindex="0" role="button" aria-expanded="false"
-            onkeypress="if(event.key==='Enter') toggleProjectDetails('project-web-es')">
-          <div class="project-title">
-            <h3>Sitio web</h3>
-            <div class="project-icon">+</div>
-          </div>
-          <div class="project-details">
-            <p>Diseñé y desarrollé un sitio web responsive utilizando HTML, CSS y JavaScript.</p>
-            <ul>
-              <li>Diseño de wireframes e interfaz de usuario</li>
-              <li>Implementación de estructura HTML semántica</li>
-              <li>Estilización con CSS para diferentes dispositivos</li>
-              <li>Adición de interactividad con JavaScript</li>
-            </ul>
-            <div class="project-tech-list">
-              <span class="tech-tag">HTML</span>
-              <span class="tech-tag">CSS</span>
-              <span class="tech-tag">JavaScript</span>
-              <span class="tech-tag">Diseño Responsive</span>
-            </div>
-          </div>
-        </li>
-      </ul>
-      
-      <h2>Otras experiencias</h2>
-      <div class="experience-container">
-        <div class="experience-card">
-          <div class="experience-header">
-            <h3>Asistente de enfermería</h3>
-            <p class="experience-period">2018–2022</p>
-          </div>
-          <div class="experience-content">
-            <p><strong>Ubicación:</strong> Enfermería escolar</p>
-            <p>Trabajé como asistente de enfermería a tiempo parcial en la enfermería de mi escuela, donde desarrollé habilidades en cuidados básicos y comunicación con pacientes.</p>
-            <ul>
-              <li>Recepción y atención de estudiantes enfermos o heridos</li>
-              <li>Asistencia a enfermeras para cuidados rutinarios</li>
-              <li>Gestión administrativa de registros médicos</li>
-              <li>Participación en campañas de prevención de salud</li>
-            </ul>
-          </div>
-        </div>
-        
-        <div class="experience-card">
-          <div class="experience-header">
-            <h3>Líder de grupo</h3>
-            <p class="experience-period">2020–2022</p>
-          </div>
-          <div class="experience-content">
-            <p>Fui designada como líder de un grupo de 16 estudiantes para la organización de eventos y coordinación de proyectos académicos.</p>
-            <ul>
-              <li>Coordinación de actividades y planificación de reuniones</li>
-              <li>Mediación durante conflictos entre miembros</li>
-              <li>Representación del grupo ante la administración</li>
-              <li>Gestión de recursos asignados a proyectos</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Section chinoise -->
-    <section class="lang zh">
-      <h2>完成的IT项目</h2>
-      
-      <ul class="project-list">
-        <li id="project-db-zh" class="project-item" onclick="toggleProjectDetails('project-db-zh')"
-            tabindex="0" role="button" aria-expanded="false"
-            onkeypress="if(event.key==='Enter') toggleProjectDetails('project-db-zh')">
-          <div class="project-title">
-            <h3>SQLite数据库创建</h3>
-            <div class="project-icon">+</div>
-          </div>
-          <div class="project-details">
-            <p>我使用SQLite开发了一个完整的数据库，用于小型企业的库存管理和账单管理。</p>
-            <ul>
-              <li>数据库架构设计</li>
-              <li>实现表格和关系</li>
-              <li>创建复杂的SQL查询进行数据分析</li>
-              <li>开发简单界面与数据交互</li>
+              <li>Entwurf des Datenbankschemas</li>
+              <li>Implementierung von Tabellen und Beziehungen</li>
+              <li>Erstellung komplexer SQL-Abfragen zur Datenanalyse</li>
+              <li>Entwicklung einer einfachen Schnittstelle für die Dateninteraktion</li>
             </ul>
             <div class="project-tech-list">
               <span class="tech-tag">SQLite</span>
               <span class="tech-tag">SQL</span>
-              <span class="tech-tag">数据库</span>
-              <span class="tech-tag">库存管理</span>
+              <span class="tech-tag">Datenbank</span>
             </div>
           </div>
         </li>
-        
-        <li id="project-raspberry-zh" class="project-item" onclick="toggleProjectDetails('project-raspberry-zh')"
-            tabindex="0" role="button" aria-expanded="false"
-            onkeypress="if(event.key==='Enter') toggleProjectDetails('project-raspberry-zh')">
-          <div class="project-title">
-            <h3>开发环境 (Raspberry Pi)</h3>
-            <div class="project-icon">+</div>
-          </div>
-          <div class="project-details">
-            <p>我配置了一个完整的Raspberry Pi系统，用作轻量级工作站和本地服务器。</p>
-            <ul>
-              <li>安装和配置Linux操作系统</li>
-              <li>系统安全和网络配置</li>
-              <li>设置必要的服务</li>
-              <li>自动化管理任务</li>
-            </ul>
-            <div class="project-tech-list">
-              <span class="tech-tag">Raspberry Pi</span>
-              <span class="tech-tag">Linux</span>
-              <span class="tech-tag">系统管理</span>
-              <span class="tech-tag">网络</span>
-            </div>
-          </div>
-        </li>
-        
-        <li id="project-game-zh" class="project-item" onclick="toggleProjectDetails('project-game-zh')"
-            tabindex="0" role="button" aria-expanded="false"
-            onkeypress="if(event.key==='Enter') toggleProjectDetails('project-game-zh')">
-          <div class="project-title">
-            <h3>C++游戏开发</h3>
-            <div class="project-icon">+</div>
-          </div>
-          <div class="project-details">
-            <p>我使用C++和SDL2库创建了一个2D游戏作为学术项目的一部分。</p>
-            <ul>
-              <li>游戏架构设计</li>
-              <li>实现游戏机制和物理</li>
-              <li>创建用户界面</li>
-              <li>事件处理和碰撞检测</li>
-            </ul>
-            <div class="project-tech-list">
-              <span class="tech-tag">C++</span>
-              <span class="tech-tag">SDL2</span>
-              <span class="tech-tag">面向对象编程</span>
-              <span class="tech-tag">游戏开发</span>
-            </div>
-          </div>
-        </li>
-        
-        <li id="project-web-zh" class="project-item" onclick="toggleProjectDetails('project-web-zh')"
-            tabindex="0" role="button" aria-expanded="false"
-            onkeypress="if(event.key==='Enter') toggleProjectDetails('project-web-zh')">
-          <div class="project-title">
-            <h3>网站创建</h3>
-            <div class="project-icon">+</div>
-          </div>
-          <div class="project-details">
-            <p>我设计并开发了一个响应式网站，使用HTML、CSS和JavaScript。</p>
-            <ul>
-              <li>线框图和用户界面设计</li>
-              <li>实现语义HTML结构</li>
-              <li>使用CSS为不同设备设计样式</li>
-              <li>使用JavaScript添加交互性</li>
-            </ul>
-            <div class="project-tech-list">
-              <span class="tech-tag">HTML</span>
-              <span class="tech-tag">CSS</span>
-              <span class="tech-tag">JavaScript</span>
-              <span class="tech-tag">响应式设计</span>
-            </div>
-          </div>
-        </li>
-      </ul>
-      
-      <h2>其他经历</h2>
-      <div class="experience-container">
-        <div class="experience-card">
-          <div class="experience-header">
-            <h3>护理助理</h3>
-            <p class="experience-period">2018–2022</p>
-          </div>
-          <div class="experience-content">
-            <p><strong>地点：</strong> 学校医务室</p>
-            <p>我在学校医务室担任兼职护理助理，在那里我发展了基础护理和与患者沟通的技能。</p>
-            <ul>
-              <li>接待和照顾生病或受伤的学生</li>
-              <li>协助护士进行日常护理</li>
-              <li>管理医疗记录</li>
-              <li>参与健康预防活动</li>
-            </ul>
-          </div>
-        </div>
-        
-        <div class="experience-card">
-          <div class="experience-header">
-            <h3>小组长</h3>
-            <p class="experience-period">2020–2022</p>
-          </div>
-          <div class="experience-content">
-            <p>我被任命为16名学生小组的负责人，负责组织活动和协调学术项目。</p>
-            <ul>
-              <li>协调活动和会议安排</li>
-              <li>成员之间的冲突调解</li>
-              <li>向管理层代表团队</li>
-              <li>管理分配给项目的资源</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
 
-    <!-- Section arabe -->
-    <section class="lang ar" dir="rtl">
-      <h2>مشاريع الحاسوب</h2>
-      
-      <ul class="project-list">
-        <li id="project-db-ar" class="project-item" onclick="toggleProjectDetails('project-db-ar')"
+        <li id="project-mammiafore-de" class="project-item" onclick="toggleProjectDetails('project-mammiafore-de')"
             tabindex="0" role="button" aria-expanded="false"
-            onkeypress="if(event.key==='Enter') toggleProjectDetails('project-db-ar')">
+            onkeypress="if(event.key==='Enter') toggleProjectDetails('project-mammiafore-de')">
           <div class="project-title">
-            <h3>إنشاء قاعدة بيانات (SQLite)</h3>
+            <h3>Datenbankdesign für Mammiafore</h3>
             <div class="project-icon">+</div>
           </div>
           <div class="project-details">
-            <p>قمت بتطوير قاعدة بيانات كاملة باستخدام SQLite لإدارة المخزون والفواتير لشركة صغيرة.</p>
+            <p>Ich habe mit Miguel NONGNI zusammengearbeitet, um eine vollständige relationale Datenbank für das Unternehmen Mammiafore zu entwerfen, einschließlich Kunden-, Produkt-, Auftrags- und Bestandsverwaltung.</p>
             <ul>
-              <li>تصميم مخطط قاعدة البيانات</li>
-              <li>تنفيذ الجداول والعلاقات</li>
-              <li>إنشاء استعلامات SQL معقدة لتحليل البيانات</li>
-              <li>تطوير واجهة بسيطة للتفاعل مع البيانات</li>
+              <li>Erstellung des konzeptuellen Datenmodells (KDM)</li>
+              <li>Entwicklung des Datenwörterbuchs</li>
+              <li>Definition nicht modellierbarer Verwaltungsregeln</li>
+              <li>Entwurf des endgültigen relationalen Schemas</li>
+              <li>Vollständige Dokumentation des Prozesses und der Ergebnisse</li>
             </ul>
             <div class="project-tech-list">
-              <span class="tech-tag">SQLite</span>
+              <span class="tech-tag">Modellierung</span>
+              <span class="tech-tag">KDM</span>
               <span class="tech-tag">SQL</span>
-              <span class="tech-tag">قواعد البيانات</span>
-              <span class="tech-tag">إدارة المخزون</span>
+              <span class="tech-tag">DBMS</span>
             </div>
           </div>
         </li>
         
-        <li id="project-raspberry-ar" class="project-item" onclick="toggleProjectDetails('project-raspberry-ar')"
+        <li id="project-raspberry-de" class="project-item" onclick="toggleProjectDetails('project-raspberry-de')"
             tabindex="0" role="button" aria-expanded="false"
-            onkeypress="if(event.key==='Enter') toggleProjectDetails('project-raspberry-ar')">
+            onkeypress="if(event.key==='Enter') toggleProjectDetails('project-raspberry-de')">
           <div class="project-title">
-            <h3>تركيب نظام (Raspberry Pi)</h3>
+            <h3>Entwicklungsumgebung (Raspberry Pi)</h3>
             <div class="project-icon">+</div>
           </div>
           <div class="project-details">
-            <p>قمت بتكوين نظام Raspberry Pi كامل ليعمل كمحطة عمل خفيفة وخادم محلي.</p>
+            <p>Ich habe ein komplettes Raspberry Pi-System konfiguriert, das als leichte Workstation und lokaler Server dient.</p>
             <ul>
-              <li>تثبيت وتكوين نظام التشغيل Linux</li>
-              <li>أمان النظام وتكوين الشبكة</li>
-              <li>إعداد الخدمات اللازمة</li>
-              <li>أتمتة المهام الإدارية</li>
+             <li>Installation und Konfiguration des Linux-Betriebssystems</li>
+              <li>Systemsicherheit und Netzwerkkonfiguration</li>
+              <li>Einrichtung notwendiger Dienste</li>
             </ul>
             <div class="project-tech-list">
               <span class="tech-tag">Raspberry Pi</span>
               <span class="tech-tag">Linux</span>
-              <span class="tech-tag">إدارة النظام</span>
-              <span class="tech-tag">الشبكات</span>
             </div>
           </div>
         </li>
         
-        <li id="project-game-ar" class="project-item" onclick="toggleProjectDetails('project-game-ar')"
+        <li id="project-game-de" class="project-item" onclick="toggleProjectDetails('project-game-de')"
             tabindex="0" role="button" aria-expanded="false"
-            onkeypress="if(event.key==='Enter') toggleProjectDetails('project-game-ar')">
+            onkeypress="if(event.key==='Enter') toggleProjectDetails('project-game-de')">
           <div class="project-title">
-            <h3>تطوير لعبة C++</h3>
+            <h3>Spieleentwicklung in C++</h3>
             <div class="project-icon">+</div>
           </div>
           <div class="project-details">
-            <p>قمت بإنشاء لعبة ثنائية الأبعاد باستخدام C++ ومكتبة SDL2 كجزء من مشروع أكاديمي.</p>
+            <p>Ich habe im Rahmen eines akademischen Projekts ein 2D-Spiel mit C++ und der SDL2-Bibliothek erstellt.</p>
             <ul>
-              <li>تصميم هيكل اللعبة</li>
-              <li>تنفيذ آليات اللعبة والفيزياء</li>
-              <li>إنشاء واجهة المستخدم</li>
-              <li>معالجة الأحداث واكتشاف التصادم</li>
-            </ul>
-            <div class="project-tech-list">
-              <span class="tech-tag">C++</span>
-              <span class="tech-tag">SDL2</span>
-              <span class="tech-tag">البرمجة الكائنية</span>
-              <span class="tech-tag">تطوير الألعاب</span>
-            </div>
-          </div>
-        </li>
-        
-        <li id="project-web-ar" class="project-item" onclick="toggleProjectDetails('project-web-ar')"
-            tabindex="0" role="button" aria-expanded="false"
-            onkeypress="if(event.key==='Enter') toggleProjectDetails('project-web-ar')">
-          <div class="project-title">
-            <h3>إنشاء موقع ويب</h3>
-            <div class="project-icon">+</div>
-          </div>
-          <div class="project-details">
-            <p>قمت بتصميم وتطوير موقع ويب متجاوب باستخدام HTML وCSS وبعض JavaScript.</p>
-            <ul>
-              <li>إنشاء مخططات وتصميم واجهة المستخدم</li>
-              <li>تنفيذ بنية HTML دلالية</li>
-              <li>تصميم CSS لأجهزة مختلفة</li>
-              <li>إضافة التفاعلية باستخدام JavaScript</li>
-            </ul>
-            <div class="project-tech-list">
-              <span class="tech-tag">HTML</span>
-              <span class="tech-tag">CSS</span>
-              <span class="tech-tag">JavaScript</span>
-              <span class="tech-tag">التصميم المتجاوب</span>
-            </div>
-          </div>
-        </li>
-      </ul>
-      
-      <h2>تجارب أخرى</h2>
-      <div class="experience-container">
-        <div class="experience-card">
-          <div class="experience-header">
-            <h3>مساعد ممرض</h3>
-            <p class="experience-period">2018–2022</p>
-          </div>
-          <div class="experience-content">
-            <p><strong>المكان:</strong> مصحة المدرسة</p>
-            <p>عملت كمساعد ممرض بدوام جزئي في مصحة مدرستي، حيث طورت مهارات في الرعاية الأساسية والتواصل مع المرضى.</p>
-            <ul>
-              <li>استقبال ورعاية الطلاب المرضى أو المصابين</li>
-              <li>مساعدة الممرضات في الرعاية الروتينية</li>
-              <li>إدارة السجلات الطبية</li>
-              <li>المشاركة في حملات الوقاية الصحية</li>
-            </ul>
-          </div>
-        </div>
-        
-        <div class="experience-card">
-          <div class="experience-header">
-            <h3>رئيس فريق</h3>
-            <p class="experience-period">2020–2022</p>
-          </div>
-          <div class="experience-content">
-            <p>تم تعييني كقائد لمجموعة من 16 طالبًا لتنظيم الفعاليات وتنسيق المشاريع الأكاديمية.</p>
-            <ul>
-              <li>تنسيق الأنشطة وتخطيط الاجتماعات</li>
-              <li>الوساطة خلال النزاعات بين الأعضاء</li>
-              <li>تمثيل المجموعة أمام الإدارة</li>
-              <li>إدارة الموارد المخصصة للمشاريع</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Section hindi -->
-    <section class="lang hi">
-      <h2>पूर्ण कंप्यूटर प्रोजेक्ट</h2>
-      
-      <ul class="project-list">
-        <li id="project-db-hi" class="project-item" onclick="toggleProjectDetails('project-db-hi')"
-            tabindex="0" role="button" aria-expanded="false"
-            onkeypress="if(event.key==='Enter') toggleProjectDetails('project-db-hi')">
-          <div class="project-title">
-            <h3>SQLite डेटाबेस</h3>
-            <div class="project-icon">+</div>
-          </div>
-          <div class="project-details">
-            <p>मैंने एक छोटे व्यवसाय के लिए इन्वेंटरी प्रबंधन और बिलिंग के लिए SQLite का उपयोग करके एक पूर्ण डेटाबेस विकसित किया।</p>
-            <ul>
-              <li>डेटाबेस स्कीमा डिजाइन</li>
-              <li>टेबल और रिलेशनशिप का कार्यान्वयन</li>
-              <li>डेटा विश्लेषण के लिए जटिल SQL क्वेरी बनाना</li>
-              <li>डेटा इंटरैक्शन के लिए एक साधारण इंटरफेस का विकास</li>
-            </ul>
-            <div class="project-tech-list">
-              <span class="tech-tag">SQLite</span>
-              <span class="tech-tag">SQL</span>
-              <span class="tech-tag">डेटाबेस</span>
-              <span class="tech-tag">इन्वेंटरी प्रबंधन</span>
-            </div>
-          </div>
-        </li>
-        
-        <li id="project-raspberry-hi" class="project-item" onclick="toggleProjectDetails('project-raspberry-hi')"
-            tabindex="0" role="button" aria-expanded="false"
-            onkeypress="if(event.key==='Enter') toggleProjectDetails('project-raspberry-hi')">
-          <div class="project-title">
-            <h3>डेव सेटअप (Raspberry Pi)</h3>
-            <div class="project-icon">+</div>
-          </div>
-          <div class="project-details">
-            <p>मैंने एक हल्के वर्कस्टेशन और लोकल सर्वर के रूप में काम करने के लिए एक पूर्ण Raspberry Pi सिस्टम कॉन्फ़िगर किया।</p>
-            <ul>
-              <li>Linux ऑपरेटिंग सिस्टम की स्थापना और कॉन्फ़िगरेशन</li>
-              <li>सिस्टम सुरक्षा और नेटवर्क कॉन्फ़िगरेशन</li>
-              <li>आवश्यक सेवाओं की स्थापना</li>
-              <li>प्रशासनिक कार्यों का स्वचालन</li>
-            </ul>
-            <div class="project-tech-list">
-              <span class="tech-tag">Raspberry Pi</span>
-              <span class="tech-tag">Linux</span>
-              <span class="tech-tag">सिस्टम प्रशासन</span>
-              <span class="tech-tag">नेटवर्क</span>
-            </div>
-          </div>
-        </li>
-        
-        <li id="project-game-hi" class="project-item" onclick="toggleProjectDetails('project-game-hi')"
-            tabindex="0" role="button" aria-expanded="false"
-            onkeypress="if(event.key==='Enter') toggleProjectDetails('project-game-hi')">
-          <div class="project-title">
-            <h3>C++ गेम का विकास</h3>
-            <div class="project-icon">+</div>
-          </div>
-          <div class="project-details">
-            <p>मैंने एक शैक्षिक परियोजना के हिस्से के रूप में C++ और SDL2 लाइब्रेरी का उपयोग करके एक 2D गेम बनाया।</p>
-            <ul>
-              <li>गेम आर्किटेक्चर डिज़ाइन</li>
-              <li>गेम मैकेनिक्स और फिजिक्स का कार्यान्वयन</li>
-              <li>यूजर इंटरफेस का निर्माण</li>
-              <li>इवेंट हैंडलिंग और कोलिशन डिटेक्शन</li>
+              <li>Gestaltung der Spielarchitektur</li>
+              <li>Implementierung von Spielmechanik und Physik</li>
+              <li>Erstellung der Benutzeroberfläche</li>
+              <li>Ereignisbehandlung und Kollisionserkennung</li>
             </ul>
             <div class="project-tech-list">
               <span class="tech-tag">C++</span>
               <span class="tech-tag">SDL2</span>
               <span class="tech-tag">OOP</span>
-              <span class="tech-tag">गेम डेवलपमेंट</span>
+              <span class="tech-tag">Spieleentwicklung</span>
             </div>
           </div>
         </li>
         
-        <li id="project-web-hi" class="project-item" onclick="toggleProjectDetails('project-web-hi')"
+        <li id="project-web-de" class="project-item" onclick="toggleProjectDetails('project-web-de')"
             tabindex="0" role="button" aria-expanded="false"
-            onkeypress="if(event.key==='Enter') toggleProjectDetails('project-web-hi')">
+            onkeypress="if(event.key==='Enter') toggleProjectDetails('project-web-de')">
           <div class="project-title">
-            <h3>वेबसाइट बनाना</h3>
+            <h3>Website-Erstellung</h3>
             <div class="project-icon">+</div>
           </div>
           <div class="project-details">
-            <p>मैंने HTML, CSS और थोड़ा JavaScript का उपयोग करके एक रिस्पॉन्सिव वेबसाइट डिज़ाइन और विकसित की।</p>
+            <p>Ich habe eine responsive Website mit HTML, CSS und etwas JavaScript gestaltet und entwickelt.</p>
             <ul>
-              <li>वायरफ्रेमिंग और यूजर इंटरफेस डिज़ाइन</li>
-              <li>सिमेंटिक HTML स्ट्रक्चर का कार्यान्वयन</li>
-              <li>विभिन्न डिवाइस के लिए CSS स्टाइलिंग</li>
-              <li>JavaScript के साथ इंटरैक्टिविटी जोड़ना</li>
+              <li>Wireframing und Design der Benutzeroberfläche</li>
+              <li>Implementierung einer semantischen HTML-Struktur</li>
+              <li>CSS-Styling für verschiedene Geräte</li>
+              <li>Hinzufügen von Interaktivität mit JavaScript</li>
             </ul>
             <div class="project-tech-list">
               <span class="tech-tag">HTML</span>
               <span class="tech-tag">CSS</span>
               <span class="tech-tag">JavaScript</span>
-              <span class="tech-tag">रिस्पॉन्सिव डिज़ाइन</span>
+              <span class="tech-tag">Responsive Design</span>
             </div>
           </div>
         </li>
       </ul>
       
-      <h2>अन्य अनुभव</h2>
+      <h2>Andere Erfahrungen</h2>
       <div class="experience-container">
         <div class="experience-card">
           <div class="experience-header">
-            <h3>केयर असिस्टेंट</h3>
+            <h3>Pflegeassistentin</h3>
             <p class="experience-period">2018–2022</p>
           </div>
           <div class="experience-content">
-            <p><strong>स्थान:</strong> स्कूल इंफर्मरी</p>
-            <p>मैंने अपने स्कूल के इंफर्मरी में पार्ट-टाइम केयर असिस्टेंट के रूप में काम किया, जहां मैंने बुनियादी देखभाल और रोगियों के साथ संवाद के कौशल विकसित किए।</p>
+            <p><strong>Ort:</strong> Schulkrankenzimmer</p>
+            <p>Ich habe als Teilzeit-Pflegeassistentin im Krankenzimmer meiner Schule gearbeitet, wo ich Fähigkeiten in der Grundpflege und der Patientenkommunikation entwickelt habe.</p>
             <ul>
-              <li>बीमार या घायल छात्रों का स्वागत और देखभाल</li>
-              <li>नियमित देखभाल के लिए नर्सों की सहायता</li>
-              <li>चिकित्सा रिकॉर्ड्स का प्रशासनिक प्रबंधन</li>
-              <li>स्वास्थ्य रोकथाम अभियानों में भागीदारी</li>
+              <li>Empfang und Betreuung kranker oder verletzter Schüler</li>
+              <li>Unterstützung der Krankenschwestern bei der Routineversorgung</li>
+              <li>Administrative Verwaltung von Krankenakten</li>
+              <li>Teilnahme an Kampagnen zur Gesundheitsvorsorge</li>
             </ul>
           </div>
         </div>
         
         <div class="experience-card">
           <div class="experience-header">
-            <h3>समूह नेता</h3>
+            <h3>Gruppenleitung</h3>
             <p class="experience-period">2020–2022</p>
           </div>
           <div class="experience-content">
-            <p>मुझे कार्यक्रम आयोजन और शैक्षणिक परियोजना समन्वय के लिए 16 छात्रों के समूह के नेता के रूप में नियुक्त किया गया था।</p>
+            <p>Ich wurde zur Leiterin einer Gruppe von 16 Schülern für die Organisation von Veranstaltungen und die Koordination akademischer Projekte ernannt.</p>
             <ul>
-              <li>गतिविधियों का समन्वय और बैठकों की योजना</li>
-              <li>सदस्यों के बीच संघर्ष के दौरान मध्यस्थता</li>
-              <li>प्रशासन के प्रति समूह का प्रतिनिधित्व</li>
-              <li>परियोजनाओं के लिए आवंटित संसाधनों का प्रबंधन</li>
+              <li>Koordination von Aktivitäten und Besprechungsplanung</li>
+              <li>Vermittlung bei Konflikten zwischen Mitgliedern</li>
+              <li>Gruppenvertretung bei der Verwaltung</li>
+              <li>Verwaltung der für Projekte zugewiesenen Ressourcen</li>
             </ul>
           </div>
         </div>
@@ -956,4 +627,4 @@
     <p>© 2024 Christelle Vanessa Soubeiga – Tous droits réservés</p>
   </footer>
 </body>
-</html>
+</html> 
