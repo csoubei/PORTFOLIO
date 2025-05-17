@@ -1,458 +1,1190 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Centres d'intérêt de Christelle Vanessa SOUBEIGA, étudiante en BUT Informatique à l'IUT d'Orsay">
-  <title>Centres d'intérêt – Christelle Vanessa SOUBEIGA</title>
-  
-  <!-- Préchargement des ressources critiques -->
-  <link rel="preload" href="./styles/index.css" as="style">
-  
-  <link rel="stylesheet" href="./styles/index.css" />
-  <link rel="stylesheet" href="./styles/presentation.css" />
-  <link rel="stylesheet" href="./styles/flexbox_101_nav.css" />
-  <link rel="stylesheet" href="./styles/grid_101.css" />
-  <link rel="stylesheet" href="./styles/float_101.css" />
-  <link rel="stylesheet" href="./styles/formation.css" />
-  <link rel="stylesheet" href="./styles/projet.css" />
-  <link rel="stylesheet" href="./styles/ambition.css" />
-  
-  <script>
-    function setLanguage(lang) {
-      // Masquer toutes les sections linguistiques
-      document.querySelectorAll(".lang").forEach(el => el.style.display = "none");
-      
-      // Afficher les sections dans la langue sélectionnée
-      document.querySelectorAll(".lang." + lang).forEach(el => el.style.display = "block");
-      
-      // Ajuster la direction du document pour l'arabe
-      if (lang === 'ar') {
-        document.body.setAttribute('dir', 'rtl');
-        document.querySelectorAll('.lang.ar').forEach(el => el.setAttribute('dir', 'rtl'));
-      } else {
-        document.body.setAttribute('dir', 'ltr');
-      }
-      
-      // Enregistrer la préférence de langue
-      localStorage.setItem('preferredLanguage', lang);
-      
-      // Mettre à jour l'apparence des boutons de langue
-      document.querySelectorAll('.language-buttons button').forEach(button => {
-        if (button.getAttribute('onclick').includes(`'${lang}'`)) {
-          button.classList.add('active-lang');
-        } else {
-          button.classList.remove('active-lang');
-        }
-      });
-    }
-    
-    function showInterestDetails(interestId) {
-      // Masquer tous les détails d'intérêts
-      document.querySelectorAll(".interest-details").forEach(el => {
-        el.style.display = "none";
-        
-        // Mettre à jour aria-expanded sur les items d'intérêt
-        const itemId = el.id;
-        const relatedItem = document.querySelector(`.interest-item[aria-controls="${itemId}"]`);
-        if (relatedItem) {
-          relatedItem.setAttribute('aria-expanded', 'false');
-        }
-      });
-      
-      // Afficher le détail sélectionné avec animation
-      const detailElement = document.getElementById(interestId);
-      if (detailElement) {
-        detailElement.style.display = "block";
-        detailElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        
-        // Mettre à jour aria-expanded
-        const relatedItem = document.querySelector(`.interest-item[aria-controls="${interestId}"]`);
-        if (relatedItem) {
-          relatedItem.setAttribute('aria-expanded', 'true');
-        }
-      }
-    }
-    
-    window.addEventListener("DOMContentLoaded", () => {
-      // Récupérer la préférence de langue ou utiliser le français par défaut
-      const savedLanguage = localStorage.getItem('preferredLanguage') || 'fr';
-      
-      // Vérifier si nous avons un paramètre de langue dans l'URL
-      const urlParams = new URLSearchParams(window.location.search);
-      const langParam = urlParams.get('lang');
-      
-      if (langParam && ['fr', 'en', 'es', 'zh', 'ar', 'hi', 'de'].includes(langParam)) {
-        setLanguage(langParam);
-      } else {
-        setLanguage(savedLanguage);
-      }
-      
-      // Masquer tous les détails au chargement
-      document.querySelectorAll(".interest-details").forEach(el => {
-        el.style.display = "none";
-      });
-      
-      // Initialiser aria-expanded sur les items d'intérêt
-      document.querySelectorAll(".interest-item").forEach(item => {
-        item.setAttribute('aria-expanded', 'false');
-      });
-      
-      // Modifier les liens pour conserver la langue lors de la navigation
-      document.querySelectorAll('nav a').forEach(link => {
-        const currentHref = link.getAttribute('href');
-        if (currentHref && currentHref.includes('.html')) {
-          const langToUse = langParam || savedLanguage;
-          link.setAttribute('href', `${currentHref}?lang=${langToUse}`);
-        }
-      });
-      
-      // Implémenter le lazy loading pour les images
-      if ('IntersectionObserver' in window) {
-        const imageObserver = new IntersectionObserver((entries, observer) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              const image = entry.target;
-              const dataSrc = image.getAttribute('data-src');
-              if (dataSrc) {
-                image.src = dataSrc;
-                image.classList.add('loaded');
-                observer.unobserve(image);
-              }
-            }
-          });
-        });
-        
-        document.querySelectorAll('img[data-src]').forEach(img => {
-          imageObserver.observe(img);
-        });
-      } else {
-        // Fallback pour les navigateurs sans support IntersectionObserver
-        document.querySelectorAll('img[data-src]').forEach(img => {
-          img.src = img.getAttribute('data-src');
-        });
-      }
-    });
-  </script> 
-</head>
-<body>
-  <!-- Lien d'accessibilité pour passer au contenu principal -->
-  <a href="#main-content" class="skip-link">Passer au contenu principal</a>
-
-  <header>
-    <h1>Christelle Vanessa SOUBEIGA</h1>
-    <h2>Étudiante en BUT Informatique – IUT d'Orsay</h2>
-    <div class="language-buttons" role="group" aria-label="Sélection de langue">
-      <button onclick="setLanguage('fr')" aria-label="Français" title="Passer en français">🇫🇷</button>
-      <button onclick="setLanguage('en')" aria-label="English" title="Switch to English">🇬🇧</button>
-      <button onclick="setLanguage('de')" aria-label="Deutsch" title="Auf Deutsch umschalten">DE</button>
-    </div>
-  </header>
-
-  <nav aria-label="Navigation principale">
-    <a href="./PRESENTATION.html">PRESENTATION</a>
-    <a href="./FORMATION.html">FORMATIONS</a>
-    <a href="./EXPERIENCE-PROJET.html">EXPERIENCES & PROJETS</a>
-    <a href="./COMPETENCES.html">COMPETENCES</a>
-    <a class="active" href="./CENTRE-D'INTERET.html">CENTRES D'INTERETS</a>
-    <a href="./AMBITION.html">AMBITIONS</a>
-    <a href="./CONTACT.html">CONTACTS</a>
-  </nav>
-
-  <main id="main-content">
-    <section class="lang fr">
-      <h2>Centres d'intérêt</h2>
-      
-      <div class="interests-container">
-        <h3>Sportifs</h3>
-        <div class="interests-grid">
-          <div class="interest-item" onclick="showInterestDetails('athletisme')"
-               onkeypress="if(event.key==='Enter') showInterestDetails('athletisme')"
-               tabindex="0" role="button" aria-expanded="false" aria-controls="athletisme">
-            <img data-src="./styles/images/athletisme.jpg" alt="Athlétisme" class="lazy-load" />
-            <noscript>
-              <img src="./styles/images/athletisme.jpg" alt="Athlétisme" />
-            </noscript>
-            <p>Athlétisme</p>
-          </div>
-          <div class="interest-item" onclick="showInterestDetails('handball')"
-               onkeypress="if(event.key==='Enter') showInterestDetails('handball')"
-               tabindex="0" role="button" aria-expanded="false" aria-controls="handball">
-            <img data-src="./styles/images/handball.jpg" alt="Handball" class="lazy-load" />
-            <noscript>
-              <img src="./styles/images/handball.jpg" alt="Handball" />
-            </noscript>
-            <p>Handball</p>
-          </div>
-          <div class="interest-item" onclick="showInterestDetails('Taekwondo')"
-               onkeypress="if(event.key==='Enter') showInterestDetails('Taekwondo')"
-               tabindex="0" role="button" aria-expanded="false" aria-controls="Taekwondo">
-            <img data-src="./styles/images/Taekwondo.png" alt="Taekwondo" class="lazy-load" />
-            <noscript>
-              <img src="./styles/images/Taekwondo.png" alt="Taekwondo" />
-            </noscript>
-            <p>Taekwondo</p>
-          </div>
-        </div>
-        
-        <h3>Artistiques</h3>
-        <div class="interests-grid">
-          <div class="interest-item" onclick="showInterestDetails('theatre')"
-               onkeypress="if(event.key==='Enter') showInterestDetails('theatre')"
-               tabindex="0" role="button" aria-expanded="false" aria-controls="theatre">
-            <img data-src="./styles/images/theatre.jpg" alt="Théâtre" class="lazy-load" />
-            <noscript>
-              <img src="./styles/images/theatre.jpg" alt="Théâtre" />
-            </noscript>
-            <p>Théâtre</p>
-          </div>
-          <div class="interest-item" onclick="showInterestDetails('musique')"
-               onkeypress="if(event.key==='Enter') showInterestDetails('musique')"
-               tabindex="0" role="button" aria-expanded="false" aria-controls="musique">
-            <img data-src="./styles/images/musique.jpg" alt="Musique" class="lazy-load" />
-            <noscript>
-              <img src="./styles/images/musique.jpg" alt="Musique" />
-            </noscript>
-            <p>Musique</p>
-          </div>
-          <div class="interest-item" onclick="showInterestDetails('art')"
-               onkeypress="if(event.key==='Enter') showInterestDetails('art')"
-               tabindex="0" role="button" aria-expanded="false" aria-controls="art">
-            <img data-src="./styles/images/art.png" alt="Art" class="lazy-load" />
-            <noscript>
-              <img src="./styles/images/art.png" alt="Art" />
-            </noscript>
-            <p>Art</p>
-          </div>
-        </div>
-        
-        <h3>Autres</h3>
-        <div class="interests-grid">
-          <div class="interest-item" onclick="showInterestDetails('lecture')"
-               onkeypress="if(event.key==='Enter') showInterestDetails('lecture')"
-               tabindex="0" role="button" aria-expanded="false" aria-controls="lecture">
-            <img data-src="./styles/images/lecture.jpg" alt="Lecture" class="lazy-load" />
-            <noscript>
-              <img src="./styles/images/lecture.jpg" alt="Lecture" />
-            </noscript>
-            <p>Lecture</p>
-          </div>
-          <div class="interest-item" onclick="showInterestDetails('cuisine')"
-               onkeypress="if(event.key==='Enter') showInterestDetails('cuisine')"
-               tabindex="0" role="button" aria-expanded="false" aria-controls="cuisine">
-            <img data-src="./styles/images/cuisine.jpg" alt="Cuisine" class="lazy-load" />
-            <noscript>
-              <img src="./styles/images/cuisine.jpg" alt="Cuisine" />
-            </noscript>
-            <p>Cuisine</p>
-          </div>
-          <div class="interest-item" onclick="showInterestDetails('elevage')"
-               onkeypress="if(event.key==='Enter') showInterestDetails('elevage')"
-               tabindex="0" role="button" aria-expanded="false" aria-controls="elevage">
-            <img data-src="./styles/images/elevage.jpg" alt="Élevage" class="lazy-load" />
-            <noscript>
-              <img src="./styles/images/elevage.jpg" alt="Élevage" />
-            </noscript>
-            <p>Élevage</p>
-          </div>
-          <div class="interest-item" onclick="showInterestDetails('agriculture')"
-               onkeypress="if(event.key==='Enter') showInterestDetails('agriculture')"
-               tabindex="0" role="button" aria-expanded="false" aria-controls="agriculture">
-            <img data-src="./styles/images/agriculture.jpg" alt="Agriculture" class="lazy-load" />
-            <noscript>
-              <img src="./styles/images/agriculture.jpg" alt="Agriculture" />
-            </noscript>
-            <p>Agriculture</p>
-          </div>
-          <div class="interest-item" onclick="showInterestDetails('voyages')"
-               onkeypress="if(event.key==='Enter') showInterestDetails('voyages')"
-               tabindex="0" role="button" aria-expanded="false" aria-controls="voyages">
-            <img data-src="./styles/images/voyages.jpg" alt="Voyages" class="lazy-load" />
-            <noscript>
-              <img src="./styles/images/voyages.jpg" alt="Voyages" />
-            </noscript>
-            <p>Voyages</p>
-          </div>
-        </div>
-      </div>
-      
-      <div id="athletisme" class="interest-details" role="region" aria-labelledby="athletisme-heading">
-        <h3 id="athletisme-heading">Athlétisme</h3>
-        <div class="interest-detail-content">
-          <img data-src="./styles/images/athletisme-detail.jpg" alt="Athlétisme détails" class="lazy-load" />
-          <noscript>
-            <img src="./styles/images/athletisme-detail.jpg" alt="Athlétisme détails" />
-          </noscript>
-          <div class="interest-description">
-            <p>J'ai pratiqué l'athlétisme pendant mon cursus scolaire, me spécialisant dans le sprint, le saut en longueur et le triple saut.</p>
-            <p>Cette discipline m'a permis de développer mon endurance, ma concentration et mon esprit de compétition.</p>
-          </div>
-        </div>
-        <button class="close-details" onclick="document.getElementById('athletisme').style.display='none'; document.querySelector('[aria-controls=\'athletisme\']').setAttribute('aria-expanded', 'false');" aria-label="Fermer les détails sur l'athlétisme">Fermer</button>
-      </div>
-      
-      <div id="handball" class="interest-details" role="region" aria-labelledby="handball-heading">
-        <h3 id="handball-heading">Handball</h3>
-        <div class="interest-detail-content">
-          <img data-src="./styles/images/handball-detail.jpg" alt="Handball détails" class="lazy-load" />
-          <noscript>
-            <img src="./styles/images/handball-detail.jpg" alt="Handball détails" />
-          </noscript>
-          <div class="interest-description">
-            <p>J'ai appris le handball dans mon école pendant 4 ans.</p>
-            <p>Ce sport collectif m'a appris l'importance du travail d'équipe et de la communication.</p>
-          </div>
-        </div>
-        <button class="close-details" onclick="document.getElementById('handball').style.display='none'; document.querySelector('[aria-controls=\'handball\']').setAttribute('aria-expanded', 'false');" aria-label="Fermer les détails sur le handball">Fermer</button>
-      </div>
-      
-      <div id="Taekwondo" class="interest-details" role="region" aria-labelledby="Taekwondo-heading">
-        <h3 id="Taekwondo-heading">Taekwondo</h3>
-        <div class="interest-detail-content">
-          <img data-src="./styles/images/Taekwondo-detail.jpg" alt="Taekwondo détails" class="lazy-load" />
-          <noscript>
-            <img src="./styles/images/Taekwondo-detail.jpg" alt="Taekwondo détails" />
-          </noscript>
-          <div class="interest-description">
-            <p>J'ai pratiqué le Taekwondo pendant <span>3 ans</span> et j'ai obtenu ma ceinture rouge.</p>
-            <p>Cet art martial m'a aidé à maintenir ma discipline personnelle et à améliorer ma confiance en moi.</p>
-          </div>
-        </div>
-        <button class="close-details" onclick="document.getElementById('Taekwondo').style.display='none'; document.querySelector('[aria-controls=\'Taekwondo\']').setAttribute('aria-expanded', 'false');" aria-label="Fermer les détails sur le Taekwondo">Fermer</button>
-      </div>
-      
-      <div id="theatre" class="interest-details" role="region" aria-labelledby="theatre-heading">
-        <h3 id="theatre-heading">Théâtre</h3>
-        <div class="interest-detail-content">
-          <img data-src="./styles/images/theatre-detail.jpg" alt="Théâtre détails" class="lazy-load" />
-          <noscript>
-            <img src="./styles/images/theatre-detail.jpg" alt="Théâtre détails" />
-          </noscript>
-          <div class="interest-description">
-            <p>J'ai participé à plusieurs pièces de théâtre scolaires, jouant différents rôles. Actuellement je suis un atelier théâtre organisé par mon établissement.</p>
-            <p>Le théâtre a considérablement amélioré mon expression orale et ma capacité à parler en public.</p>
-          </div>
-        </div>
-        <button class="close-details" onclick="document.getElementById('theatre').style.display='none'; document.querySelector('[aria-controls=\'theatre\']').setAttribute('aria-expanded', 'false');" aria-label="Fermer les détails sur le théâtre">Fermer</button>
-      </div>
-      
-      <div id="musique" class="interest-details" role="region" aria-labelledby="musique-heading">
-        <h3 id="musique-heading">Musique</h3>
-        <div class="interest-detail-content">
-          <img data-src="./styles/images/musique-detail.jpg" alt="Musique détails" class="lazy-load" />
-          <noscript>
-            <img src="./styles/images/musique-detail.jpg" alt="Musique détails" />
-          </noscript>
-          <div class="interest-description">
-            <p>J'aime écouter différents genres musicaux et j'ai appris un peu le piano et je sais jouer certains instruments africains comme le "djembé", la "calebasse" et le "shékéré".</p>
-            <p>La musique me permet de me détendre et de m'exprimer différemment.</p>
-          </div>
-        </div>
-        <button class="close-details" onclick="document.getElementById('musique').style.display='none'; document.querySelector('[aria-controls=\'musique\']').setAttribute('aria-expanded', 'false');" aria-label="Fermer les détails sur la musique">Fermer</button>
-      </div>
-      
-      <div id="art" class="interest-details" role="region" aria-labelledby="art-heading">
-        <h3 id="art-heading">Art</h3>
-        <div class="interest-detail-content">
-          <video controls width="320" height="240" preload="none" poster="./styles/images/art.png">
-            <source src="./styles/videos/mes-creations.mp4" type="video/mp4">
-            Votre navigateur ne prend pas en charge la lecture vidéo.
-          </video>
-          <div class="interest-description">
-            <p>Je pratique diverses formes d'art, notamment la création d'objets décoratifs. Je suis aussi passionnée par le dessin et la peinture.</p>
-            <p>Cette passion me permet d'exprimer ma créativité et d'explorer différentes techniques artistiques.</p>
-          </div>
-        </div>
-        <button class="close-details" onclick="document.getElementById('art').style.display='none'; document.querySelector('[aria-controls=\'art\']').setAttribute('aria-expanded', 'false');" aria-label="Fermer les détails sur l'art">Fermer</button>
-      </div>
-      
-      <div id="lecture" class="interest-details" role="region" aria-labelledby="lecture-heading">
-        <h3 id="lecture-heading">Lecture</h3>
-        <div class="interest-detail-content">
-          <img data-src="./styles/images/lecture-detail.jpg" alt="Lecture détails" class="lazy-load" />
-          <noscript>
-            <img src="./styles/images/lecture-detail.jpg" alt="Lecture détails" />
-          </noscript>
-          <div class="interest-description">
-            <p>Je suis une lectrice passionnée, particulièrement intéressée par les romans de science-fiction, les livres poétiques et les essais scientifiques.</p>
-            <p>La lecture enrichit mon vocabulaire et ouvre mon esprit à de nouvelles idées.</p>
-          </div>
-        </div>
-        <button class="close-details" onclick="document.getElementById('lecture').style.display='none'; document.querySelector('[aria-controls=\'lecture\']').setAttribute('aria-expanded', 'false');" aria-label="Fermer les détails sur la lecture">Fermer</button>
-      </div>
-      
-      <div id="cuisine" class="interest-details" role="region" aria-labelledby="cuisine-heading">
-        <h3 id="cuisine-heading">Cuisine</h3>
-        <div class="interest-detail-content">
-          <img data-src="./styles/images/cuisine-detail.jpg" alt="Cuisine détails" class="lazy-load" />
-          <noscript>
-            <img src="./styles/images/cuisine-detail.jpg" alt="Cuisine détails" />
-          </noscript>
-          <div class="interest-description">
-            <p>J'aime expérimenter avec différentes recettes, en particulier les plats traditionnels africains et la cuisine française.</p>
-            <p>La cuisine me permet de partager ma culture et d'apprendre celle des autres.</p>
-          </div>
-        </div>
-        <button class="close-details" onclick="document.getElementById('cuisine').style.display='none'; document.querySelector('[aria-controls=\'cuisine\']').setAttribute('aria-expanded', 'false');" aria-label="Fermer les détails sur la cuisine">Fermer</button>
-      </div>
-      
-      <div id="elevage" class="interest-details" role="region" aria-labelledby="elevage-heading">
-        <h3 id="elevage-heading">Élevage</h3>
-        <div class="interest-detail-content">
-          <img data-src="./styles/images/elevage-detail.jpg" alt="Élevage détails" class="lazy-load" />
-          <noscript>
-            <img src="./styles/images/elevage-detail.jpg" alt="Élevage détails" />
-          </noscript>
-          <div class="interest-description">
-            <p>J'ai participé à l'élevage de volailles et de petits animaux dans ma famille et dans mon école.</p>
-            <p>Cette activité m'a enseigné la responsabilité et le respect des êtres vivants.</p>
-          </div>
-        </div>
-        <button class="close-details" onclick="document.getElementById('elevage').style.display='none'; document.querySelector('[aria-controls=\'elevage\']').setAttribute('aria-expanded', 'false');" aria-label="Fermer les détails sur l'élevage">Fermer</button>
-      </div>
-      
-      <div id="agriculture" class="interest-details" role="region" aria-labelledby="agriculture-heading">
-        <h3 id="agriculture-heading">Agriculture</h3>
-        <div class="interest-detail-content">
-          <img data-src="./styles/images/agriculture-detail.jpg" alt="Agriculture détails" class="lazy-load" />
-          <noscript>
-            <img src="./styles/images/agriculture-detail.jpg" alt="Agriculture détails" />
-          </noscript>
-          <div class="interest-description">
-            <p>J'ai participé aux travaux agricoles familiaux, cultivant principalement des légumes et du maïs.</p>
-            <p>L'agriculture m'a appris la patience et l'importance du travail régulier.</p>
-          </div>
-        </div>
-        <button class="close-details" onclick="document.getElementById('agriculture').style.display='none'; document.querySelector('[aria-controls=\'agriculture\']').setAttribute('aria-expanded', 'false');" aria-label="Fermer les détails sur l'agriculture">Fermer</button>
-      </div>
-      
-      <div id="voyages" class="interest-details" role="region" aria-labelledby="voyages-heading">
-        <h3 id="voyages-heading">Voyages</h3>
-        <div class="interest-detail-content">
-          <img data-src="./styles/images/voyages-detail.jpg" alt="Voyages détails" class="lazy-load" />
-          <noscript>
-            <img src="./styles/images/voyages-detail.jpg" alt="Voyages détails" />
-          </noscript>
-          <div class="interest-description">
-            <p>Je suis passionnée par les voyages.</p>
-            <p>Les voyages me permettent de découvrir différentes cultures et d'élargir ma vision du monde.</p>
-          </div>
-        </div>
-        <button class="close-details" onclick="document.getElementById('voyages').style.display='none'; document.querySelector('[aria-controls=\'voyages\']').setAttribute('aria-expanded', 'false');" aria-label="Fermer les détails sur les voyages">Fermer</button>
-      </div>
-    </section>
-
-    <section class="lang en">
-      
-    </section>
-
-    <section class="lang de">
-
-    </section>
-  </main>
-
-  <footer>
-    <p>© 2024 Christelle Vanessa Soubeiga – Tous droits réservés</p>
-  </footer>
-</body>
+   <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="description" content="Centres d'intérêt de Christelle Vanessa SOUBEIGA, étudiante en BUT Informatique à l'IUT d'Orsay">
+      <title>Centres d'intérêt – Christelle Vanessa SOUBEIGA</title>
+      <!-- Préchargement des ressources critiques -->
+      <link rel="preload" href="./styles/index.css" as="style">
+      <link rel="stylesheet" href="./styles/index.css" />
+      <link rel="stylesheet" href="./styles/presentation.css" />
+      <link rel="stylesheet" href="./styles/flexbox_101_nav.css" />
+      <link rel="stylesheet" href="./styles/grid_101.css" />
+      <link rel="stylesheet" href="./styles/float_101.css" />
+      <link rel="stylesheet" href="./styles/formation.css" />
+      <link rel="stylesheet" href="./styles/projet.css" />
+      <link rel="stylesheet" href="./styles/ambition.css" />
+      <script>
+         function setLanguage(lang) {
+           // Masquer toutes les sections linguistiques
+           document.querySelectorAll(".lang").forEach(el => el.style.display = "none");
+           
+           // Afficher les sections dans la langue sélectionnée
+           document.querySelectorAll(".lang." + lang).forEach(el => el.style.display = "block");
+           
+           // Ajuster la direction du document pour l'arabe
+           if (lang === 'ar') {
+             document.body.setAttribute('dir', 'rtl');
+             document.querySelectorAll('.lang.ar').forEach(el => el.setAttribute('dir', 'rtl'));
+           } else {
+             document.body.setAttribute('dir', 'ltr');
+           }
+           
+           // Enregistrer la préférence de langue
+           localStorage.setItem('preferredLanguage', lang);
+           
+           // Mettre à jour l'apparence des boutons de langue
+           document.querySelectorAll('.language-buttons button').forEach(button => {
+             if (button.getAttribute('onclick').includes(`'${lang}'`)) {
+               button.classList.add('active-lang');
+             } else {
+               button.classList.remove('active-lang');
+             }
+           });
+         }
+         
+         function showInterestDetails(interestId) {
+           // Masquer tous les détails d'intérêts
+           document.querySelectorAll(".interest-details").forEach(el => {
+             el.style.display = "none";
+             
+             // Mettre à jour aria-expanded sur les items d'intérêt
+             const itemId = el.id;
+             const relatedItem = document.querySelector(`.interest-item[aria-controls="${itemId}"]`);
+             if (relatedItem) {
+               relatedItem.setAttribute('aria-expanded', 'false');
+             }
+           });
+           
+           // Afficher le détail sélectionné avec animation
+           const detailElement = document.getElementById(interestId);
+           if (detailElement) {
+             detailElement.style.display = "block";
+             detailElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+             
+             // Mettre à jour aria-expanded
+             const relatedItem = document.querySelector(`.interest-item[aria-controls="${interestId}"]`);
+             if (relatedItem) {
+               relatedItem.setAttribute('aria-expanded', 'true');
+             }
+           }
+         }
+         
+         window.addEventListener("DOMContentLoaded", () => {
+           // Récupérer la préférence de langue ou utiliser le français par défaut
+           const savedLanguage = localStorage.getItem('preferredLanguage') || 'fr';
+           
+           // Vérifier si nous avons un paramètre de langue dans l'URL
+           const urlParams = new URLSearchParams(window.location.search);
+           const langParam = urlParams.get('lang');
+           
+           if (langParam && ['fr', 'en', 'es', 'zh', 'ar', 'hi', 'de'].includes(langParam)) {
+             setLanguage(langParam);
+           } else {
+             setLanguage(savedLanguage);
+           }
+           
+           // Masquer tous les détails au chargement
+           document.querySelectorAll(".interest-details").forEach(el => {
+             el.style.display = "none";
+           });
+           
+           // Initialiser aria-expanded sur les items d'intérêt
+           document.querySelectorAll(".interest-item").forEach(item => {
+             item.setAttribute('aria-expanded', 'false');
+           });
+           
+           // Modifier les liens pour conserver la langue lors de la navigation
+           document.querySelectorAll('nav a').forEach(link => {
+             const currentHref = link.getAttribute('href');
+             if (currentHref && currentHref.includes('.html')) {
+               const langToUse = langParam || savedLanguage;
+               link.setAttribute('href', `${currentHref}?lang=${langToUse}`);
+             }
+           });
+           
+           // Implémenter le lazy loading pour les images
+           if ('IntersectionObserver' in window) {
+             const imageObserver = new IntersectionObserver((entries, observer) => {
+               entries.forEach(entry => {
+                 if (entry.isIntersecting) {
+                   const image = entry.target;
+                   const dataSrc = image.getAttribute('data-src');
+                   if (dataSrc) {
+                     image.src = dataSrc;
+                     image.classList.add('loaded');
+                     observer.unobserve(image);
+                   }
+                 }
+               });
+             });
+             
+             document.querySelectorAll('img[data-src]').forEach(img => {
+               imageObserver.observe(img);
+             });
+           } else {
+             // Fallback pour les navigateurs sans support IntersectionObserver
+             document.querySelectorAll('img[data-src]').forEach(img => {
+               img.src = img.getAttribute('data-src');
+             });
+           }
+         });
+      </script> 
+   </head>
+   <body>
+      <!-- Lien d'accessibilité pour passer au contenu principal -->
+      <a href="#main-content" class="skip-link">Passer au contenu principal</a>
+      <header>
+         <h1>Christelle Vanessa SOUBEIGA</h1>
+         <h2>Étudiante en BUT Informatique – IUT d'Orsay</h2>
+         <div class="language-buttons" role="group" aria-label="Sélection de langue">
+            <button onclick="setLanguage('fr')" aria-label="Français" title="Passer en français">🇫🇷</button>
+            <button onclick="setLanguage('en')" aria-label="English" title="Switch to English">🇬🇧</button>
+            <button onclick="setLanguage('de')" aria-label="Deutsch" title="Auf Deutsch umschalten">DE</button>
+         </div>
+      </header>
+      <nav aria-label="Navigation principale">
+         <a href="./PRESENTATION.html">PRESENTATION</a>
+         <a href="./FORMATION.html">FORMATIONS</a>
+         <a href="./EXPERIENCE-PROJET.html">EXPERIENCES & PROJETS</a>
+         <a href="./COMPETENCES.html">COMPETENCES</a>
+         <a class="active" href="./CENTRE-D'INTERET.html">CENTRES D'INTERETS</a>
+         <a href="./AMBITION.html">AMBITIONS</a>
+         <a href="./CONTACT.html">CONTACTS</a>
+      </nav>
+      <main id="main-content">
+         <section class="lang fr">
+            <h2>Centres d'intérêt</h2>
+            <div class="interests-container">
+               <h3>Informatiques</h3>
+               <div class="interests-grid">
+                  <div class="interest-item" onclick="showInterestDetails('securite-reseau')"
+                     onkeypress="if(event.key==='Enter') showInterestDetails('securite-reseau')"
+                     tabindex="0" role="button" aria-expanded="false" aria-controls="securite-reseau">
+                     <img data-src="./styles/images/securite-reseau.png" alt="Sécurité Réseau" class="lazy-load" />
+                     <noscript>
+                        <img src="./styles/images/securite-reseau.png" alt="Sécurité Réseau" />
+                     </noscript>
+                     <p>Sécurité Réseau</p>
+                  </div>
+                  <div class="interest-item" onclick="showInterestDetails('programmation')"
+                     onkeypress="if(event.key==='Enter') showInterestDetails('programmation')"
+                     tabindex="0" role="button" aria-expanded="false" aria-controls="programmation">
+                     <img data-src="./styles/images/programmation.jpeg" alt="Programmation" class="lazy-load" />
+                     <noscript>
+                        <img src="./styles/images/programmation.jpeg" alt="Programmation" />
+                     </noscript>
+                     <p>Programmation</p>
+                  </div>
+                  <div class="interest-item" onclick="showInterestDetails('developpement-web')"
+                     onkeypress="if(event.key==='Enter') showInterestDetails('developpement-web')"
+                     tabindex="0" role="button" aria-expanded="false" aria-controls="developpement-web">
+                     <img data-src="./styles/images/developpement-web.png" alt="Développement Web" class="lazy-load" />
+                     <noscript>
+                        <img src="./styles/images/developpement-web.png" alt="Développement Web" />
+                     </noscript>
+                     <p>Développement Web</p>
+                  </div>
+               </div>
+               <h3>Sportifs</h3>
+               <div class="interests-grid">
+                  <div class="interest-item" onclick="showInterestDetails('athletisme')"
+                     onkeypress="if(event.key==='Enter') showInterestDetails('athletisme')"
+                     tabindex="0" role="button" aria-expanded="false" aria-controls="athletisme">
+                     <img data-src="./styles/images/athletisme.jpg" alt="Athlétisme" class="lazy-load" />
+                     <noscript>
+                        <img src="./styles/images/athletisme.jpg" alt="Athlétisme" />
+                     </noscript>
+                     <p>Athlétisme</p>
+                  </div>
+                  <div class="interest-item" onclick="showInterestDetails('handball')"
+                     onkeypress="if(event.key==='Enter') showInterestDetails('handball')"
+                     tabindex="0" role="button" aria-expanded="false" aria-controls="handball">
+                     <img data-src="./styles/images/handball.jpg" alt="Handball" class="lazy-load" />
+                     <noscript>
+                        <img src="./styles/images/handball.jpg" alt="Handball" />
+                     </noscript>
+                     <p>Handball</p>
+                  </div>
+                  <div class="interest-item" onclick="showInterestDetails('Taekwondo')"
+                     onkeypress="if(event.key==='Enter') showInterestDetails('Taekwondo')"
+                     tabindex="0" role="button" aria-expanded="false" aria-controls="Taekwondo">
+                     <img data-src="./styles/images/Taekwondo.png" alt="Taekwondo" class="lazy-load" />
+                     <noscript>
+                        <img src="./styles/images/Taekwondo.png" alt="Taekwondo" />
+                     </noscript>
+                     <p>Taekwondo</p>
+                  </div>
+               </div>
+               <h3>Artistiques</h3>
+               <div class="interests-grid">
+                  <div class="interest-item" onclick="showInterestDetails('theatre')"
+                     onkeypress="if(event.key==='Enter') showInterestDetails('theatre')"
+                     tabindex="0" role="button" aria-expanded="false" aria-controls="theatre">
+                     <img data-src="./styles/images/theatre.jpg" alt="Théâtre" class="lazy-load" />
+                     <noscript>
+                        <img src="./styles/images/theatre.jpg" alt="Théâtre" />
+                     </noscript>
+                     <p>Théâtre</p>
+                  </div>
+                  <div class="interest-item" onclick="showInterestDetails('musique')"
+                     onkeypress="if(event.key==='Enter') showInterestDetails('musique')"
+                     tabindex="0" role="button" aria-expanded="false" aria-controls="musique">
+                     <img data-src="./styles/images/musique.jpg" alt="Musique" class="lazy-load" />
+                     <noscript>
+                        <img src="./styles/images/musique.jpg" alt="Musique" />
+                     </noscript>
+                     <p>Musique</p>
+                  </div>
+                  <div class="interest-item" onclick="showInterestDetails('art')"
+                     onkeypress="if(event.key==='Enter') showInterestDetails('art')"
+                     tabindex="0" role="button" aria-expanded="false" aria-controls="art">
+                     <img data-src="./styles/images/art.png" alt="Art" class="lazy-load" />
+                     <noscript>
+                        <img src="./styles/images/art.png" alt="Art" />
+                     </noscript>
+                     <p>Art</p>
+                  </div>
+               </div>
+               <h3>Autres</h3>
+               <div class="interests-grid">
+                  <div class="interest-item" onclick="showInterestDetails('lecture')"
+                     onkeypress="if(event.key==='Enter') showInterestDetails('lecture')"
+                     tabindex="0" role="button" aria-expanded="false" aria-controls="lecture">
+                     <img data-src="./styles/images/lecture.jpg" alt="Lecture" class="lazy-load" />
+                     <noscript>
+                        <img src="./styles/images/lecture.jpg" alt="Lecture" />
+                     </noscript>
+                     <p>Lecture</p>
+                  </div>
+                  <div class="interest-item" onclick="showInterestDetails('cuisine')"
+                     onkeypress="if(event.key==='Enter') showInterestDetails('cuisine')"
+                     tabindex="0" role="button" aria-expanded="false" aria-controls="cuisine">
+                     <img data-src="./styles/images/cuisine.jpg" alt="Cuisine" class="lazy-load" />
+                     <noscript>
+                        <img src="./styles/images/cuisine.jpg" alt="Cuisine" />
+                     </noscript>
+                     <p>Cuisine</p>
+                  </div>
+                  <div class="interest-item" onclick="showInterestDetails('elevage')"
+                     onkeypress="if(event.key==='Enter') showInterestDetails('elevage')"
+                     tabindex="0" role="button" aria-expanded="false" aria-controls="elevage">
+                     <img data-src="./styles/images/elevage.jpg" alt="Élevage" class="lazy-load" />
+                     <noscript>
+                        <img src="./styles/images/elevage.jpg" alt="Élevage" />
+                     </noscript>
+                     <p>Élevage</p>
+                  </div>
+                  <div class="interest-item" onclick="showInterestDetails('agriculture')"
+                     onkeypress="if(event.key==='Enter') showInterestDetails('agriculture')"
+                     tabindex="0" role="button" aria-expanded="false" aria-controls="agriculture">
+                     <img data-src="./styles/images/agriculture.jpg" alt="Agriculture" class="lazy-load" />
+                     <noscript>
+                        <img src="./styles/images/agriculture.jpg" alt="Agriculture" />
+                     </noscript>
+                     <p>Agriculture</p>
+                  </div>
+                  <div class="interest-item" onclick="showInterestDetails('voyages')"
+                     onkeypress="if(event.key==='Enter') showInterestDetails('voyages')"
+                     tabindex="0" role="button" aria-expanded="false" aria-controls="voyages">
+                     <img data-src="./styles/images/voyages.jpg" alt="Voyages" class="lazy-load" />
+                     <noscript>
+                        <img src="./styles/images/voyages.jpg" alt="Voyages" />
+                     </noscript>
+                     <p>Voyages</p>
+                  </div>
+               </div>
+            </div>
+            <!-- Détails des intérêts informatiques -->
+            <div id="securite-reseau" class="interest-details" role="region" aria-labelledby="securite-reseau-heading">
+               <h3 id="securite-reseau-heading">Sécurité Réseau</h3>
+               <div class="interest-detail-content">
+                  <img data-src="./styles/images/securite-reseau.png" alt="Sécurité Réseau détails" class="lazy-load" />
+                  <noscript>
+                     <img src="./styles/images/securite-reseau.png" alt="Sécurité Réseau détails" />
+                  </noscript>
+                  <div class="interest-description">
+                     <p>La sécurité réseau est ma passion principale dans le domaine informatique. Je m'intéresse particulièrement à la protection des infrastructures réseau, aux protocoles de sécurité et à la détection d'intrusion.</p>
+                     <p>Bien que je n'aie pas encore eu l'occasion de développer des compétences pratiques approfondies dans ce domaine, j'étudie activement les concepts théoriques et j'espère avoir l'opportunité de participer à des projets concrets liés à la cybersécurité dans un futur proche.</p>
+                  </div>
+               </div>
+               <button class="close-details" onclick="document.getElementById('securite-reseau').style.display='none'; document.querySelector('[aria-controls=\'securite-reseau\']').setAttribute('aria-expanded', 'false');" aria-label="Fermer les détails sur la sécurité réseau">Fermer</button>
+            </div>
+            <div id="programmation" class="interest-details" role="region" aria-labelledby="programmation-heading">
+               <h3 id="programmation-heading">Programmation</h3>
+               <div class="interest-detail-content">
+                  <img data-src="./styles/images/programmation.jpeg" alt="Programmation détails" class="lazy-load" />
+                  <noscript>
+                     <img src="./styles/images/programmation.jpeg" alt="Programmation détails" />
+                  </noscript>
+                  <div class="interest-description">
+                     <p>Je m'intéresse à plusieurs langages de programmation, notamment Java, Python et C++.</p>
+                     <p>Résoudre des problèmes algorithmiques et développer des applications sont des activités que j'apprécie particulièrement dans mon parcours informatique.</p>
+                  </div>
+               </div>
+               <button class="close-details" onclick="document.getElementById('programmation').style.display='none'; document.querySelector('[aria-controls=\'programmation\']').setAttribute('aria-expanded', 'false');" aria-label="Fermer les détails sur la programmation">Fermer</button>
+            </div>
+            <div id="developpement-web" class="interest-details" role="region" aria-labelledby="developpement-web-heading">
+               <h3 id="developpement-web-heading">Développement Web</h3>
+               <div class="interest-detail-content">
+                  <img data-src="./styles/images/developpement-web.png" alt="Développement Web détails" class="lazy-load" />
+                  <noscript>
+                     <img src="./styles/images/developpement-web.png" alt="Développement Web détails" />
+                  </noscript>
+                  <div class="interest-description">
+                     <p>Le développement web est un domaine qui me fascine. J'aime créer des sites web interactifs et responsive en utilisant HTML, CSS et JavaScript.</p>
+                     <p>Ce site web personnel est d'ailleurs l'un de mes projets de développement web, où j'ai pu mettre en pratique ces technologies.</p>
+                  </div>
+               </div>
+               <button class="close-details" onclick="document.getElementById('developpement-web').style.display='none'; document.querySelector('[aria-controls=\'developpement-web\']').setAttribute('aria-expanded', 'false');" aria-label="Fermer les détails sur le développement web">Fermer</button>
+            </div>
+            <div id="athletisme" class="interest-details" role="region" aria-labelledby="athletisme-heading">
+               <h3 id="athletisme-heading">Athlétisme</h3>
+               <div class="interest-detail-content">
+                  <img data-src="./styles/images/athletisme.jpg" alt="Athlétisme détails" class="lazy-load" />
+                  <noscript>
+                     <img src="./styles/images/athletisme.jpg" alt="Athlétisme détails" />
+                  </noscript>
+                  <div class="interest-description">
+                     <p>J'ai pratiqué l'athlétisme pendant mon cursus scolaire, me spécialisant dans le sprint, le saut en longueur et le triple saut.</p>
+                     <p>Cette discipline m'a permis de développer mon endurance, ma concentration et mon esprit de compétition.</p>
+                  </div>
+               </div>
+               <button class="close-details" onclick="document.getElementById('athletisme').style.display='none'; document.querySelector('[aria-controls=\'athletisme\']').setAttribute('aria-expanded', 'false');" aria-label="Fermer les détails sur l'athlétisme">Fermer</button>
+            </div>
+            <div id="handball" class="interest-details" role="region" aria-labelledby="handball-heading">
+               <h3 id="handball-heading">Handball</h3>
+               <div class="interest-detail-content">
+                  <img data-src="./styles/images/handball.jpg" alt="Handball détails" class="lazy-load" />
+                  <noscript>
+                     <img src="./styles/images/handball.jpg" alt="Handball détails" />
+                  </noscript>
+                  <div class="interest-description">
+                     <p>J'ai appris le handball dans mon école pendant 4 ans.</p>
+                     <p>Ce sport collectif m'a appris l'importance du travail d'équipe et de la communication.</p>
+                  </div>
+               </div>
+               <button class="close-details" onclick="document.getElementById('handball').style.display='none'; document.querySelector('[aria-controls=\'handball\']').setAttribute('aria-expanded', 'false');" aria-label="Fermer les détails sur le handball">Fermer</button>
+            </div>
+            <div id="Taekwondo" class="interest-details" role="region" aria-labelledby="Taekwondo-heading">
+               <h3 id="Taekwondo-heading">Taekwondo</h3>
+               <div class="interest-detail-content">
+                  <img data-src="./styles/images/Taekwondo-detail.jpg" alt="Taekwondo détails" class="lazy-load" />
+                  <noscript>
+                     <img src="./styles/images/Taekwondo-detail.jpg" alt="Taekwondo détails" />
+                  </noscript>
+                  <div class="interest-description">
+                     <p>J'ai pratiqué le Taekwondo pendant <span>3 ans</span> et j'ai obtenu ma ceinture rouge.</p>
+                     <p>Cet art martial m'a aidé à maintenir ma discipline personnelle et à améliorer ma confiance en moi.</p>
+                  </div>
+               </div>
+               <button class="close-details" onclick="document.getElementById('Taekwondo').style.display='none'; document.querySelector('[aria-controls=\'Taekwondo\']').setAttribute('aria-expanded', 'false');" aria-label="Fermer les détails sur le Taekwondo">Fermer</button>
+            </div>
+            <div id="theatre" class="interest-details" role="region" aria-labelledby="theatre-heading">
+               <h3 id="theatre-heading">Théâtre</h3>
+               <div class="interest-detail-content">
+                  <img data-src="./styles/images/theatre.jpg" alt="Théâtre détails" class="lazy-load" />
+                  <noscript>
+                     <img src="./styles/images/theatre.jpg" alt="Théâtre détails" />
+                  </noscript>
+                  <div class="interest-description">
+                     <p>J'ai participé à plusieurs pièces de théâtre scolaires, jouant différents rôles. Actuellement je suis un atelier théâtre organisé par mon établissement.</p>
+                     <p>Le théâtre a considérablement amélioré mon expression orale et ma capacité à parler en public.</p>
+                  </div>
+               </div>
+               <button class="close-details" onclick="document.getElementById('theatre').style.display='none'; document.querySelector('[aria-controls=\'theatre\']').setAttribute('aria-expanded', 'false');" aria-label="Fermer les détails sur le théâtre">Fermer</button>
+            </div>
+            <div id="musique" class="interest-details" role="region" aria-labelledby="musique-heading">
+               <h3 id="musique-heading">Musique</h3>
+               <div class="interest-detail-content">
+                  <img data-src="./styles/images/musique.jpg" alt="Musique détails" class="lazy-load" />
+                  <noscript>
+                     <img src="./styles/images/musique.jpg" alt="Musique détails" />
+                  </noscript>
+                  <div class="interest-description">
+                     <p>J'aime écouter différents genres musicaux et j'ai appris un peu le piano et je sais jouer certains instruments africains comme le "djembé", la "calebasse" et le "shékéré".</p>
+                     <p>La musique me permet de me détendre et de m'exprimer différemment.</p>
+                  </div>
+               </div>
+               <button class="close-details" onclick="document.getElementById('musique').style.display='none'; document.querySelector('[aria-controls=\'musique\']').setAttribute('aria-expanded', 'false');" aria-label="Fermer les détails sur la musique">Fermer</button>
+            </div>
+            <div id="art" class="interest-details" role="region" aria-labelledby="art-heading">
+               <h3 id="art-heading">Art</h3>
+               <div class="interest-detail-content">
+                  <video controls width="320" height="240" preload="none" poster="./styles/images/art.png">
+                     <source src="./styles/videos/mes-creations.mp4" type="video/mp4">
+                     Votre navigateur ne prend pas en charge la lecture vidéo.
+                  </video>
+                  <div class="interest-description">
+                     <p>Je pratique diverses formes d'art, notamment la création d'objets décoratifs. Je suis aussi passionnée par le dessin et la peinture.</p>
+                     <p>Cette passion me permet d'exprimer ma créativité et d'explorer différentes techniques artistiques.</p>
+                  </div>
+               </div>
+               <button class="close-details" onclick="document.getElementById('art').style.display='none'; document.querySelector('[aria-controls=\'art\']').setAttribute('aria-expanded', 'false');" aria-label="Fermer les détails sur l'art">Fermer</button>
+            </div>
+            <div id="lecture" class="interest-details" role="region" aria-labelledby="lecture-heading">
+               <h3 id="lecture-heading">Lecture</h3>
+               <div class="interest-detail-content">
+                  <img data-src="./styles/images/lecture.jpg" alt="Lecture détails" class="lazy-load" />
+                  <noscript>
+                     <img src="./styles/images/lecture.jpg" alt="Lecture détails" />
+                  </noscript>
+                  <div class="interest-description">
+                     <p>Je suis une lectrice passionnée, particulièrement intéressée par les romans de science-fiction, les livres poétiques et les essais scientifiques.</p>
+                     <p>La lecture enrichit mon vocabulaire et ouvre mon esprit à de nouvelles idées.</p>
+                  </div>
+               </div>
+               <button class="close-details" onclick="document.getElementById('lecture').style.display='none'; document.querySelector('[aria-controls=\'lecture\']').setAttribute('aria-expanded', 'false');" aria-label="Fermer les détails sur la lecture">Fermer</button>
+            </div>
+            <div id="cuisine" class="interest-details" role="region" aria-labelledby="cuisine-heading">
+               <h3 id="cuisine-heading">Cuisine</h3>
+               <div class="interest-detail-content">
+                  <img data-src="./styles/images/cuisine.jpg" alt="Cuisine détails" class="lazy-load" />
+                  <noscript>
+                     <img src="./styles/images/cuisine.jpg" alt="Cuisine détails" />
+                  </noscript>
+                  <div class="interest-description">
+                     <p>J'aime expérimenter avec différentes recettes, en particulier les plats traditionnels africains et la cuisine française.</p>
+                     <p>La cuisine me permet de partager ma culture et d'apprendre celle des autres.</p>
+                  </div>
+               </div>
+               <button class="close-details" onclick="document.getElementById('cuisine').style.display='none'; document.querySelector('[aria-controls=\'cuisine\']').setAttribute('aria-expanded', 'false');" aria-label="Fermer les détails sur la cuisine">Fermer</button>
+            </div>
+            <div id="elevage" class="interest-details" role="region" aria-labelledby="elevage-heading">
+               <h3 id="elevage-heading">Élevage</h3>
+               <div class="interest-detail-content">
+                  <img data-src="./styles/images/elevage.jpg" alt="Élevage détails" class="lazy-load" />
+                  <noscript>
+                     <img src="./styles/images/elevage.jpg" alt="Élevage détails" />
+                  </noscript>
+                  <div class="interest-description">
+                     <p>J'ai participé à l'élevage de volailles et de petits animaux dans ma famille et dans mon école.</p>
+                     <p>Cette activité m'a enseigné la responsabilité et le respect des êtres vivants.</p>
+                  </div>
+               </div>
+               <button class="close-details" onclick="document.getElementById('elevage').style.display='none'; document.querySelector('[aria-controls=\'elevage\']').setAttribute('aria-expanded', 'false');" aria-label="Fermer les détails sur l'élevage">Fermer</button>
+            </div>
+            <div id="agriculture" class="interest-details" role="region" aria-labelledby="agriculture-heading">
+               <h3 id="agriculture-heading">Agriculture</h3>
+               <div class="interest-detail-content">
+                  <img data-src="./styles/images/agriculture.jpg" alt="Agriculture détails" class="lazy-load" />
+                  <noscript>
+                     <img src="./styles/images/agriculture.jpg" alt="Agriculture détails" />
+                  </noscript>
+                  <div class="interest-description">
+                     <p>J'ai participé aux travaux agricoles familiaux, cultivant principalement des légumes et du maïs.</p>
+                     <p>L'agriculture m'a appris la patience et l'importance du travail régulier.</p>
+                  </div>
+               </div>
+               <button class="close-details" onclick="document.getElementById('agriculture').style.display='none'; document.querySelector('[aria-controls=\'agriculture\']').setAttribute('aria-expanded', 'false');" aria-label="Fermer les détails sur l'agriculture">Fermer</button>
+            </div>
+            <div id="voyages" class="interest-details" role="region" aria-labelledby="voyages-heading">
+               <h3 id="voyages-heading">Voyages</h3>
+               <div class="interest-detail-content">
+                  <img data-src="./styles/images/voyages.jpg" alt="Voyages détails" class="lazy-load" />
+                  <noscript>
+                     <img src="./styles/images/voyages.jpg" alt="Voyages détails" />
+                  </noscript>
+                  <div class="interest-description">
+                     <p>Je suis passionnée par les voyages.</p>
+                     <p>Les voyages me permettent de découvrir différentes cultures et d'élargir ma vision du monde.</p>
+                  </div>
+               </div>
+               <button class="close-details" onclick="document.getElementById('voyages').style.display='none'; document.querySelector('[aria-controls=\'voyages\']').setAttribute('aria-expanded', 'false');" aria-label="Fermer les détails sur les voyages">Fermer</button>
+            </div>
+         </section>
+         <section class="lang en">
+            <h2>Interests</h2>
+            <div class="interests-container">
+               <h3>Computing</h3>
+               <div class="interests-grid">
+                  <div class="interest-item" onclick="showInterestDetails('securite-reseau')"
+                     onkeypress="if(event.key==='Enter') showInterestDetails('securite-reseau')"
+                     tabindex="0" role="button" aria-expanded="false" aria-controls="securite-reseau">
+                     <img data-src="./styles/images/securite-reseau.png" alt="Network Security" class="lazy-load" />
+                     <noscript>
+                        <img src="./styles/images/securite-reseau.png" alt="Network Security" />
+                     </noscript>
+                     <p>Network Security</p>
+                  </div>
+                  <div class="interest-item" onclick="showInterestDetails('programmation')"
+                     onkeypress="if(event.key==='Enter') showInterestDetails('programmation')"
+                     tabindex="0" role="button" aria-expanded="false" aria-controls="programmation">
+                     <img data-src="./styles/images/programmation.jpeg" alt="Programming" class="lazy-load" />
+                     <noscript>
+                        <img src="./styles/images/programmation.jpeg" alt="Programming" />
+                     </noscript>
+                     <p>Programming</p>
+                  </div>
+                  <div class="interest-item" onclick="showInterestDetails('developpement-web')"
+                     onkeypress="if(event.key==='Enter') showInterestDetails('developpement-web')"
+                     tabindex="0" role="button" aria-expanded="false" aria-controls="developpement-web">
+                     <img data-src="./styles/images/developpement-web.png" alt="Web Development" class="lazy-load" />
+                     <noscript>
+                        <img src="./styles/images/developpement-web.png" alt="Web Development" />
+                     </noscript>
+                     <p>Web Development</p>
+                  </div>
+               </div>
+               <h3>Sports</h3>
+               <div class="interests-grid">
+                  <div class="interest-item" onclick="showInterestDetails('athletisme')"
+                     onkeypress="if(event.key==='Enter') showInterestDetails('athletisme')"
+                     tabindex="0" role="button" aria-expanded="false" aria-controls="athletisme">
+                     <img data-src="./styles/images/athletisme.jpg" alt="Athletics" class="lazy-load" />
+                     <noscript>
+                        <img src="./styles/images/athletisme.jpg" alt="Athletics" />
+                     </noscript>
+                     <p>Athletics</p>
+                  </div>
+                  <div class="interest-item" onclick="showInterestDetails('handball')"
+                     onkeypress="if(event.key==='Enter') showInterestDetails('handball')"
+                     tabindex="0" role="button" aria-expanded="false" aria-controls="handball">
+                     <img data-src="./styles/images/handball.jpg" alt="Handball" class="lazy-load" />
+                     <noscript>
+                        <img src="./styles/images/handball.jpg" alt="Handball" />
+                     </noscript>
+                     <p>Handball</p>
+                  </div>
+                  <div class="interest-item" onclick="showInterestDetails('Taekwondo')"
+                     onkeypress="if(event.key==='Enter') showInterestDetails('Taekwondo')"
+                     tabindex="0" role="button" aria-expanded="false" aria-controls="Taekwondo">
+                     <img data-src="./styles/images/Taekwondo.png" alt="Taekwondo" class="lazy-load" />
+                     <noscript>
+                        <img src="./styles/images/Taekwondo.png" alt="Taekwondo" />
+                     </noscript>
+                     <p>Taekwondo</p>
+                  </div>
+               </div>
+               <h3>Artistic</h3>
+               <div class="interests-grid">
+                  <div class="interest-item" onclick="showInterestDetails('theatre')"
+                     onkeypress="if(event.key==='Enter') showInterestDetails('theatre')"
+                     tabindex="0" role="button" aria-expanded="false" aria-controls="theatre">
+                     <img data-src="./styles/images/theatre.jpg" alt="Theatre" class="lazy-load" />
+                     <noscript>
+                        <img src="./styles/images/theatre.jpg" alt="Theatre" />
+                     </noscript>
+                     <p>Theatre</p>
+                  </div>
+                  <div class="interest-item" onclick="showInterestDetails('musique')"
+                     onkeypress="if(event.key==='Enter') showInterestDetails('musique')"
+                     tabindex="0" role="button" aria-expanded="false" aria-controls="musique">
+                     <img data-src="./styles/images/musique.jpg" alt="Music" class="lazy-load" />
+                     <noscript>
+                        <img src="./styles/images/musique.jpg" alt="Music" />
+                     </noscript>
+                     <p>Music</p>
+                  </div>
+                  <div class="interest-item" onclick="showInterestDetails('art')"
+                     onkeypress="if(event.key==='Enter') showInterestDetails('art')"
+                     tabindex="0" role="button" aria-expanded="false" aria-controls="art">
+                     <img data-src="./styles/images/art.png" alt="Art" class="lazy-load" />
+                     <noscript>
+                        <img src="./styles/images/art.png" alt="Art" />
+                     </noscript>
+                     <p>Art</p>
+                  </div>
+               </div>
+               <h3>Others</h3>
+               <div class="interests-grid">
+                  <div class="interest-item" onclick="showInterestDetails('lecture')"
+                     onkeypress="if(event.key==='Enter') showInterestDetails('lecture')"
+                     tabindex="0" role="button" aria-expanded="false" aria-controls="lecture">
+                     <img data-src="./styles/images/lecture.jpg" alt="Reading" class="lazy-load" />
+                     <noscript>
+                        <img src="./styles/images/lecture.jpg" alt="Reading" />
+                     </noscript>
+                     <p>Reading</p>
+                  </div>
+                  <div class="interest-item" onclick="showInterestDetails('cuisine')"
+                     onkeypress="if(event.key==='Enter') showInterestDetails('cuisine')"
+                     tabindex="0" role="button" aria-expanded="false" aria-controls="cuisine">
+                     <img data-src="./styles/images/cuisine.jpg" alt="Cooking" class="lazy-load" />
+                     <noscript>
+                        <img src="./styles/images/cuisine.jpg" alt="Cooking" />
+                     </noscript>
+                     <p>Cooking</p>
+                  </div>
+                  <div class="interest-item" onclick="showInterestDetails('elevage')"
+                     onkeypress="if(event.key==='Enter') showInterestDetails('elevage')"
+                     tabindex="0" role="button" aria-expanded="false" aria-controls="elevage">
+                     <img data-src="./styles/images/elevage.jpg" alt="Animal Breeding" class="lazy-load" />
+                     <noscript>
+                        <img src="./styles/images/elevage.jpg" alt="Animal Breeding" />
+                     </noscript>
+                     <p>Animal Breeding</p>
+                  </div>
+                  <div class="interest-item" onclick="showInterestDetails('agriculture')"
+                     onkeypress="if(event.key==='Enter') showInterestDetails('agriculture')"
+                     tabindex="0" role="button" aria-expanded="false" aria-controls="agriculture">
+                     <img data-src="./styles/images/agriculture.jpg" alt="Agriculture" class="lazy-load" />
+                     <noscript>
+                        <img src="./styles/images/agriculture.jpg" alt="Agriculture" />
+                     </noscript>
+                     <p>Agriculture</p>
+                  </div>
+                  <div class="interest-item" onclick="showInterestDetails('voyages')"
+                     onkeypress="if(event.key==='Enter') showInterestDetails('voyages')"
+                     tabindex="0" role="button" aria-expanded="false" aria-controls="voyages">
+                     <img data-src="./styles/images/voyages.jpg" alt="Traveling" class="lazy-load" />
+                     <noscript>
+                        <img src="./styles/images/voyages.jpg" alt="Traveling" />
+                     </noscript>
+                     <p>Traveling</p>
+                  </div>
+               </div>
+            </div>
+            <!-- Section pour les détails en anglais -->
+            <!-- Détails des intérêts informatiques en anglais -->
+            <div id="securite-reseau-en" class="interest-details" role="region" aria-labelledby="securite-reseau-heading-en">
+               <h3 id="securite-reseau-heading-en">Network Security</h3>
+               <div class="interest-detail-content">
+                  <img data-src="./styles/images/securite-reseau.png" alt="Network Security details" class="lazy-load" />
+                  <noscript>
+                     <img src="./styles/images/securite-reseau.png" alt="Network Security details" />
+                  </noscript>
+                  <div class="interest-description">
+                     <p>Network security is my main passion in the field of computer science. I'm particularly interested in the protection of network infrastructures, security protocols, and intrusion detection.</p>
+                     <p>Although I haven't yet had the opportunity to develop in-depth practical skills in this field, I'm actively studying the theoretical concepts and hope to have the opportunity to participate in concrete cybersecurity projects in the near future.</p>
+                  </div>
+               </div>
+               <button class="close-details" onclick="document.getElementById('securite-reseau-en').style.display='none'; document.querySelector('[aria-controls=\'securite-reseau-en\']').setAttribute('aria-expanded', 'false');" aria-label="Close network security details">Close</button>
+            </div>
+            <div id="programmation-en" class="interest-details" role="region" aria-labelledby="programmation-heading-en">
+               <h3 id="programmation-heading-en">Programming</h3>
+               <div class="interest-detail-content">
+                  <img data-src="./styles/images/programmation.jpeg" alt="Programming details" class="lazy-load" />
+                  <noscript>
+                     <img src="./styles/images/programmation.jpeg" alt="Programming details" />
+                  </noscript>
+                  <div class="interest-description">
+                     <p>I'm interested in several programming languages, notably Java, Python, and C++.</p>
+                     <p>Solving algorithmic problems and developing applications are activities that I particularly enjoy in my computer science journey.</p>
+                  </div>
+               </div>
+               <button class="close-details" onclick="document.getElementById('programmation-en').style.display='none'; document.querySelector('[aria-controls=\'programmation-en\']').setAttribute('aria-expanded', 'false');" aria-label="Close programming details">Close</button>
+            </div>
+            <div id="developpement-web-en" class="interest-details" role="region" aria-labelledby="developpement-web-heading-en">
+               <h3 id="developpement-web-heading-en">Web Development</h3>
+               <div class="interest-detail-content">
+                  <img data-src="./styles/images/developpement-web.png" alt="Web Development details" class="lazy-load" />
+                  <noscript>
+                     <img src="./styles/images/developpement-web.png" alt="Web Development details" />
+                  </noscript>
+                  <div class="interest-description">
+                     <p>Web development is a field that fascinates me. I enjoy creating interactive and responsive websites using HTML, CSS, and JavaScript.</p>
+                     <p>This personal website is actually one of my web development projects, where I've been able to put these technologies into practice.</p>
+                  </div>
+               </div>
+               <button class="close-details" onclick="document.getElementById('developpement-web-en').style.display='none'; document.querySelector('[aria-controls=\'developpement-web-en\']').setAttribute('aria-expanded', 'false');" aria-label="Close web development details">Close</button>
+            </div>
+            <!-- Détails des intérêts sportifs en anglais -->
+            <div id="athletisme-en" class="interest-details" role="region" aria-labelledby="athletisme-heading-en">
+               <h3 id="athletisme-heading-en">Athletics</h3>
+               <div class="interest-detail-content">
+                  <img data-src="./styles/images/athletisme.jpg" alt="Athletics details" class="lazy-load" />
+                  <noscript>
+                     <img src="./styles/images/athletisme.jpg" alt="Athletics details" />
+                  </noscript>
+                  <div class="interest-description">
+                     <p>I practiced athletics during my school years, specializing in sprinting, long jump, and triple jump.</p>
+                     <p>This discipline helped me develop my endurance, concentration, and competitive spirit.</p>
+                  </div>
+               </div>
+               <button class="close-details" onclick="document.getElementById('athletisme-en').style.display='none'; document.querySelector('[aria-controls=\'athletisme-en\']').setAttribute('aria-expanded', 'false');" aria-label="Close athletics details">Close</button>
+            </div>
+            <div id="handball-en" class="interest-details" role="region" aria-labelledby="handball-heading-en">
+               <h3 id="handball-heading-en">Handball</h3>
+               <div class="interest-detail-content">
+                  <img data-src="./styles/images/handball.jpg" alt="Handball details" class="lazy-load" />
+                  <noscript>
+                     <img src="./styles/images/handball.jpg" alt="Handball details" />
+                  </noscript>
+                  <div class="interest-description">
+                     <p>I learned handball at my school for 4 years.</p>
+                     <p>This team sport taught me the importance of teamwork and communication.</p>
+                  </div>
+               </div>
+               <button class="close-details" onclick="document.getElementById('handball-en').style.display='none'; document.querySelector('[aria-controls=\'handball-en\']').setAttribute('aria-expanded', 'false');" aria-label="Close handball details">Close</button>
+            </div>
+            <div id="Taekwondo-en" class="interest-details" role="region" aria-labelledby="Taekwondo-heading-en">
+               <h3 id="Taekwondo-heading-en">Taekwondo</h3>
+               <div class="interest-detail-content">
+                  <img data-src="./styles/images/Taekwondo-detail.jpg" alt="Taekwondo details" class="lazy-load" />
+                  <noscript>
+                     <img src="./styles/images/Taekwondo-detail.jpg" alt="Taekwondo details" />
+                  </noscript>
+                  <div class="interest-description">
+                     <p>I practiced Taekwondo for <span>3 years</span> and earned my red belt.</p>
+                     <p>This martial art helped me maintain personal discipline and improve my self-confidence.</p>
+                  </div>
+               </div>
+               <button class="close-details" onclick="document.getElementById('Taekwondo-en').style.display='none'; document.querySelector('[aria-controls=\'Taekwondo-en\']').setAttribute('aria-expanded', 'false');" aria-label="Close Taekwondo details">Close</button>
+            </div>
+            <!-- Détails des intérêts artistiques en anglais -->
+            <div id="theatre-en" class="interest-details" role="region" aria-labelledby="theatre-heading-en">
+               <h3 id="theatre-heading-en">Theatre</h3>
+               <div class="interest-detail-content">
+                  <img data-src="./styles/images/theatre.jpg" alt="Theatre details" class="lazy-load" />
+                  <noscript>
+                     <img src="./styles/images/theatre.jpg" alt="Theatre details" />
+                  </noscript>
+                  <div class="interest-description">
+                     <p>I have participated in several school plays, playing different roles. I am currently attending a theatre workshop organized by my institution.</p>
+                     <p>Theatre has significantly improved my oral expression and my ability to speak in public.</p>
+                  </div>
+               </div>
+               <button class="close-details" onclick="document.getElementById('theatre-en').style.display='none'; document.querySelector('[aria-controls=\'theatre-en\']').setAttribute('aria-expanded', 'false');" aria-label="Close theatre details">Close</button>
+            </div>
+            <div id="musique-en" class="interest-details" role="region" aria-labelledby="musique-heading-en">
+               <h3 id="musique-heading-en">Music</h3>
+               <div class="interest-detail-content">
+                  <img data-src="./styles/images/musique.jpg" alt="Music details" class="lazy-load" />
+                  <noscript>
+                     <img src="./styles/images/musique.jpg" alt="Music details" />
+                  </noscript>
+                  <div class="interest-description">
+                     <p>I enjoy listening to different music genres and I've learned to play a bit of piano and some African instruments like the "djembé", the "calabash", and the "shekere".</p>
+                     <p>Music allows me to relax and express myself differently.</p>
+                  </div>
+               </div>
+               <button class="close-details" onclick="document.getElementById('musique-en').style.display='none'; document.querySelector('[aria-controls=\'musique-en\']').setAttribute('aria-expanded', 'false');" aria-label="Close music details">Close</button>
+            </div>
+            <div id="art-en" class="interest-details" role="region" aria-labelledby="art-heading-en">
+               <h3 id="art-heading-en">Art</h3>
+               <div class="interest-detail-content">
+                  <video controls width="320" height="240" preload="none" poster="./styles/images/art.png">
+                     <source src="./styles/videos/mes-creations.mp4" type="video/mp4">
+                     Your browser does not support video playback.
+                  </video>
+                  <div class="interest-description">
+                     <p>I practice various art forms, notably creating decorative objects. I'm also passionate about drawing and painting.</p>
+                     <p>This passion allows me to express my creativity and explore different artistic techniques.</p>
+                  </div>
+               </div>
+               <button class="close-details" onclick="document.getElementById('art-en').style.display='none'; document.querySelector('[aria-controls=\'art-en\']').setAttribute('aria-expanded', 'false');" aria-label="Close art details">Close</button>
+            </div>
+            <!-- Détails des autres intérêts en anglais -->
+            <div id="lecture-en" class="interest-details" role="region" aria-labelledby="lecture-heading-en">
+               <h3 id="lecture-heading-en">Reading</h3>
+               <div class="interest-detail-content">
+                  <img data-src="./styles/images/lecture.jpg" alt="Reading details" class="lazy-load" />
+                  <noscript>
+                     <img src="./styles/images/lecture.jpg" alt="Reading details" />
+                  </noscript>
+                  <div class="interest-description">
+                     <p>I am a passionate reader, particularly interested in science fiction novels, poetic books, and scientific essays.</p>
+                     <p>Reading enriches my vocabulary and opens my mind to new ideas.</p>
+                  </div>
+               </div>
+               <button class="close-details" onclick="document.getElementById('lecture-en').style.display='none'; document.querySelector('[aria-controls=\'lecture-en\']').setAttribute('aria-expanded', 'false');" aria-label="Close reading details">Close</button>
+            </div>
+            <div id="cuisine-en" class="interest-details" role="region" aria-labelledby="cuisine-heading-en">
+               <h3 id="cuisine-heading-en">Cooking</h3>
+               <div class="interest-detail-content">
+                  <img data-src="./styles/images/cuisine.jpg" alt="Cooking details" class="lazy-load" />
+                  <noscript>
+                     <img src="./styles/images/cuisine.jpg" alt="Cooking details" />
+                  </noscript>
+                  <div class="interest-description">
+                     <p>I enjoy experimenting with different recipes, especially traditional African dishes and French cuisine.</p>
+                     <p>Cooking allows me to share my culture and learn about others'.</p>
+                  </div>
+               </div>
+               <button class="close-details" onclick="document.getElementById('cuisine-en').style.display='none'; document.querySelector('[aria-controls=\'cuisine-en\']').setAttribute('aria-expanded', 'false');" aria-label="Close cooking details">Close</button>
+            </div>
+            <div id="elevage-en" class="interest-details" role="region" aria-labelledby="elevage-heading-en">
+               <h3 id="elevage-heading-en">Animal Breeding</h3>
+               <div class="interest-detail-content">
+                  <img data-src="./styles/images/elevage.jpg" alt="Animal Breeding details" class="lazy-load" />
+                  <noscript>
+                     <img src="./styles/images/elevage.jpg" alt="Animal Breeding details" />
+                  </noscript>
+                  <div class="interest-description">
+                     <p>I have participated in raising poultry and small animals in my family and at school.</p>
+                     <p>This activity has taught me responsibility and respect for living beings.</p>
+                  </div>
+               </div>
+               <button class="close-details" onclick="document.getElementById('elevage-en').style.display='none'; document.querySelector('[aria-controls=\'elevage-en\']').setAttribute('aria-expanded', 'false');" aria-label="Close animal breeding details">Close</button>
+            </div>
+            <div id="agriculture-en" class="interest-details" role="region" aria-labelledby="agriculture-heading-en">
+               <h3 id="agriculture-heading-en">Agriculture</h3>
+               <div class="interest-detail-content">
+                  <img data-src="./styles/images/agriculture.jpg" alt="Agriculture details" class="lazy-load" />
+                  <noscript>
+                     <img src="./styles/images/agriculture.jpg" alt="Agriculture details" />
+                  </noscript>
+                  <div class="interest-description">
+                     <p>I have participated in family agricultural work, mainly growing vegetables and corn.</p>
+                     <p>Agriculture has taught me patience and the importance of regular work.</p>
+                  </div>
+               </div>
+               <button class="close-details" onclick="document.getElementById('agriculture-en').style.display='none'; document.querySelector('[aria-controls=\'agriculture-en\']').setAttribute('aria-expanded', 'false');" aria-label="Close agriculture details">Close</button>
+            </div>
+            <div id="voyages-en" class="interest-details" role="region" aria-labelledby="voyages-heading-en">
+               <h3 id="voyages-heading-en">Traveling</h3>
+               <div class="interest-detail-content">
+                  <img data-src="./styles/images/voyages.jpg" alt="Traveling details" class="lazy-load" />
+                  <noscript>
+                     <img src="./styles/images/voyages.jpg" alt="Traveling details" />
+                  </noscript>
+                  <div class="interest-description">
+                     <p>I am passionate about traveling.</p>
+                     <p>Traveling allows me to discover different cultures and broaden my vision of the world.</p>
+                  </div>
+               </div>
+               <button class="close-details" onclick="document.getElementById('voyages-en').style.display='none'; document.querySelector('[aria-controls=\'voyages-en\']').setAttribute('aria-expanded', 'false');" aria-label="Close traveling details">Close</button>
+            </div>
+         </section>
+         <section class="lang de">
+            <h2>Interessen</h2>
+            <div class="interests-container">
+               <h3>Informatik</h3>
+               <div class="interests-grid">
+                  <div class="interest-item" onclick="showInterestDetails('securite-reseau')"
+                     onkeypress="if(event.key==='Enter') showInterestDetails('securite-reseau')"
+                     tabindex="0" role="button" aria-expanded="false" aria-controls="securite-reseau">
+                     <img data-src="./styles/images/securite-reseau.png" alt="Netzwerksicherheit" class="lazy-load" />
+                     <noscript>
+                        <img src="./styles/images/securite-reseau.png" alt="Netzwerksicherheit" />
+                     </noscript>
+                     <p>Netzwerksicherheit</p>
+                  </div>
+                  <div class="interest-item" onclick="showInterestDetails('programmation')"
+                     onkeypress="if(event.key==='Enter') showInterestDetails('programmation')"
+                     tabindex="0" role="button" aria-expanded="false" aria-controls="programmation">
+                     <img data-src="./styles/images/programmation.jpeg" alt="Programmierung" class="lazy-load" />
+                     <noscript>
+                        <img src="./styles/images/programmation.jpeg" alt="Programmierung" />
+                     </noscript>
+                     <p>Programmierung</p>
+                  </div>
+                  <div class="interest-item" onclick="showInterestDetails('developpement-web')"
+                     onkeypress="if(event.key==='Enter') showInterestDetails('developpement-web')"
+                     tabindex="0" role="button" aria-expanded="false" aria-controls="developpement-web">
+                     <img data-src="./styles/images/developpement-web.png" alt="Webentwicklung" class="lazy-load" />
+                     <noscript>
+                        <img src="./styles/images/developpement-web.png" alt="Webentwicklung" />
+                     </noscript>
+                     <p>Webentwicklung</p>
+                  </div>
+               </div>
+               <h3>Sport</h3>
+               <div class="interests-grid">
+                  <div class="interest-item" onclick="showInterestDetails('athletisme')"
+                     onkeypress="if(event.key==='Enter') showInterestDetails('athletisme')"
+                     tabindex="0" role="button" aria-expanded="false" aria-controls="athletisme">
+                     <img data-src="./styles/images/athletisme.jpg" alt="Leichtathletik" class="lazy-load" />
+                     <noscript>
+                        <img src="./styles/images/athletisme.jpg" alt="Leichtathletik" />
+                     </noscript>
+                     <p>Leichtathletik</p>
+                  </div>
+                  <div class="interest-item" onclick="showInterestDetails('handball')"
+                     onkeypress="if(event.key==='Enter') showInterestDetails('handball')"
+                     tabindex="0" role="button" aria-expanded="false" aria-controls="handball">
+                     <img data-src="./styles/images/handball.jpg" alt="Handball" class="lazy-load" />
+                     <noscript>
+                        <img src="./styles/images/handball.jpg" alt="Handball" />
+                     </noscript>
+                     <p>Handball</p>
+                  </div>
+                  <div class="interest-item" onclick="showInterestDetails('Taekwondo')"
+                     onkeypress="if(event.key==='Enter') showInterestDetails('Taekwondo')"
+                     tabindex="0" role="button" aria-expanded="false" aria-controls="Taekwondo">
+                     <img data-src="./styles/images/Taekwondo.png" alt="Taekwondo" class="lazy-load" />
+                     <noscript>
+                        <img src="./styles/images/Taekwondo.png" alt="Taekwondo" />
+                     </noscript>
+                     <p>Taekwondo</p>
+                  </div>
+               </div>
+               <h3>Künstlerisch</h3>
+               <div class="interests-grid">
+                  <div class="interest-item" onclick="showInterestDetails('theatre')"
+                     onkeypress="if(event.key==='Enter') showInterestDetails('theatre')"
+                     tabindex="0" role="button" aria-expanded="false" aria-controls="theatre">
+                     <img data-src="./styles/images/theatre.jpg" alt="Theater" class="lazy-load" />
+                     <noscript>
+                        <img src="./styles/images/theatre.jpg" alt="Theater" />
+                     </noscript>
+                     <p>Theater</p>
+                  </div>
+                  <div class="interest-item" onclick="showInterestDetails('musique')"
+                     onkeypress="if(event.key==='Enter') showInterestDetails('musique')"
+                     tabindex="0" role="button" aria-expanded="false" aria-controls="musique">
+                     <img data-src="./styles/images/musique.jpg" alt="Musik" class="lazy-load" />
+                     <noscript>
+                        <img src="./styles/images/musique.jpg" alt="Musik" />
+                     </noscript>
+                     <p>Musik</p>
+                  </div>
+                  <div class="interest-item" onclick="showInterestDetails('art')"
+                     onkeypress="if(event.key==='Enter') showInterestDetails('art')"
+                     tabindex="0" role="button" aria-expanded="false" aria-controls="art">
+                     <img data-src="./styles/images/art.png" alt="Kunst" class="lazy-load" />
+                     <noscript>
+                        <img src="./styles/images/art.png" alt="Kunst" />
+                     </noscript>
+                     <p>Kunst</p>
+                  </div>
+               </div>
+               <h3>Andere</h3>
+               <div class="interests-grid">
+                  <div class="interest-item" onclick="showInterestDetails('lecture')"
+                     onkeypress="if(event.key==='Enter') showInterestDetails('lecture')"
+                     tabindex="0" role="button" aria-expanded="false" aria-controls="lecture">
+                     <img data-src="./styles/images/lecture.jpg" alt="Lesen" class="lazy-load" />
+                     <noscript>
+                        <img src="./styles/images/lecture.jpg" alt="Lesen" />
+                     </noscript>
+                     <p>Lesen</p>
+                  </div>
+                  <div class="interest-item" onclick="showInterestDetails('cuisine')"
+                     onkeypress="if(event.key==='Enter') showInterestDetails('cuisine')"
+                     tabindex="0" role="button" aria-expanded="false" aria-controls="cuisine">
+                     <img data-src="./styles/images/cuisine.jpg" alt="Kochen" class="lazy-load" />
+                     <noscript>
+                        <img src="./styles/images/cuisine.jpg" alt="Kochen" />
+                     </noscript>
+                     <p>Kochen</p>
+                  </div>
+                  <div class="interest-item" onclick="showInterestDetails('elevage')"
+                     onkeypress="if(event.key==='Enter') showInterestDetails('elevage')"
+                     tabindex="0" role="button" aria-expanded="false" aria-controls="elevage">
+                     <img data-src="./styles/images/elevage.jpg" alt="Tierzucht" class="lazy-load" />
+                     <noscript>
+                        <img src="./styles/images/elevage.jpg" alt="Tierzucht" />
+                     </noscript>
+                     <p>Tierzucht</p>
+                  </div>
+                  <div class="interest-item" onclick="showInterestDetails('agriculture')"
+                     onkeypress="if(event.key==='Enter') showInterestDetails('agriculture')"
+                     tabindex="0" role="button" aria-expanded="false" aria-controls="agriculture">
+                     <img data-src="./styles/images/agriculture.jpg" alt="Landwirtschaft" class="lazy-load" />
+                     <noscript>
+                        <img src="./styles/images/agriculture.jpg" alt="Landwirtschaft" />
+                     </noscript>
+                     <p>Landwirtschaft</p>
+                  </div>
+                  <div class="interest-item" onclick="showInterestDetails('voyages')"
+                     onkeypress="if(event.key==='Enter') showInterestDetails('voyages')"
+                     tabindex="0" role="button" aria-expanded="false" aria-controls="voyages">
+                     <img data-src="./styles/images/voyages.jpg" alt="Reisen" class="lazy-load" />
+                     <noscript>
+                        <img src="./styles/images/voyages.jpg" alt="Reisen" />
+                     </noscript>
+                     <p>Reisen</p>
+                  </div>
+               </div>
+            </div>
+            <!-- Section pour les détails en allemand -->
+            <!-- Détails des intérêts informatiques en allemand -->
+            <div id="securite-reseau-de" class="interest-details" role="region" aria-labelledby="securite-reseau-heading-de">
+               <h3 id="securite-reseau-heading-de">Netzwerksicherheit</h3>
+               <div class="interest-detail-content">
+                  <img data-src="./styles/images/securite-reseau.png" alt="Netzwerksicherheit Details" class="lazy-load" />
+                  <noscript>
+                     <img src="./styles/images/securite-reseau.png" alt="Netzwerksicherheit Details" />
+                  </noscript>
+                  <div class="interest-description">
+                     <p>Netzwerksicherheit ist meine Hauptleidenschaft im Bereich der Informatik. Ich interessiere mich besonders für den Schutz von Netzwerkinfrastrukturen, Sicherheitsprotokolle und Einbruchserkennung.</p>
+                     <p>Obwohl ich noch keine Gelegenheit hatte, vertiefte praktische Fähigkeiten in diesem Bereich zu entwickeln, studiere ich aktiv die theoretischen Konzepte und hoffe, in naher Zukunft die Möglichkeit zu haben, an konkreten Cybersicherheitsprojekten teilzunehmen.</p>
+                  </div>
+               </div>
+               <button class="close-details" onclick="document.getElementById('securite-reseau-de').style.display='none'; document.querySelector('[aria-controls=\'securite-reseau-de\']').setAttribute('aria-expanded', 'false');" aria-label="Netzwerksicherheit Details schließen">Schließen</button>
+            </div>
+            <div id="programmation-de" class="interest-details" role="region" aria-labelledby="programmation-heading-de">
+               <h3 id="programmation-heading-de">Programmierung</h3>
+               <div class="interest-detail-content">
+                  <img data-src="./styles/images/programmation.jpeg" alt="Programmierung Details" class="lazy-load" />
+                  <noscript>
+                     <img src="./styles/images/programmation.jpeg" alt="Programmierung Details" />
+                  </noscript>
+                  <div class="interest-description">
+                     <p>Ich interessiere mich für mehrere Programmiersprachen, insbesondere Java, Python und C++.</p>
+                     <p>Algorithmische Probleme zu lösen und Anwendungen zu entwickeln sind Aktivitäten, die ich in meinem Informatikstudium besonders schätze.</p>
+                  </div>
+               </div>
+               <button class="close-details" onclick="document.getElementById('programmation-de').style.display='none'; document.querySelector('[aria-controls=\'programmation-de\']').setAttribute('aria-expanded', 'false');" aria-label="Programmierung Details schließen">Schließen</button>
+            </div>
+            <div id="developpement-web-de" class="interest-details" role="region" aria-labelledby="developpement-web-heading-de">
+               <h3 id="developpement-web-heading-de">Webentwicklung</h3>
+               <div class="interest-detail-content">
+                  <img data-src="./styles/images/developpement-web.png" alt="Webentwicklung Details" class="lazy-load" />
+                  <noscript>
+                     <img src="./styles/images/developpement-web.png" alt="Webentwicklung Details" />
+                  </noscript>
+                  <div class="interest-description">
+                     <p>Webentwicklung ist ein Bereich, der mich fasziniert. Ich erstelle gerne interaktive und responsive Websites mit HTML, CSS und JavaScript.</p>
+                     <p>Diese persönliche Website ist übrigens eines meiner Webentwicklungsprojekte, bei dem ich diese Technologien in die Praxis umsetzen konnte.</p>
+                  </div>
+               </div>
+               <button class="close-details" onclick="document.getElementById('developpement-web-de').style.display='none'; document.querySelector('[aria-controls=\'developpement-web-de\']').setAttribute('aria-expanded', 'false');" aria-label="Webentwicklung Details schließen">Schließen</button>
+            </div>
+            <!-- Détails des intérêts sportifs en allemand -->
+            <div id="athletisme-de" class="interest-details" role="region" aria-labelledby="athletisme-heading-de">
+               <h3 id="athletisme-heading-de">Leichtathletik</h3>
+               <div class="interest-detail-content">
+                  <img data-src="./styles/images/athletisme.jpg" alt="Leichtathletik Details" class="lazy-load" />
+                  <noscript>
+                     <img src="./styles/images/athletisme.jpg" alt="Leichtathletik Details" />
+                  </noscript>
+                  <div class="interest-description">
+                     <p>Ich habe während meiner Schulzeit Leichtathletik praktiziert und mich auf Sprint, Weitsprung und Dreisprung spezialisiert.</p>
+                     <p>Diese Disziplin hat mir geholfen, meine Ausdauer, Konzentration und meinen Wettbewerbsgeist zu entwickeln.</p>
+                  </div>
+               </div>
+               <button class="close-details" onclick="document.getElementById('athletisme-de').style.display='none'; document.querySelector('[aria-controls=\'athletisme-de\']').setAttribute('aria-expanded', 'false');" aria-label="Leichtathletik Details schließen">Schließen</button>
+            </div>
+            <div id="handball-de" class="interest-details" role="region" aria-labelledby="handball-heading-de">
+               <h3 id="handball-heading-de">Handball</h3>
+               <div class="interest-detail-content">
+                  <img data-src="./styles/images/handball.jpg" alt="Handball Details" class="lazy-load" />
+                  <noscript>
+                     <img src="./styles/images/handball.jpg" alt="Handball Details" />
+                  </noscript>
+                  <div class="interest-description">
+                     <p>Ich habe 4 Jahre lang in meiner Schule Handball gelernt.</p>
+                     <p>Dieser Mannschaftssport hat mir die Bedeutung von Teamarbeit und Kommunikation beigebracht.</p>
+                  </div>
+               </div>
+               <button class="close-details" onclick="document.getElementById('handball-de').style.display='none'; document.querySelector('[aria-controls=\'handball-de\']').setAttribute('aria-expanded', 'false');" aria-label="Handball Details schließen">Schließen</button>
+            </div>
+            <div id="Taekwondo-de" class="interest-details" role="region" aria-labelledby="Taekwondo-heading-de">
+               <h3 id="Taekwondo-heading-de">Taekwondo</h3>
+               <div class="interest-detail-content">
+                  <img data-src="./styles/images/Taekwondo-detail.jpg" alt="Taekwondo Details" class="lazy-load" />
+                  <noscript>
+                     <img src="./styles/images/Taekwondo-detail.jpg" alt="Taekwondo Details" />
+                  </noscript>
+                  <div class="interest-description">
+                     <p>Ich habe <span>3 Jahre</span> lang Taekwondo praktiziert und meinen roten Gürtel erhalten.</p>
+                     <p>Diese Kampfkunst hat mir geholfen, meine persönliche Disziplin zu erhalten und mein Selbstvertrauen zu verbessern.</p>
+                  </div>
+               </div>
+               <button class="close-details" onclick="document.getElementById('Taekwondo-de').style.display='none'; document.querySelector('[aria-controls=\'Taekwondo-de\']').setAttribute('aria-expanded', 'false');" aria-label="Taekwondo Details schließen">Schließen</button>
+            </div>
+            <!-- Détails des intérêts artistiques en allemand -->
+            <div id="theatre-de" class="interest-details" role="region" aria-labelledby="theatre-heading-de">
+               <h3 id="theatre-heading-de">Theater</h3>
+               <div class="interest-detail-content">
+                  <img data-src="./styles/images/theatre.jpg" alt="Theater Details" class="lazy-load" />
+                  <noscript>
+                     <img src="./styles/images/theatre.jpg" alt="Theater Details" />
+                  </noscript>
+                  <div class="interest-description">
+                     <p>Ich habe an mehreren Schultheaterstücken teilgenommen und verschiedene Rollen gespielt. Derzeit besuche ich einen Theaterworkshop, der von meiner Institution organisiert wird.</p>
+                     <p>Das Theater hat meine mündliche Ausdrucksfähigkeit und meine Fähigkeit, öffentlich zu sprechen, erheblich verbessert.</p>
+                  </div>
+               </div>
+               <button class="close-details" onclick="document.getElementById('theatre-de').style.display='none'; document.querySelector('[aria-controls=\'theatre-de\']').setAttribute('aria-expanded', 'false');" aria-label="Theater Details schließen">Schließen</button>
+            </div>
+            <div id="musique-de" class="interest-details" role="region" aria-labelledby="musique-heading-de">
+               <h3 id="musique-heading-de">Musik</h3>
+               <div class="interest-detail-content">
+                  <img data-src="./styles/images/musique.jpg" alt="Musik Details" class="lazy-load" />
+                  <noscript>
+                     <img src="./styles/images/musique.jpg" alt="Musik Details" />
+                  </noscript>
+                  <div class="interest-description">
+                     <p>Ich höre gerne verschiedene Musikgenres und habe etwas Klavier gelernt. Ich kann auch einige afrikanische Instrumente wie "Djembé", "Kalebasse" und "Shékéré" spielen.</p>
+                     <p>Musik ermöglicht es mir, mich zu entspannen und mich anders auszudrücken.</p>
+                  </div>
+               </div>
+               <button class="close-details" onclick="document.getElementById('musique-de').style.display='none'; document.querySelector('[aria-controls=\'musique-de\']').setAttribute('aria-expanded', 'false');" aria-label="Musik Details schließen">Schließen</button>
+            </div>
+            <div id="art-de" class="interest-details" role="region" aria-labelledby="art-heading-de">
+               <h3 id="art-heading-de">Kunst</h3>
+               <div class="interest-detail-content">
+                  <video controls width="320" height="240" preload="none" poster="./styles/images/art.png">
+                     <source src="./styles/videos/mes-creations.mp4" type="video/mp4">
+                     Ihr Browser unterstützt keine Videowiedergabe.
+                  </video>
+                  <div class="interest-description">
+                     <p>Ich praktiziere verschiedene Kunstformen, insbesondere die Herstellung von dekorativen Objekten. Ich bin auch leidenschaftlich am Zeichnen und Malen interessiert.</p>
+                     <p>Diese Leidenschaft ermöglicht es mir, meine Kreativität auszudrücken und verschiedene künstlerische Techniken zu erkunden.</p>
+                  </div>
+               </div>
+               <button class="close-details" onclick="document.getElementById('art-de').style.display='none'; document.querySelector('[aria-controls=\'art-de\']').setAttribute('aria-expanded', 'false');" aria-label="Kunst Details schließen">Schließen</button>
+            </div>
+            <!-- Détails des autres intérêts en allemand -->
+            <div id="lecture-de" class="interest-details" role="region" aria-labelledby="lecture-heading-de">
+               <h3 id="lecture-heading-de">Lesen</h3>
+               <div class="interest-detail-content">
+                  <img data-src="./styles/images/lecture.jpg" alt="Lesen Details" class="lazy-load" />
+                  <noscript>
+                     <img src="./styles/images/lecture.jpg" alt="Lesen Details" />
+                  </noscript>
+                  <div class="interest-description">
+                     <p>Ich bin eine leidenschaftliche Leserin und interessiere mich besonders für Science-Fiction-Romane, poetische Bücher und wissenschaftliche Essays.</p>
+                     <p>Das Lesen bereichert meinen Wortschatz und öffnet meinen Geist für neue Ideen.</p>
+                  </div>
+               </div>
+               <button class="close-details" onclick="document.getElementById('lecture-de').style.display='none'; document.querySelector('[aria-controls=\'lecture-de\']').setAttribute('aria-expanded', 'false');" aria-label="Lesen Details schließen">Schließen</button>
+            </div>
+            <div id="cuisine-de" class="interest-details" role="region" aria-labelledby="cuisine-heading-de">
+               <h3 id="cuisine-heading-de">Kochen</h3>
+               <div class="interest-detail-content">
+                  <img data-src="./styles/images/cuisine.jpg" alt="Kochen Details" class="lazy-load" />
+                  <noscript>
+                     <img src="./styles/images/cuisine.jpg" alt="Kochen Details" />
+                  </noscript>
+                  <div class="interest-description">
+                     <p>Ich experimentiere gerne mit verschiedenen Rezepten, insbesondere traditionellen afrikanischen Gerichten und französischer Küche.</p>
+                     <p>Das Kochen ermöglicht es mir, meine Kultur zu teilen und die anderer zu lernen.</p>
+                  </div>
+               </div>
+               <button class="close-details" onclick="document.getElementById('cuisine-de').style.display='none'; document.querySelector('[aria-controls=\'cuisine-de\']').setAttribute('aria-expanded', 'false');" aria-label="Kochen Details schließen">Schließen</button>
+            </div>
+            <div id="elevage-de" class="interest-details" role="region" aria-labelledby="elevage-heading-de">
+               <h3 id="elevage-heading-de">Tierzucht</h3>
+               <div class="interest-detail-content">
+                  <img data-src="./styles/images/elevage.jpg" alt="Tierzucht Details" class="lazy-load" />
+                  <noscript>
+                     <img src="./styles/images/elevage.jpg" alt="Tierzucht Details" />
+                  </noscript>
+                  <div class="interest-description">
+                     <p>Ich habe an der Zucht von Geflügel und Kleintieren in meiner Familie und in meiner Schule teilgenommen.</p>
+                     <p>Diese Aktivität hat mir Verantwortung und Respekt vor Lebewesen beigebracht.</p>
+                  </div>
+               </div>
+               <button class="close-details" onclick="document.getElementById('elevage-de').style.display='none'; document.querySelector('[aria-controls=\'elevage-de\']').setAttribute('aria-expanded', 'false');" aria-label="Tierzucht Details schließen">Schließen</button>
+            </div>
+            <div id="agriculture-de" class="interest-details" role="region" aria-labelledby="agriculture-heading-de">
+               <h3 id="agriculture-heading-de">Landwirtschaft</h3>
+               <div class="interest-detail-content">
+                  <img data-src="./styles/images/agriculture.jpg" alt="Landwirtschaft Details" class="lazy-load" />
+                  <noscript>
+                     <img src="./styles/images/agriculture.jpg" alt="Landwirtschaft Details" />
+                  </noscript>
+                  <div class="interest-description">
+                     <p>Ich habe an landwirtschaftlichen Familienarbeiten teilgenommen, hauptsächlich im Anbau von Gemüse und Mais.</p>
+                     <p>Die Landwirtschaft hat mir Geduld und die Wichtigkeit regelmäßiger Arbeit beigebracht.</p>
+                  </div>
+               </div>
+               <button class="close-details" onclick="document.getElementById('agriculture-de').style.display='none'; document.querySelector('[aria-controls=\'agriculture-de\']').setAttribute('aria-expanded', 'false');" aria-label="Landwirtschaft Details schließen">Schließen</button>
+            </div>
+            <div id="voyages-de" class="interest-details" role="region" aria-labelledby="voyages-heading-de">
+               <h3 id="voyages-heading-de">Reisen</h3>
+               <div class="interest-detail-content">
+                  <img data-src="./styles/images/voyages.jpg" alt="Reisen Details" class="lazy-load" />
+                  <noscript>
+                     <img src="./styles/images/voyages.jpg" alt="Reisen Details" />
+                  </noscript>
+                  <div class="interest-description">
+                     <p>Ich bin leidenschaftlich am Reisen interessiert.</p>
+                     <p>Das Reisen ermöglicht es mir, verschiedene Kulturen zu entdecken und meine Weltsicht zu erweitern.</p>
+                  </div>
+               </div>
+               <button class="close-details" onclick="document.getElementById('voyages-de').style.display='none'; document.querySelector('[aria-controls=\'voyages-de\']').setAttribute('aria-expanded', 'false');" aria-label="Reisen Details schließen">Schließen</button>
+            </div>
+         </section>
+      </main>
+      <footer>
+         <p>© 2024 Christelle Vanessa Soubeiga – Tous droits réservés</p>
+      </footer>
+   </body>
 </html>

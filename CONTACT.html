@@ -1,225 +1,204 @@
-	<!DOCTYPE html>
-	<html lang="fr">
-	<head>
-	  <meta charset="utf-8" />
-	  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	  <meta name="description" content="Coordonnées et formulaire de contact de Christelle Vanessa SOUBEIGA, étudiante en BUT Informatique à l'IUT d'Orsay">
-	  <title>Contact – Christelle Vanessa SOUBEIGA</title>
-	  
-	  <link rel="preload" href="./styles/index.css" as="style">
-	  
-	  <link rel="stylesheet" href="./styles/index.css" />
-	  <link rel="stylesheet" href="./styles/presentation.css" />
-	  <link rel="stylesheet" href="./styles/flexbox_101_nav.css" />
-	  <link rel="stylesheet" href="./styles/grid_101.css" />
-	  <link rel="stylesheet" href="./styles/float_101.css" />
-	  <link rel="stylesheet" href="./styles/formation.css" />
-	  <link rel="stylesheet" href="./styles/projet.css" />
-	  <link rel="stylesheet" href="./styles/ambition.css" />
-	  
-	  <script>
-		function setLanguage(lang) {
-		  // Masquer toutes les sections linguistiques
-		  document.querySelectorAll(".lang").forEach(el => el.style.display = "none");
-		  
-		  // Afficher les sections dans la langue sélectionnée
-		  document.querySelectorAll(".lang." + lang).forEach(el => el.style.display = "block");
-		  
-		  // Ajuster la direction du document pour l'arabe
-		  if (lang === 'ar') {
-			document.body.setAttribute('dir', 'rtl');
-			document.querySelectorAll('.lang.ar').forEach(el => el.setAttribute('dir', 'rtl'));
-		  } else {
-			document.body.setAttribute('dir', 'ltr');
-		  }
-		  
-		  // Enregistrer la préférence de langue
-		  localStorage.setItem('preferredLanguage', lang);
-		  
-		  // Mettre à jour les attributs lang des formulaires
-		  document.querySelectorAll('form').forEach(form => {
-			form.setAttribute('lang', lang);
-		  });
-		  
-		  // Mettre à jour l'apparence des boutons de langue
-		  document.querySelectorAll('.language-buttons button').forEach(button => {
-			if (button.getAttribute('onclick').includes(`'${lang}'`)) {
-			  button.classList.add('active-lang');
-			} else {
-			  button.classList.remove('active-lang');
-			}
-		  });
-		}
-		
-		window.addEventListener("DOMContentLoaded", () => {
-		  // Récupérer la préférence de langue ou utiliser le français par défaut
-		  const savedLanguage = localStorage.getItem('preferredLanguage') || 'fr';
-		  
-		  // Vérifier si nous avons un paramètre de langue dans l'URL
-		  const urlParams = new URLSearchParams(window.location.search);
-		  const langParam = urlParams.get('lang');
-		  
-		  if (langParam && ['fr', 'en', 'es', 'zh', 'ar', 'hi', 'de'].includes(langParam)) {
-			setLanguage(langParam);
-		  } else {
-			setLanguage(savedLanguage);
-		  }
-		  
-		  // Modifier les liens pour conserver la langue lors de la navigation
-		  document.querySelectorAll('nav a').forEach(link => {
-			const currentHref = link.getAttribute('href');
-			if (currentHref && currentHref.includes('.html')) {
-			  const langToUse = langParam || savedLanguage;
-			  link.setAttribute('href', `${currentHref}?lang=${langToUse}`);
-			}
-		  });
-		  
-		  // Améliorer les formulaires
-		  document.querySelectorAll('form').forEach(form => {
-			// Ajouter une validation HTML5
-			form.addEventListener('submit', function(event) {
-			  // Vérifier si le formulaire est valide avant soumission
-			  if (!this.checkValidity()) {
-				event.preventDefault();
-				// Mettre en évidence les champs invalides
-				this.reportValidity();
-			  }
-			});
-		  });
-		});
-	  </script>
-	  
-	  </style>
-	</head>
-	<body>
-	  <a href="#main-content" class="skip-link">Passer au contenu principal</a>
-
-	  <header>
-		<h1>Christelle Vanessa SOUBEIGA</h1>
-		<h2>Étudiante en BUT Informatique – IUT d'Orsay</h2>
-		<div class="language-buttons" role="group" aria-label="Sélection de langue">
-		  <button onclick="setLanguage('fr')" aria-label="Français" title="Passer en français">🇫🇷</button>
-		  <button onclick="setLanguage('en')" aria-label="English" title="Switch to English">🇬🇧</button>
-		  <button onclick="setLanguage('de')" aria-label="Deutsch" title="Auf Deutsch umschalten">DE</button>
-		</div>
-	  </header>
-
-	  <nav class="flex-nav" aria-label="Navigation principale">
-		<a href="./PRESENTATION.html">PRESENTATION</a>
-		<a href="./FORMATION.html">FORMATIONS</a>
-		<a href="./EXPERIENCE-PROJET.html">EXPERIENCES & PROJETS</a>
-		<a href="./COMPETENCES.html">COMPETENCES</a>
-		<a href="./CENTRE-D'INTERET.html">CENTRES D'INTERETS</a>
-		<a href="./AMBITION.html">AMBITIONS</a>
-		<a class="active" href="./CONTACT.html">CONTACTS</a>
-	  </nav>
-
-	  <main id="main-content">
-		<section class="lang fr animate-fade-in-up">
-		  <h2>Contact</h2>
-		  
-		  <div class="contact-card">
-			<div class="contact-info">
-			  <p>Vous pouvez me contacter directement via ce formulaire ou en utilisant mes coordonnées ci-dessous :</p>
-			  <ul>
-	<li><span class="contact-icon">✉</span><strong>Email :</strong> soubeigachristellevanessa@gmail.com</li>            <li><span class="contact-icon">📱</span><strong>Téléphone :</strong> 07 58 00 42 96</li>
-				<li><span class="contact-icon">🔗</span><strong>LinkedIn :</strong> <a href="https://www.linkedin.com/in/christelle-vanessa-soubeiga-781149329/" target="_blank" rel="noopener">linkedin.com/in/christellevanessa</a></li>
-			  </ul>
-			</div>
-
-			<form action="https://formspree.io/f/mjkydyvg" method="POST" lang="fr" aria-label="Formulaire de contact">
-			  <div class="form-group">
-				<label for="nom-fr" id="nom-label-fr">Nom :</label>
-				<input type="text" id="nom-fr" name="nom" class="form-control" aria-labelledby="nom-label-fr" required />
-			  </div>
-
-			  <div class="form-group">
-				<label for="email-fr" id="email-label-fr">Email :</label>
-				<input type="email" id="email-fr" name="email" class="form-control" aria-labelledby="email-label-fr" required />
-			  </div>
-
-			  <div class="form-group">
-				<label for="message-fr" id="message-label-fr">Message :</label>
-				<textarea id="message-fr" name="message" rows="5" class="form-control" aria-labelledby="message-label-fr" required></textarea>
-			  </div>
-
-			  <input type="hidden" name="_subject" value="Nouveau message depuis le site web !" />
-			  <button type="submit" class="btn-primary" aria-label="Envoyer le formulaire">Envoyer</button>
-			</form>
-		  </div>
-		</section>
-
-		<section class="lang en animate-fade-in-up">
-		  <h2>Contact</h2>
-		  
-		  <div class="contact-card">
-			<div class="contact-info">
-			  <p>You can contact me directly using this form or via the contact information below:</p>
-			  <ul>
-	<li><span class="contact-icon">✉</span><strong>Email :</strong> soubeigachristellevanessa@gmail.com</li>            <li><span class="contact-icon">📱</span><strong>Phone:</strong> +33 7 58 00 42 96</li>
-				<li><span class="contact-icon">🔗</span><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/christelle-vanessa-soubeiga-781149329/" target="_blank" rel="noopener">linkedin.com/in/christellevanessa</a></li>
-			  </ul>
-			</div>
-			
-			<form action="https://formspree.io/f/mjkydyvg" method="POST" lang="en" aria-label="Contact form">
-			  <div class="form-group">
-				<label for="nom-en" id="nom-label-en">Name:</label>
-				<input type="text" id="nom-en" name="nom" class="form-control" aria-labelledby="nom-label-en" required />
-			  </div>
-
-			  <div class="form-group">
-				<label for="email-en" id="email-label-en">Email:</label>
-				<input type="email" id="email-en" name="email" class="form-control" aria-labelledby="email-label-en" required />
-			  </div>
-
-			  <div class="form-group">
-				<label for="message-en" id="message-label-en">Message:</label>
-				<textarea id="message-en" name="message" rows="5" class="form-control" aria-labelledby="message-label-en" required></textarea>
-			  </div>
-
-			  <input type="hidden" name="_subject" value="New message from the website!" />
-			  <button type="submit" class="btn-primary" aria-label="Send form">Send</button>
-			</form>
-		  </div>
-		</section>
-
-		<section class="lang de animate-fade-in-up">
-		  <h2>Kontakt</h2>
-		  
-		  <div class="contact-card">
-			<div class="contact-info">
-			  <p>Sie können mich direkt über dieses Formular oder über die folgenden Kontaktinformationen erreichen:</p>
-			  <ul>
-	<li><span class="contact-icon">✉</span><strong>Email :</strong> soubeigachristellevanessa@gmail.com</li>            <li><span class="contact-icon">📱</span><strong>Telefon:</strong> +33 7 58 00 42 96</li>
-				<li><span class="contact-icon">🔗</span><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/christelle-vanessa-soubeiga-781149329/" target="_blank" rel="noopener">linkedin.com/in/christellevanessa</a></li>
-			  </ul>
-			</div>
-			
-			<form action="https://formspree.io/f/mjkydyvg" method="POST" lang="de" aria-label="Kontaktformular">
-			  <div class="form-group">
-				<label for="nom-de" id="nom-label-de">Name:</label>
-				<input type="text" id="nom-de" name="nom" class="form-control" aria-labelledby="nom-label-de" required />
-			  </div>
-
-			  <div class="form-group">
-				<label for="email-de" id="email-label-de">E-Mail:</label>
-				<input type="email" id="email-de" name="email" class="form-control" aria-labelledby="email-label-de" required />
-			  </div>
-
-			  <div class="form-group">
-				<label for="message-de" id="message-label-de">Nachricht:</label>
-				<textarea id="message-de" name="message" rows="5" class="form-control" aria-labelledby="message-label-de" required></textarea>
-			  </div>
-
-			  <input type="hidden" name="_subject" value="Neue Nachricht von der Website!" />
-			  <button type="submit" class="btn-primary" aria-label="Formular senden">Senden</button>
-			</form>
-		  </div>
-		</section>
-	  </main>
-
-	  <footer>
-		<p>© 2024 Christelle Vanessa Soubeiga – Tous droits réservés</p>
-	  </footer>
-	</body>
-	</html>
+<!DOCTYPE html>
+<html lang="fr">
+   <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="description" content="Coordonnées et formulaire de contact de Christelle Vanessa SOUBEIGA, étudiante en BUT Informatique à l'IUT d'Orsay">
+      <title>Contact – Christelle Vanessa SOUBEIGA</title>
+      <link rel="preload" href="./styles/index.css" as="style">
+      <link rel="stylesheet" href="./styles/index.css" />
+      <link rel="stylesheet" href="./styles/presentation.css" />
+      <link rel="stylesheet" href="./styles/flexbox_101_nav.css" />
+      <link rel="stylesheet" href="./styles/grid_101.css" />
+      <link rel="stylesheet" href="./styles/float_101.css" />
+      <link rel="stylesheet" href="./styles/formation.css" />
+      <link rel="stylesheet" href="./styles/projet.css" />
+      <link rel="stylesheet" href="./styles/ambition.css" />
+      <script>
+         function setLanguage(lang) {
+           // Masquer toutes les sections linguistiques
+           document.querySelectorAll(".lang").forEach(el => el.style.display = "none");
+           
+           // Afficher les sections dans la langue sélectionnée
+           document.querySelectorAll(".lang." + lang).forEach(el => el.style.display = "block");
+           
+           // Ajuster la direction du document pour l'arabe
+           if (lang === 'ar') {
+         	document.body.setAttribute('dir', 'rtl');
+         	document.querySelectorAll('.lang.ar').forEach(el => el.setAttribute('dir', 'rtl'));
+           } else {
+         	document.body.setAttribute('dir', 'ltr');
+           }
+           
+           // Enregistrer la préférence de langue
+           localStorage.setItem('preferredLanguage', lang);
+           
+           // Mettre à jour les attributs lang des formulaires
+           document.querySelectorAll('form').forEach(form => {
+         	form.setAttribute('lang', lang);
+           });
+           
+           // Mettre à jour l'apparence des boutons de langue
+           document.querySelectorAll('.language-buttons button').forEach(button => {
+         	if (button.getAttribute('onclick').includes(`'${lang}'`)) {
+         	  button.classList.add('active-lang');
+         	} else {
+         	  button.classList.remove('active-lang');
+         	}
+           });
+         }
+         
+         window.addEventListener("DOMContentLoaded", () => {
+           // Récupérer la préférence de langue ou utiliser le français par défaut
+           const savedLanguage = localStorage.getItem('preferredLanguage') || 'fr';
+           
+           // Vérifier si nous avons un paramètre de langue dans l'URL
+           const urlParams = new URLSearchParams(window.location.search);
+           const langParam = urlParams.get('lang');
+           
+           if (langParam && ['fr', 'en', 'es', 'zh', 'ar', 'hi', 'de'].includes(langParam)) {
+         	setLanguage(langParam);
+           } else {
+         	setLanguage(savedLanguage);
+           }
+           
+           // Modifier les liens pour conserver la langue lors de la navigation
+           document.querySelectorAll('nav a').forEach(link => {
+         	const currentHref = link.getAttribute('href');
+         	if (currentHref && currentHref.includes('.html')) {
+         	  const langToUse = langParam || savedLanguage;
+         	  link.setAttribute('href', `${currentHref}?lang=${langToUse}`);
+         	}
+           });
+           
+           // Améliorer les formulaires
+           document.querySelectorAll('form').forEach(form => {
+         	// Ajouter une validation HTML5
+         	form.addEventListener('submit', function(event) {
+         	  // Vérifier si le formulaire est valide avant soumission
+         	  if (!this.checkValidity()) {
+         		event.preventDefault();
+         		// Mettre en évidence les champs invalides
+         		this.reportValidity();
+         	  }
+         	});
+           });
+         });
+          
+      </script>
+      </style>
+   </head>
+   <body>
+      <a href="#main-content" class="skip-link">Passer au contenu principal</a>
+      <header>
+         <h1>Christelle Vanessa SOUBEIGA</h1>
+         <h2>Étudiante en BUT Informatique – IUT d'Orsay</h2>
+         <div class="language-buttons" role="group" aria-label="Sélection de langue">
+            <button onclick="setLanguage('fr')" aria-label="Français" title="Passer en français">🇫🇷</button>
+            <button onclick="setLanguage('en')" aria-label="English" title="Switch to English">🇬🇧</button>
+            <button onclick="setLanguage('de')" aria-label="Deutsch" title="Auf Deutsch umschalten">DE</button>
+         </div>
+      </header>
+      <nav class="flex-nav" aria-label="Navigation principale">
+         <a href="./PRESENTATION.html">PRESENTATION</a>
+         <a href="./FORMATION.html">FORMATIONS</a>
+         <a href="./EXPERIENCE-PROJET.html">EXPERIENCES & PROJETS</a>
+         <a href="./COMPETENCES.html">COMPETENCES</a>
+         <a href="./CENTRE-D'INTERET.html">CENTRES D'INTERETS</a>
+         <a href="./AMBITION.html">AMBITIONS</a>
+         <a class="active" href="./CONTACT.html">CONTACTS</a>
+      </nav>
+      <main id="main-content">
+         <section class="lang fr animate-fade-in-up">
+            <h2>Contact</h2>
+            <div class="contact-card">
+               <div class="contact-info">
+                  <p>Vous pouvez me contacter directement via ce formulaire ou en utilisant mes coordonnées ci-dessous :</p>
+                  <ul>
+                     <li><span class="contact-icon">✉</span><strong>Email :</strong> soubeigachristellevanessa@gmail.com</li>
+                     <li><span class="contact-icon">📱</span><strong>Téléphone :</strong> 07 58 00 42 96</li>
+                     <li><span class="contact-icon">🔗</span><strong>LinkedIn :</strong> <a href="https://www.linkedin.com/in/christelle-vanessa-soubeiga-781149329/" target="_blank" rel="noopener">linkedin.com/in/christellevanessa</a></li>
+                  </ul>
+               </div>
+               <form action="https://formspree.io/f/mjkydyvg" method="POST" lang="fr" aria-label="Formulaire de contact">
+                  <div class="form-group">
+                     <label for="nom-fr" id="nom-label-fr">Nom :</label>
+                     <input type="text" id="nom-fr" name="nom" class="form-control" aria-labelledby="nom-label-fr" required />
+                  </div>
+                  <div class="form-group">
+                     <label for="email-fr" id="email-label-fr">Email :</label>
+                     <input type="email" id="email-fr" name="email" class="form-control" aria-labelledby="email-label-fr" required />
+                  </div>
+                  <div class="form-group">
+                     <label for="message-fr" id="message-label-fr">Message :</label>
+                     <textarea id="message-fr" name="message" rows="5" class="form-control" aria-labelledby="message-label-fr" required></textarea>
+                  </div>
+                  <input type="hidden" name="_subject" value="Nouveau message depuis le site web !" />
+                  <button type="submit" class="btn-primary" aria-label="Envoyer le formulaire">Envoyer</button>
+               </form>
+            </div>
+         </section>
+         <section class="lang en animate-fade-in-up">
+            <h2>Contact</h2>
+            <div class="contact-card">
+               <div class="contact-info">
+                  <p>You can contact me directly using this form or via the contact information below:</p>
+                  <ul>
+                     <li><span class="contact-icon">✉</span><strong>Email :</strong> soubeigachristellevanessa@gmail.com</li>
+                     <li><span class="contact-icon">📱</span><strong>Phone:</strong> +33 7 58 00 42 96</li>
+                     <li><span class="contact-icon">🔗</span><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/christelle-vanessa-soubeiga-781149329/" target="_blank" rel="noopener">linkedin.com/in/christellevanessa</a></li>
+                  </ul>
+               </div>
+               <form action="https://formspree.io/f/mjkydyvg" method="POST" lang="en" aria-label="Contact form">
+                  <div class="form-group">
+                     <label for="nom-en" id="nom-label-en">Name:</label>
+                     <input type="text" id="nom-en" name="nom" class="form-control" aria-labelledby="nom-label-en" required />
+                  </div>
+                  <div class="form-group">
+                     <label for="email-en" id="email-label-en">Email:</label>
+                     <input type="email" id="email-en" name="email" class="form-control" aria-labelledby="email-label-en" required />
+                  </div>
+                  <div class="form-group">
+                     <label for="message-en" id="message-label-en">Message:</label>
+                     <textarea id="message-en" name="message" rows="5" class="form-control" aria-labelledby="message-label-en" required></textarea>
+                  </div>
+                  <input type="hidden" name="_subject" value="New message from the website!" />
+                  <button type="submit" class="btn-primary" aria-label="Send form">Send</button>
+               </form>
+            </div>
+         </section>
+         <section class="lang de animate-fade-in-up">
+            <h2>Kontakt</h2>
+            <div class="contact-card">
+               <div class="contact-info">
+                  <p>Sie können mich direkt über dieses Formular oder über die folgenden Kontaktinformationen erreichen:</p>
+                  <ul>
+                     <li><span class="contact-icon">✉</span><strong>Email :</strong> soubeigachristellevanessa@gmail.com</li>
+                     <li><span class="contact-icon">📱</span><strong>Telefon:</strong> +33 7 58 00 42 96</li>
+                     <li><span class="contact-icon">🔗</span><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/christelle-vanessa-soubeiga-781149329/" target="_blank" rel="noopener">linkedin.com/in/christellevanessa</a></li>
+                  </ul>
+               </div>
+               <form action="https://formspree.io/f/mjkydyvg" method="POST" lang="de" aria-label="Kontaktformular">
+                  <div class="form-group">
+                     <label for="nom-de" id="nom-label-de">Name:</label>
+                     <input type="text" id="nom-de" name="nom" class="form-control" aria-labelledby="nom-label-de" required />
+                  </div>
+                  <div class="form-group">
+                     <label for="email-de" id="email-label-de">E-Mail:</label>
+                     <input type="email" id="email-de" name="email" class="form-control" aria-labelledby="email-label-de" required />
+                  </div>
+                  <div class="form-group">
+                     <label for="message-de" id="message-label-de">Nachricht:</label>
+                     <textarea id="message-de" name="message" rows="5" class="form-control" aria-labelledby="message-label-de" required></textarea>
+                  </div>
+                  <input type="hidden" name="_subject" value="Neue Nachricht von der Website!" />
+                  <button type="submit" class="btn-primary" aria-label="Formular senden">Senden</button>
+               </form>
+            </div>
+         </section>
+      </main>
+      <footer>
+         <p>© 2024 Christelle Vanessa Soubeiga – Tous droits réservés</p>
+      </footer>
+   </body>
+</html>
