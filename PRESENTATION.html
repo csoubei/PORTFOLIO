@@ -4,29 +4,18 @@
       <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta name="description" content="Portfolio de Christelle Vanessa SOUBEIGA, étudiante en BUT Informatique à l'IUT d'Orsay, spécialisée en cybersécurité et développement">
-      <meta name="theme-color" content="#2c3e50">
+      <meta name="theme-color" content="#546e7a">
       <meta name="color-scheme" content="light dark">
       <title>Présentation – Christelle Vanessa SOUBEIGA</title>
-      
       <link rel="preload" href="./styles/index.css" as="style">
       <link rel="preload" href="./styles/images/avatar-christelle.jpg" as="image" fetchpriority="high">
       <link rel="stylesheet" href="./styles/index.css" />
       <link rel="stylesheet" href="./styles/presentation.css" />
-      <link rel="stylesheet" href="./styles/flexbox_101_nav.css" />
-      <link rel="stylesheet" href="./styles/grid_101.css" />
-      <link rel="stylesheet" href="./styles/float_101.css" />
-      <link rel="stylesheet" href="./styles/formation.css" />
-      <link rel="stylesheet" href="./styles/projet.css" />
-      <link rel="stylesheet" href="./styles/ambition.css" />
-      
       <!-- Importation de polices Google avec attributs de performance -->
       <link rel="preconnect" href="https://fonts.googleapis.com">
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap">
-      
-     
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap">
       <script>document.documentElement.classList.remove('no-js');</script>
-      
       <!-- Script pour la gestion des langues et animations -->
       <script>
          // Fonction pour changer de langue avec transition fluide
@@ -205,10 +194,10 @@
            const setDarkModeClass = (isDark) => {
              if (isDark) {
                document.documentElement.classList.add('dark-mode');
-               document.querySelector('meta[name="theme-color"]').setAttribute('content', '#1a1a1a');
+               document.querySelector('meta[name="theme-color"]').setAttribute('content', '#1a1d21');
              } else {
                document.documentElement.classList.remove('dark-mode');
-               document.querySelector('meta[name="theme-color"]').setAttribute('content', '#2c3e50');
+               document.querySelector('meta[name="theme-color"]').setAttribute('content', '#546e7a');
              }
            };
            
@@ -239,7 +228,7 @@
              // Mettre à jour la couleur du thème
              document.querySelector('meta[name="theme-color"]').setAttribute(
                'content', 
-               isDark ? '#1a1a1a' : '#2c3e50'
+               isDark ? '#1a1d21' : '#546e7a'
              );
              
              // Sauvegarder la préférence
@@ -256,7 +245,7 @@
              document.documentElement.classList.toggle('dark-mode', isDark);
              document.querySelector('meta[name="theme-color"]').setAttribute(
                'content', 
-               isDark ? '#1a1a1a' : '#2c3e50'
+               isDark ? '#1a1d21' : '#546e7a'
              );
            }
            
@@ -266,15 +255,14 @@
          // Optimisation performance des images
          function setupLazyLoading() {
            if ('loading' in HTMLImageElement.prototype) {
-             // Le navigateur supporte nativement lazy loading
+             // Native lazy loading is supported
              document.querySelectorAll('img[loading="lazy"]').forEach(img => {
-               // Assurez-vous que les dimensions sont définies pour éviter les changements de mise en page
                if (!img.hasAttribute('width') && !img.hasAttribute('height') && img.src) {
                  img.style.aspectRatio = 'auto';
                }
              });
            } else {
-             // Fallback pour les navigateurs qui ne supportent pas le lazy loading
+             // Fallback for browsers that don't support lazy loading
              const lazyImages = document.querySelectorAll('img[loading="lazy"]');
              
              if ('IntersectionObserver' in window) {
@@ -294,50 +282,12 @@
                lazyImages.forEach(img => {
                  if (!img.dataset.src && img.src) {
                    img.dataset.src = img.src;
-                   // Une image de substitution très légère
+                   // Very light placeholder
                    img.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 150"%3E%3C/svg%3E';
                  }
                  imageObserver.observe(img);
                });
              }
-           }
-         }
-         
-         // Gérer les connexions réseau lentes
-         function setupConnectionAwareness() {
-           if ('connection' in navigator) {
-             if (navigator.connection.saveData) {
-               // Mode économie de données activé
-               document.documentElement.classList.add('save-data');
-               console.log('Mode économie de données détecté. Optimisation du chargement des ressources.');
-             }
-             
-             function updateForConnectionType() {
-               const connection = navigator.connection;
-               const type = connection.effectiveType;
-               
-               // Ajouter une classe pour la qualité de connexion
-               document.documentElement.className = document.documentElement.className
-                 .replace(/connection-[^\s]+/g, '')
-                 .trim();
-               document.documentElement.classList.add(`connection-${type}`);
-               
-               console.log(`Qualité de connexion: ${type}`);
-               
-               // Adapter le site en fonction de la qualité de connexion
-               if (type === '2g' || type === 'slow-2g') {
-                 // Réduire la qualité des images, désactiver certaines animations, etc.
-                 document.documentElement.classList.add('low-bandwidth');
-               } else {
-                 document.documentElement.classList.remove('low-bandwidth');
-               }
-             }
-             
-             // Exécuter initialement
-             updateForConnectionType();
-             
-             // Écouter les changements
-             navigator.connection.addEventListener('change', updateForConnectionType);
            }
          }
          
@@ -374,9 +324,6 @@
            
            // Optimiser les images
            setupLazyLoading();
-           
-           // Gestion des connexions réseau
-           setupConnectionAwareness();
            
            // Initialiser les observateurs d'impression
            setupPrintHandlers();
@@ -422,8 +369,8 @@
            });
          }
           
-        // Fonction pour initialiser le bouton retour en haut
-        function initBackToTopButton() {
+         // Fonction pour initialiser le bouton retour en haut
+         function initBackToTopButton() {
           // Créer le bouton
           const backToTopButton = document.createElement('a');
           backToTopButton.href = '#';
@@ -481,12 +428,12 @@
               scrollToTop();
             }
           });
-        }
-        
-        // Fonction pour initialiser les animations au défilement
-        function initScrollAnimation() {
+         }
+         
+         // Fonction pour initialiser les animations au défilement
+         function initScrollAnimation() {
           if ('IntersectionObserver' in window) {
-            const elements = document.querySelectorAll('.bio-card, .visual-item, .welcome-section, .quote-box');
+            const elements = document.querySelectorAll('.bio-card, .welcome-section, .quote-box');
             
             const observer = new IntersectionObserver((entries) => {
               entries.forEach(entry => {
@@ -506,102 +453,12 @@
               observer.observe(element);
             });
           }
-        }
+         }
       </script>
-      
-      <style>
-        /* Styles critiques inlined pour améliorer le First Contentful Paint */
-        .sr-only {
-          position: absolute;
-          width: 1px;
-          height: 1px;
-          padding: 0;
-          margin: -1px;
-          overflow: hidden;
-          clip: rect(0, 0, 0, 0);
-          white-space: nowrap;
-          border: 0;
-        }
-        
-        .theme-toggle {
-          position: fixed;
-          top: 20px;
-          right: 20px;
-          width: 40px;
-          height: 40px;
-          border-radius: 50%;
-          border: none;
-          background-color: #f1c40f;
-          color: #2c3e50;
-          cursor: pointer;
-          z-index: 50;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-          transition: all 0.3s ease;
-        }
-        
-        .theme-toggle:hover {
-          transform: rotate(15deg);
-        }
-        
-        .light-icon, .dark-icon {
-          position: absolute;
-          transition: opacity 0.3s ease, transform 0.3s ease;
-        }
-        
-        .dark-mode .light-icon {
-          opacity: 0;
-          transform: rotate(90deg);
-        }
-        
-        .light-icon {
-          opacity: 1;
-        }
-        
-        .dark-mode .dark-icon {
-          opacity: 1;
-        }
-        
-        .dark-icon {
-          opacity: 0;
-          transform: rotate(-90deg);
-        }
-        
-        .dark-mode .dark-icon {
-          transform: rotate(0);
-        }
-        
-        /* Fallback pour No-JS */
-        .no-js .to-animate {
-          opacity: 1 !important;
-          transform: none !important;
-        }
-        
-        .no-js .lang {
-          display: block !important;
-          opacity: 1 !important;
-        }
-        
-        /* Optimisation pour les connexions lentes */
-        .low-bandwidth .presentation-visuals {
-          grid-template-columns: 1fr !important;
-        }
-        
-        .low-bandwidth img {
-          filter: none !important;
-        }
-        
-        .save-data audio {
-          display: none;
-        }
-      </style>
    </head>
    <body>
       <!-- Élément invisible pour les lecteurs d'écran -->
       <div id="announcer" aria-live="polite" class="sr-only"></div>
-      
       <a href="#main-content" class="skip-link">Passer au contenu principal</a>
       <header>
          <h1>Christelle Vanessa SOUBEIGA</h1>
@@ -626,112 +483,98 @@
             <div class="avatar-container">
                <img class="avatar" src="./styles/images/avatar-christelle.jpg" alt="Photo de Christelle Vanessa Soubeiga" width="200" height="200" loading="eager" fetchpriority="high" />
             </div>
-            
             <audio id="audio-fr" preload="metadata">
                <source src="./styles/audio/audio-fr.wav" type="audio/mpeg">
                Votre navigateur ne supporte pas la lecture audio.
             </audio>
-            
             <audio id="audio-en" preload="metadata">
                <source src="./styles/audio/audio-en.wav" type="audio/mpeg">
                Your browser does not support audio playback.
             </audio>
-            
             <audio id="audio-de" preload="metadata">
                <source src="./styles/audio/audio-de.wav" type="audio/mpeg">
                Ihr Browser unterstützt keine Audiowiedergabe.
             </audio>
-            
             <div class="audio-controls">
                <button id="play-btn-fr" class="audio-button" onclick="toggleAudio('fr')" 
-                     data-play-text="Écouter" data-pause-text="Pause" aria-label="Écouter présentation en français">
-                  <span class="audio-icon" aria-hidden="true">▶</span> Écouter
-                  <span class="audio-language-indicator">FR</span>
+                  data-play-text="Écouter" data-pause-text="Pause" aria-label="Écouter présentation en français">
+               <span class="audio-icon" aria-hidden="true">▶</span> Écouter
+               <span class="audio-language-indicator">FR</span>
                </button>
-               
                <button id="play-btn-en" class="audio-button" onclick="toggleAudio('en')"
-                     data-play-text="Listen" data-pause-text="Pause" aria-label="Listen to presentation in English">
-                  <span class="audio-icon" aria-hidden="true">▶</span> Listen
-                  <span class="audio-language-indicator">EN</span>
+                  data-play-text="Listen" data-pause-text="Pause" aria-label="Listen to presentation in English">
+               <span class="audio-icon" aria-hidden="true">▶</span> Listen
+               <span class="audio-language-indicator">EN</span>
                </button>
-               
                <button id="play-btn-de" class="audio-button" onclick="toggleAudio('de')"
-                     data-play-text="Hören" data-pause-text="Pause" aria-label="Präsentation auf Deutsch anhören">
-                  <span class="audio-icon" aria-hidden="true">▶</span> Hören
-                  <span class="audio-language-indicator">DE</span>
+                  data-play-text="Hören" data-pause-text="Pause" aria-label="Präsentation auf Deutsch anhören">
+               <span class="audio-icon" aria-hidden="true">▶</span> Hören
+               <span class="audio-language-indicator">DE</span>
                </button>
             </div>
          </section>
-         
          <section class="lang fr">
             <div class="welcome-section">
                <h2 class="message">Bonjour ! Je suis SOUBEIGA Christelle Vanessa 👋</h2>
-               <p>Étudiante de 19 ans à l’IUT d’Orsay, passionnée par la cybersécurité.</p>
-   
+               <p>Étudiante de 19 ans à l'IUT d'Orsay, passionnée par la cybersécurité.</p>
+            </div>
             <div class="bio-grid">
                <div class="bio-card">
                   <h3>À propos de moi</h3>
                   <p>Je suis une étudiante en informatique passionnée par les technologies et la résolution de problèmes. Mon parcours entre l'Afrique et l'Europe m'a donné une perspective unique sur les défis technologiques globaux.</p>
                   <p>Curieuse, rigoureuse et motivée, je m'investis dans mes projets avec détermination et créativité, toujours à la recherche de meilleures solutions.</p>
                </div>
-               
-            <div class="quote-box">
-               <blockquote>
-                  <p>"Le monde numérique offre d'infinies possibilités, mais c'est la façon dont nous les exploitons avec responsabilité qui détermine notre impact positif sur la société."</p>
-                  <cite>Ma philosophie personnelle</cite>
-               </blockquote>
+               <div class="quote-box">
+                  <blockquote>
+                     <p>"Le monde numérique offre d'infinies possibilités, mais c'est la façon dont nous les exploitons avec responsabilité qui détermine notre impact positif sur la société."</p>
+                     <cite>Ma philosophie personnelle</cite>
+                  </blockquote>
+               </div>
             </div>
-            
             <div class="cta-container">
                <a href="./CONTACT.html?lang=fr" class="cta-button">Me contacter</a>
             </div>
          </section>
-         
          <section class="lang en">
             <div class="welcome-section">
                <h2 class="message">Hello! I'm Christelle Vanessa SOUBEIGA 👋</h2>
                <p>I am a 19-year-old student at IUT of Orsay, passionate about cybersecurity.</p>
-              
+            </div>
             <div class="bio-grid">
                <div class="bio-card">
                   <h3>About Me</h3>
                   <p>I am a computer science student passionate about technology and problem-solving. My journey between Africa and Europe has given me a unique perspective on global technological challenges.</p>
                   <p>Curious, rigorous, and motivated, I invest in my projects with determination and creativity, always looking for innovative solutions.</p>
                </div>
+               <div class="quote-box">
+                  <blockquote>
+                     <p>"The digital world offers infinite possibilities, but it's how we responsibly harness them that determines our positive impact on society."</p>
+                     <cite>My personal philosophy</cite>
+                  </blockquote>
+               </div>
             </div>
-            
-            <div class="quote-box">
-               <blockquote>
-                  <p>"The digital world offers infinite possibilities, but it's how we responsibly harness them that determines our positive impact on society."</p>
-                  <cite>My personal philosophy</cite>
-               </blockquote>
-            </div>
-            
             <div class="cta-container">
                <a href="./CONTACT.html?lang=en" class="cta-button">Contact Me</a>
             </div>
          </section>
-         
          <section class="lang de">
             <div class="welcome-section">
                <h2 class="message">Hallo! Ich bin Christelle Vanessa SOUBEIGA 👋</h2>
                <p>Ich bin 19 Jahre alt und studiere an der IUT d'Orsay. Ich begeistere mich für Cybersicherheit.</p>
-               
+            </div>
             <div class="bio-grid">
                <div class="bio-card">
                   <h3>Über mich</h3>
                   <p>Ich bin eine Informatikstudentin mit Leidenschaft für Technologie und Problemlösung. Meine Reise zwischen Afrika und Europa hat mir eine einzigartige Perspektive auf globale technologische Herausforderungen gegeben.</p>
                   <p>Neugierig, gewissenhaft und motiviert, investiere ich in meine Projekte mit Entschlossenheit und Kreativität, immer auf der Suche nach innovativen Lösungen.</p>
                </div>
+               <div class="quote-box">
+                  <blockquote>
+                     <p>"Die digitale Welt bietet unendliche Möglichkeiten, aber es ist die Art und Weise, wie wir sie verantwortungsvoll nutzen, die unseren positiven Einfluss auf die Gesellschaft bestimmt."</p>
+                     <cite>Meine persönliche Philosophie</cite>
+                  </blockquote>
+               </div>
             </div>
-            
-            <div class="quote-box">
-               <blockquote>
-                  <p>"Die digitale Welt bietet unendliche Möglichkeiten, aber es ist die Art und Weise, wie wir sie verantwortungsvoll nutzen, die unseren positiven Einfluss auf die Gesellschaft bestimmt."</p>
-                  <cite>Meine persönliche Philosophie</cite>
-               </blockquote>
-            </div>
-            
             <div class="cta-container">
                <a href="./CONTACT.html?lang=de" class="cta-button">Kontaktieren Sie mich</a>
             </div>
@@ -752,6 +595,5 @@
          </div>
          <p>© 2024 Christelle Vanessa Soubeiga – Tous droits réservés</p>
       </footer>
-      
    </body>
 </html>
