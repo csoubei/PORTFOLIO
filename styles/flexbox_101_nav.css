@@ -52,12 +52,16 @@
   background-color: #f8f9fa;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: all 0.3s ease;
+  will-change: transform;
 }
 
-.flex-item:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+@media (hover: hover) {
+  .flex-item:hover {
+    transform: translate3d(0, -5px, 0);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    z-index: 1;
+  }
 }
 
 .flex-grow-1 {
@@ -101,11 +105,14 @@
   border-radius: 4px;
   transition: all 0.3s ease;
   text-align: center;
+  will-change: transform;
 }
 
-.flex-nav a:hover {
-  background-color: #2c3e50;
-  transform: translateY(-2px);
+@media (hover: hover) {
+  .flex-nav a:hover {
+    background-color: #2c3e50;
+    transform: translate3d(0, -2px, 0);
+  }
 }
 
 .flex-nav a.active {
@@ -130,12 +137,16 @@
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: all 0.3s ease;
+  will-change: transform;
 }
 
-.flex-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+@media (hover: hover) {
+  .flex-card:hover {
+    transform: translate3d(0, -5px, 0);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+    z-index: 1;
+  }
 }
 
 .flex-card-image {
@@ -148,10 +159,13 @@
   height: 100%;
   object-fit: cover;
   transition: transform 0.5s ease;
+  will-change: transform;
 }
 
-.flex-card:hover .flex-card-image img {
-  transform: scale(1.1);
+@media (hover: hover) {
+  .flex-card:hover .flex-card-image img {
+    transform: scale(1.1);
+  }
 }
 
 .flex-card-content {
@@ -196,11 +210,15 @@
   background-color: #f8f9fa;
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  transition: transform 0.3s ease;
+  transition: all 0.3s ease;
+  will-change: transform;
 }
 
-.skill-item:hover {
-  transform: translateY(-5px);
+@media (hover: hover) {
+  .skill-item:hover {
+    transform: translate3d(0, -5px, 0);
+    z-index: 1;
+  }
 }
 
 .skill-icon {
@@ -222,6 +240,12 @@
 }
 
 /* Media queries pour responsive design */
+@media (max-width: 992px) {
+  .flex-grow-1, .flex-grow-2, .flex-grow-3 {
+    flex-basis: 220px;
+  }
+}
+
 @media (max-width: 768px) {
   .flex-container {
     flex-direction: column;
@@ -238,5 +262,19 @@
   
   .flex-card {
     flex: 0 1 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .skills-grid {
+    gap: 15px;
+  }
+  
+  .skill-item {
+    padding: 1.2em;
+  }
+  
+  .flex-nav a {
+    padding: 0.6em 1em;
   }
 }

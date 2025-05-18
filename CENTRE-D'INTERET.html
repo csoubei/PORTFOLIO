@@ -5,7 +5,6 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta name="description" content="Centres d'intérêt de Christelle Vanessa SOUBEIGA, étudiante en BUT Informatique à l'IUT d'Orsay">
       <title>Centres d'intérêt – Christelle Vanessa SOUBEIGA</title>
-      <!-- Préchargement des ressources critiques -->
       <link rel="preload" href="./styles/index.css" as="style">
       <link rel="stylesheet" href="./styles/index.css" />
       <link rel="stylesheet" href="./styles/presentation.css" />
@@ -15,6 +14,11 @@
       <link rel="stylesheet" href="./styles/formation.css" />
       <link rel="stylesheet" href="./styles/projet.css" />
       <link rel="stylesheet" href="./styles/ambition.css" />
+	        <!-- Importation de polices Google -->
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+      
       <script>
          function setLanguage(lang) {
            // Masquer toutes les sections linguistiques
@@ -45,6 +49,12 @@
          }
          
          function showInterestDetails(interestId) {
+           // Détecter la langue active
+           const activeLang = document.querySelector('.lang[style*="display: block"]').classList[1]; // fr, en, ou de
+           
+           // Construire l'ID basé sur la langue
+           const fullInterestId = activeLang === 'fr' ? interestId : `${interestId}-${activeLang}`;
+           
            // Masquer tous les détails d'intérêts
            document.querySelectorAll(".interest-details").forEach(el => {
              el.style.display = "none";
@@ -58,13 +68,13 @@
            });
            
            // Afficher le détail sélectionné avec animation
-           const detailElement = document.getElementById(interestId);
+           const detailElement = document.getElementById(fullInterestId);
            if (detailElement) {
              detailElement.style.display = "block";
              detailElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
              
              // Mettre à jour aria-expanded
-             const relatedItem = document.querySelector(`.interest-item[aria-controls="${interestId}"]`);
+             const relatedItem = document.querySelector(`.interest-item[aria-controls="${fullInterestId}"]`);
              if (relatedItem) {
                relatedItem.setAttribute('aria-expanded', 'true');
              }
@@ -141,7 +151,7 @@
          <div class="language-buttons" role="group" aria-label="Sélection de langue">
             <button onclick="setLanguage('fr')" aria-label="Français" title="Passer en français">🇫🇷</button>
             <button onclick="setLanguage('en')" aria-label="English" title="Switch to English">🇬🇧</button>
-            <button onclick="setLanguage('de')" aria-label="Deutsch" title="Auf Deutsch umschalten">DE</button>
+            <button onclick="setLanguage('de')" aria-label="Deutsch" title="Auf Deutsch umschalten">🇩🇪</button>
          </div>
       </header>
       <nav aria-label="Navigation principale">
@@ -296,7 +306,6 @@
                   </div>
                </div>
             </div>
-            <!-- Détails des intérêts informatiques -->
             <div id="securite-reseau" class="interest-details" role="region" aria-labelledby="securite-reseau-heading">
                <h3 id="securite-reseau-heading">Sécurité Réseau</h3>
                <div class="interest-detail-content">
@@ -321,6 +330,13 @@
                   <div class="interest-description">
                      <p>Je m'intéresse à plusieurs langages de programmation, notamment Java, Python et C++.</p>
                      <p>Résoudre des problèmes algorithmiques et développer des applications sont des activités que j'apprécie particulièrement dans mon parcours informatique.</p>
+                     <div class="programming-languages">
+                        <h4>Langages maîtrisés</h4>
+                        <img data-src="./styles/images/C++.jpeg" alt="Langages de programmation maîtrisés" class="lazy-load" />
+                        <noscript>
+                           <img src="./styles/images/C++.jpeg" alt="Langages de programmation maîtrisés" />
+                        </noscript>
+                     </div>
                   </div>
                </div>
                <button class="close-details" onclick="document.getElementById('programmation').style.display='none'; document.querySelector('[aria-controls=\'programmation\']').setAttribute('aria-expanded', 'false');" aria-label="Fermer les détails sur la programmation">Fermer</button>
@@ -501,7 +517,7 @@
                <div class="interests-grid">
                   <div class="interest-item" onclick="showInterestDetails('securite-reseau')"
                      onkeypress="if(event.key==='Enter') showInterestDetails('securite-reseau')"
-                     tabindex="0" role="button" aria-expanded="false" aria-controls="securite-reseau">
+                     tabindex="0" role="button" aria-expanded="false" aria-controls="securite-reseau-en">
                      <img data-src="./styles/images/securite-reseau.png" alt="Network Security" class="lazy-load" />
                      <noscript>
                         <img src="./styles/images/securite-reseau.png" alt="Network Security" />
@@ -510,7 +526,7 @@
                   </div>
                   <div class="interest-item" onclick="showInterestDetails('programmation')"
                      onkeypress="if(event.key==='Enter') showInterestDetails('programmation')"
-                     tabindex="0" role="button" aria-expanded="false" aria-controls="programmation">
+                     tabindex="0" role="button" aria-expanded="false" aria-controls="programmation-en">
                      <img data-src="./styles/images/programmation.jpeg" alt="Programming" class="lazy-load" />
                      <noscript>
                         <img src="./styles/images/programmation.jpeg" alt="Programming" />
@@ -519,7 +535,7 @@
                   </div>
                   <div class="interest-item" onclick="showInterestDetails('developpement-web')"
                      onkeypress="if(event.key==='Enter') showInterestDetails('developpement-web')"
-                     tabindex="0" role="button" aria-expanded="false" aria-controls="developpement-web">
+                     tabindex="0" role="button" aria-expanded="false" aria-controls="developpement-web-en">
                      <img data-src="./styles/images/developpement-web.png" alt="Web Development" class="lazy-load" />
                      <noscript>
                         <img src="./styles/images/developpement-web.png" alt="Web Development" />
@@ -531,7 +547,7 @@
                <div class="interests-grid">
                   <div class="interest-item" onclick="showInterestDetails('athletisme')"
                      onkeypress="if(event.key==='Enter') showInterestDetails('athletisme')"
-                     tabindex="0" role="button" aria-expanded="false" aria-controls="athletisme">
+                     tabindex="0" role="button" aria-expanded="false" aria-controls="athletisme-en">
                      <img data-src="./styles/images/athletisme.jpg" alt="Athletics" class="lazy-load" />
                      <noscript>
                         <img src="./styles/images/athletisme.jpg" alt="Athletics" />
@@ -540,7 +556,7 @@
                   </div>
                   <div class="interest-item" onclick="showInterestDetails('handball')"
                      onkeypress="if(event.key==='Enter') showInterestDetails('handball')"
-                     tabindex="0" role="button" aria-expanded="false" aria-controls="handball">
+                     tabindex="0" role="button" aria-expanded="false" aria-controls="handball-en">
                      <img data-src="./styles/images/handball.jpg" alt="Handball" class="lazy-load" />
                      <noscript>
                         <img src="./styles/images/handball.jpg" alt="Handball" />
@@ -549,7 +565,7 @@
                   </div>
                   <div class="interest-item" onclick="showInterestDetails('Taekwondo')"
                      onkeypress="if(event.key==='Enter') showInterestDetails('Taekwondo')"
-                     tabindex="0" role="button" aria-expanded="false" aria-controls="Taekwondo">
+                     tabindex="0" role="button" aria-expanded="false" aria-controls="Taekwondo-en">
                      <img data-src="./styles/images/Taekwondo.png" alt="Taekwondo" class="lazy-load" />
                      <noscript>
                         <img src="./styles/images/Taekwondo.png" alt="Taekwondo" />
@@ -561,7 +577,7 @@
                <div class="interests-grid">
                   <div class="interest-item" onclick="showInterestDetails('theatre')"
                      onkeypress="if(event.key==='Enter') showInterestDetails('theatre')"
-                     tabindex="0" role="button" aria-expanded="false" aria-controls="theatre">
+                     tabindex="0" role="button" aria-expanded="false" aria-controls="theatre-en">
                      <img data-src="./styles/images/theatre.jpg" alt="Theatre" class="lazy-load" />
                      <noscript>
                         <img src="./styles/images/theatre.jpg" alt="Theatre" />
@@ -570,7 +586,7 @@
                   </div>
                   <div class="interest-item" onclick="showInterestDetails('musique')"
                      onkeypress="if(event.key==='Enter') showInterestDetails('musique')"
-                     tabindex="0" role="button" aria-expanded="false" aria-controls="musique">
+                     tabindex="0" role="button" aria-expanded="false" aria-controls="musique-en">
                      <img data-src="./styles/images/musique.jpg" alt="Music" class="lazy-load" />
                      <noscript>
                         <img src="./styles/images/musique.jpg" alt="Music" />
@@ -579,7 +595,7 @@
                   </div>
                   <div class="interest-item" onclick="showInterestDetails('art')"
                      onkeypress="if(event.key==='Enter') showInterestDetails('art')"
-                     tabindex="0" role="button" aria-expanded="false" aria-controls="art">
+                     tabindex="0" role="button" aria-expanded="false" aria-controls="art-en">
                      <img data-src="./styles/images/art.png" alt="Art" class="lazy-load" />
                      <noscript>
                         <img src="./styles/images/art.png" alt="Art" />
@@ -591,7 +607,7 @@
                <div class="interests-grid">
                   <div class="interest-item" onclick="showInterestDetails('lecture')"
                      onkeypress="if(event.key==='Enter') showInterestDetails('lecture')"
-                     tabindex="0" role="button" aria-expanded="false" aria-controls="lecture">
+                     tabindex="0" role="button" aria-expanded="false" aria-controls="lecture-en">
                      <img data-src="./styles/images/lecture.jpg" alt="Reading" class="lazy-load" />
                      <noscript>
                         <img src="./styles/images/lecture.jpg" alt="Reading" />
@@ -600,7 +616,7 @@
                   </div>
                   <div class="interest-item" onclick="showInterestDetails('cuisine')"
                      onkeypress="if(event.key==='Enter') showInterestDetails('cuisine')"
-                     tabindex="0" role="button" aria-expanded="false" aria-controls="cuisine">
+                     tabindex="0" role="button" aria-expanded="false" aria-controls="cuisine-en">
                      <img data-src="./styles/images/cuisine.jpg" alt="Cooking" class="lazy-load" />
                      <noscript>
                         <img src="./styles/images/cuisine.jpg" alt="Cooking" />
@@ -609,7 +625,7 @@
                   </div>
                   <div class="interest-item" onclick="showInterestDetails('elevage')"
                      onkeypress="if(event.key==='Enter') showInterestDetails('elevage')"
-                     tabindex="0" role="button" aria-expanded="false" aria-controls="elevage">
+                     tabindex="0" role="button" aria-expanded="false" aria-controls="elevage-en">
                      <img data-src="./styles/images/elevage.jpg" alt="Animal Breeding" class="lazy-load" />
                      <noscript>
                         <img src="./styles/images/elevage.jpg" alt="Animal Breeding" />
@@ -618,7 +634,7 @@
                   </div>
                   <div class="interest-item" onclick="showInterestDetails('agriculture')"
                      onkeypress="if(event.key==='Enter') showInterestDetails('agriculture')"
-                     tabindex="0" role="button" aria-expanded="false" aria-controls="agriculture">
+                     tabindex="0" role="button" aria-expanded="false" aria-controls="agriculture-en">
                      <img data-src="./styles/images/agriculture.jpg" alt="Agriculture" class="lazy-load" />
                      <noscript>
                         <img src="./styles/images/agriculture.jpg" alt="Agriculture" />
@@ -627,7 +643,7 @@
                   </div>
                   <div class="interest-item" onclick="showInterestDetails('voyages')"
                      onkeypress="if(event.key==='Enter') showInterestDetails('voyages')"
-                     tabindex="0" role="button" aria-expanded="false" aria-controls="voyages">
+                     tabindex="0" role="button" aria-expanded="false" aria-controls="voyages-en">
                      <img data-src="./styles/images/voyages.jpg" alt="Traveling" class="lazy-load" />
                      <noscript>
                         <img src="./styles/images/voyages.jpg" alt="Traveling" />
@@ -636,8 +652,6 @@
                   </div>
                </div>
             </div>
-            <!-- Section pour les détails en anglais -->
-            <!-- Détails des intérêts informatiques en anglais -->
             <div id="securite-reseau-en" class="interest-details" role="region" aria-labelledby="securite-reseau-heading-en">
                <h3 id="securite-reseau-heading-en">Network Security</h3>
                <div class="interest-detail-content">
@@ -662,6 +676,13 @@
                   <div class="interest-description">
                      <p>I'm interested in several programming languages, notably Java, Python, and C++.</p>
                      <p>Solving algorithmic problems and developing applications are activities that I particularly enjoy in my computer science journey.</p>
+                     <div class="programming-languages">
+                        <h4>Programming Languages</h4>
+                        <img data-src="./styles/images/C++.jpeg" alt="Programming languages I know" class="lazy-load" />
+                        <noscript>
+                           <img src="./styles/images/C++.jpeg" alt="Programming languages I know" />
+                        </noscript>
+                     </div>
                   </div>
                </div>
                <button class="close-details" onclick="document.getElementById('programmation-en').style.display='none'; document.querySelector('[aria-controls=\'programmation-en\']').setAttribute('aria-expanded', 'false');" aria-label="Close programming details">Close</button>
@@ -680,7 +701,6 @@
                </div>
                <button class="close-details" onclick="document.getElementById('developpement-web-en').style.display='none'; document.querySelector('[aria-controls=\'developpement-web-en\']').setAttribute('aria-expanded', 'false');" aria-label="Close web development details">Close</button>
             </div>
-            <!-- Détails des intérêts sportifs en anglais -->
             <div id="athletisme-en" class="interest-details" role="region" aria-labelledby="athletisme-heading-en">
                <h3 id="athletisme-heading-en">Athletics</h3>
                <div class="interest-detail-content">
@@ -723,7 +743,6 @@
                </div>
                <button class="close-details" onclick="document.getElementById('Taekwondo-en').style.display='none'; document.querySelector('[aria-controls=\'Taekwondo-en\']').setAttribute('aria-expanded', 'false');" aria-label="Close Taekwondo details">Close</button>
             </div>
-            <!-- Détails des intérêts artistiques en anglais -->
             <div id="theatre-en" class="interest-details" role="region" aria-labelledby="theatre-heading-en">
                <h3 id="theatre-heading-en">Theatre</h3>
                <div class="interest-detail-content">
@@ -766,7 +785,6 @@
                </div>
                <button class="close-details" onclick="document.getElementById('art-en').style.display='none'; document.querySelector('[aria-controls=\'art-en\']').setAttribute('aria-expanded', 'false');" aria-label="Close art details">Close</button>
             </div>
-            <!-- Détails des autres intérêts en anglais -->
             <div id="lecture-en" class="interest-details" role="region" aria-labelledby="lecture-heading-en">
                <h3 id="lecture-heading-en">Reading</h3>
                <div class="interest-detail-content">
@@ -845,7 +863,7 @@
                <div class="interests-grid">
                   <div class="interest-item" onclick="showInterestDetails('securite-reseau')"
                      onkeypress="if(event.key==='Enter') showInterestDetails('securite-reseau')"
-                     tabindex="0" role="button" aria-expanded="false" aria-controls="securite-reseau">
+                     tabindex="0" role="button" aria-expanded="false" aria-controls="securite-reseau-de">
                      <img data-src="./styles/images/securite-reseau.png" alt="Netzwerksicherheit" class="lazy-load" />
                      <noscript>
                         <img src="./styles/images/securite-reseau.png" alt="Netzwerksicherheit" />
@@ -854,7 +872,7 @@
                   </div>
                   <div class="interest-item" onclick="showInterestDetails('programmation')"
                      onkeypress="if(event.key==='Enter') showInterestDetails('programmation')"
-                     tabindex="0" role="button" aria-expanded="false" aria-controls="programmation">
+                     tabindex="0" role="button" aria-expanded="false" aria-controls="programmation-de">
                      <img data-src="./styles/images/programmation.jpeg" alt="Programmierung" class="lazy-load" />
                      <noscript>
                         <img src="./styles/images/programmation.jpeg" alt="Programmierung" />
@@ -863,7 +881,7 @@
                   </div>
                   <div class="interest-item" onclick="showInterestDetails('developpement-web')"
                      onkeypress="if(event.key==='Enter') showInterestDetails('developpement-web')"
-                     tabindex="0" role="button" aria-expanded="false" aria-controls="developpement-web">
+                     tabindex="0" role="button" aria-expanded="false" aria-controls="developpement-web-de">
                      <img data-src="./styles/images/developpement-web.png" alt="Webentwicklung" class="lazy-load" />
                      <noscript>
                         <img src="./styles/images/developpement-web.png" alt="Webentwicklung" />
@@ -875,7 +893,7 @@
                <div class="interests-grid">
                   <div class="interest-item" onclick="showInterestDetails('athletisme')"
                      onkeypress="if(event.key==='Enter') showInterestDetails('athletisme')"
-                     tabindex="0" role="button" aria-expanded="false" aria-controls="athletisme">
+                     tabindex="0" role="button" aria-expanded="false" aria-controls="athletisme-de">
                      <img data-src="./styles/images/athletisme.jpg" alt="Leichtathletik" class="lazy-load" />
                      <noscript>
                         <img src="./styles/images/athletisme.jpg" alt="Leichtathletik" />
@@ -884,7 +902,7 @@
                   </div>
                   <div class="interest-item" onclick="showInterestDetails('handball')"
                      onkeypress="if(event.key==='Enter') showInterestDetails('handball')"
-                     tabindex="0" role="button" aria-expanded="false" aria-controls="handball">
+                     tabindex="0" role="button" aria-expanded="false" aria-controls="handball-de">
                      <img data-src="./styles/images/handball.jpg" alt="Handball" class="lazy-load" />
                      <noscript>
                         <img src="./styles/images/handball.jpg" alt="Handball" />
@@ -893,7 +911,7 @@
                   </div>
                   <div class="interest-item" onclick="showInterestDetails('Taekwondo')"
                      onkeypress="if(event.key==='Enter') showInterestDetails('Taekwondo')"
-                     tabindex="0" role="button" aria-expanded="false" aria-controls="Taekwondo">
+                     tabindex="0" role="button" aria-expanded="false" aria-controls="Taekwondo-de">
                      <img data-src="./styles/images/Taekwondo.png" alt="Taekwondo" class="lazy-load" />
                      <noscript>
                         <img src="./styles/images/Taekwondo.png" alt="Taekwondo" />
@@ -905,7 +923,7 @@
                <div class="interests-grid">
                   <div class="interest-item" onclick="showInterestDetails('theatre')"
                      onkeypress="if(event.key==='Enter') showInterestDetails('theatre')"
-                     tabindex="0" role="button" aria-expanded="false" aria-controls="theatre">
+                     tabindex="0" role="button" aria-expanded="false" aria-controls="theatre-de">
                      <img data-src="./styles/images/theatre.jpg" alt="Theater" class="lazy-load" />
                      <noscript>
                         <img src="./styles/images/theatre.jpg" alt="Theater" />
@@ -914,7 +932,7 @@
                   </div>
                   <div class="interest-item" onclick="showInterestDetails('musique')"
                      onkeypress="if(event.key==='Enter') showInterestDetails('musique')"
-                     tabindex="0" role="button" aria-expanded="false" aria-controls="musique">
+                     tabindex="0" role="button" aria-expanded="false" aria-controls="musique-de">
                      <img data-src="./styles/images/musique.jpg" alt="Musik" class="lazy-load" />
                      <noscript>
                         <img src="./styles/images/musique.jpg" alt="Musik" />
@@ -923,7 +941,7 @@
                   </div>
                   <div class="interest-item" onclick="showInterestDetails('art')"
                      onkeypress="if(event.key==='Enter') showInterestDetails('art')"
-                     tabindex="0" role="button" aria-expanded="false" aria-controls="art">
+                     tabindex="0" role="button" aria-expanded="false" aria-controls="art-de">
                      <img data-src="./styles/images/art.png" alt="Kunst" class="lazy-load" />
                      <noscript>
                         <img src="./styles/images/art.png" alt="Kunst" />
@@ -935,7 +953,7 @@
                <div class="interests-grid">
                   <div class="interest-item" onclick="showInterestDetails('lecture')"
                      onkeypress="if(event.key==='Enter') showInterestDetails('lecture')"
-                     tabindex="0" role="button" aria-expanded="false" aria-controls="lecture">
+                     tabindex="0" role="button" aria-expanded="false" aria-controls="lecture-de">
                      <img data-src="./styles/images/lecture.jpg" alt="Lesen" class="lazy-load" />
                      <noscript>
                         <img src="./styles/images/lecture.jpg" alt="Lesen" />
@@ -944,7 +962,7 @@
                   </div>
                   <div class="interest-item" onclick="showInterestDetails('cuisine')"
                      onkeypress="if(event.key==='Enter') showInterestDetails('cuisine')"
-                     tabindex="0" role="button" aria-expanded="false" aria-controls="cuisine">
+                     tabindex="0" role="button" aria-expanded="false" aria-controls="cuisine-de">
                      <img data-src="./styles/images/cuisine.jpg" alt="Kochen" class="lazy-load" />
                      <noscript>
                         <img src="./styles/images/cuisine.jpg" alt="Kochen" />
@@ -953,7 +971,7 @@
                   </div>
                   <div class="interest-item" onclick="showInterestDetails('elevage')"
                      onkeypress="if(event.key==='Enter') showInterestDetails('elevage')"
-                     tabindex="0" role="button" aria-expanded="false" aria-controls="elevage">
+                     tabindex="0" role="button" aria-expanded="false" aria-controls="elevage-de">
                      <img data-src="./styles/images/elevage.jpg" alt="Tierzucht" class="lazy-load" />
                      <noscript>
                         <img src="./styles/images/elevage.jpg" alt="Tierzucht" />
@@ -962,7 +980,7 @@
                   </div>
                   <div class="interest-item" onclick="showInterestDetails('agriculture')"
                      onkeypress="if(event.key==='Enter') showInterestDetails('agriculture')"
-                     tabindex="0" role="button" aria-expanded="false" aria-controls="agriculture">
+                     tabindex="0" role="button" aria-expanded="false" aria-controls="agriculture-de">
                      <img data-src="./styles/images/agriculture.jpg" alt="Landwirtschaft" class="lazy-load" />
                      <noscript>
                         <img src="./styles/images/agriculture.jpg" alt="Landwirtschaft" />
@@ -971,7 +989,7 @@
                   </div>
                   <div class="interest-item" onclick="showInterestDetails('voyages')"
                      onkeypress="if(event.key==='Enter') showInterestDetails('voyages')"
-                     tabindex="0" role="button" aria-expanded="false" aria-controls="voyages">
+                     tabindex="0" role="button" aria-expanded="false" aria-controls="voyages-de">
                      <img data-src="./styles/images/voyages.jpg" alt="Reisen" class="lazy-load" />
                      <noscript>
                         <img src="./styles/images/voyages.jpg" alt="Reisen" />
@@ -980,8 +998,6 @@
                   </div>
                </div>
             </div>
-            <!-- Section pour les détails en allemand -->
-            <!-- Détails des intérêts informatiques en allemand -->
             <div id="securite-reseau-de" class="interest-details" role="region" aria-labelledby="securite-reseau-heading-de">
                <h3 id="securite-reseau-heading-de">Netzwerksicherheit</h3>
                <div class="interest-detail-content">
@@ -1006,6 +1022,13 @@
                   <div class="interest-description">
                      <p>Ich interessiere mich für mehrere Programmiersprachen, insbesondere Java, Python und C++.</p>
                      <p>Algorithmische Probleme zu lösen und Anwendungen zu entwickeln sind Aktivitäten, die ich in meinem Informatikstudium besonders schätze.</p>
+                     <div class="programming-languages">
+                        <h4>Programmiersprachen</h4>
+                        <img data-src="./styles/images/C++.jpeg" alt="Meine Programmiersprachen" class="lazy-load" />
+                        <noscript>
+                           <img src="./styles/images/C++.jpeg" alt="Meine Programmiersprachen" />
+                        </noscript>
+                     </div>
                   </div>
                </div>
                <button class="close-details" onclick="document.getElementById('programmation-de').style.display='none'; document.querySelector('[aria-controls=\'programmation-de\']').setAttribute('aria-expanded', 'false');" aria-label="Programmierung Details schließen">Schließen</button>
@@ -1024,7 +1047,6 @@
                </div>
                <button class="close-details" onclick="document.getElementById('developpement-web-de').style.display='none'; document.querySelector('[aria-controls=\'developpement-web-de\']').setAttribute('aria-expanded', 'false');" aria-label="Webentwicklung Details schließen">Schließen</button>
             </div>
-            <!-- Détails des intérêts sportifs en allemand -->
             <div id="athletisme-de" class="interest-details" role="region" aria-labelledby="athletisme-heading-de">
                <h3 id="athletisme-heading-de">Leichtathletik</h3>
                <div class="interest-detail-content">
@@ -1067,7 +1089,6 @@
                </div>
                <button class="close-details" onclick="document.getElementById('Taekwondo-de').style.display='none'; document.querySelector('[aria-controls=\'Taekwondo-de\']').setAttribute('aria-expanded', 'false');" aria-label="Taekwondo Details schließen">Schließen</button>
             </div>
-            <!-- Détails des intérêts artistiques en allemand -->
             <div id="theatre-de" class="interest-details" role="region" aria-labelledby="theatre-heading-de">
                <h3 id="theatre-heading-de">Theater</h3>
                <div class="interest-detail-content">
@@ -1110,7 +1131,6 @@
                </div>
                <button class="close-details" onclick="document.getElementById('art-de').style.display='none'; document.querySelector('[aria-controls=\'art-de\']').setAttribute('aria-expanded', 'false');" aria-label="Kunst Details schließen">Schließen</button>
             </div>
-            <!-- Détails des autres intérêts en allemand -->
             <div id="lecture-de" class="interest-details" role="region" aria-labelledby="lecture-heading-de">
                <h3 id="lecture-heading-de">Lesen</h3>
                <div class="interest-detail-content">
@@ -1184,6 +1204,18 @@
          </section>
       </main>
       <footer>
+         <div class="social-links">
+            <a href="https://github.com/" class="social-link" target="_blank" rel="noopener" aria-label="GitHub">
+               <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 0C5.37 0 0 5.37 0 12C0 17.31 3.435 21.795 8.205 23.385C8.805 23.49 9.03 23.13 9.03 22.815C9.03 22.53 9.015 21.585 9.015 20.58C6 21.135 5.22 19.845 4.98 19.17C4.845 18.825 4.26 17.76 3.75 17.475C3.33 17.25 2.73 16.695 3.735 16.68C4.68 16.665 5.355 17.55 5.58 17.91C6.66 19.725 8.385 19.215 9.075 18.9C9.18 18.12 9.495 17.595 9.84 17.295C7.17 16.995 4.38 15.96 4.38 11.37C4.38 10.065 4.845 8.985 5.61 8.145C5.49 7.845 5.07 6.615 5.73 4.965C5.73 4.965 6.735 4.65 9.03 6.195C9.99 5.925 11.01 5.79 12.03 5.79C13.05 5.79 14.07 5.925 15.03 6.195C17.325 4.635 18.33 4.965 18.33 4.965C18.99 6.615 18.57 7.845 18.45 8.145C19.215 8.985 19.68 10.05 19.68 11.37C19.68 15.975 16.875 16.995 14.205 17.295C14.64 17.67 15.015 18.39 15.015 19.515C15.015 21.12 15 22.41 15 22.815C15 23.13 15.225 23.505 15.825 23.385C18.2072 22.5807 20.2772 21.0497 21.7437 19.0074C23.2101 16.965 23.9993 14.5143 24 12C24 5.37 18.63 0 12 0Z" />
+               </svg>
+            </a>
+            <a href="https://linkedin.com/" class="social-link" target="_blank" rel="noopener" aria-label="LinkedIn">
+               <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M19 0H5C2.239 0 0 2.239 0 5V19C0 21.761 2.239 24 5 24H19C21.762 24 24 21.761 24 19V5C24 2.239 21.762 0 19 0ZM8 19H5V8H8V19ZM6.5 6.732C5.534 6.732 4.75 5.942 4.75 4.968C4.75 3.994 5.534 3.204 6.5 3.204C7.466 3.204 8.25 3.994 8.25 4.968C8.25 5.942 7.467 6.732 6.5 6.732ZM20 19H17V13.396C17 10.028 13 10.283 13 13.396V19H10V8H13V9.765C14.396 7.179 20 6.988 20 12.241V19Z" />
+               </svg>
+            </a>
+         </div>
          <p>© 2024 Christelle Vanessa Soubeiga – Tous droits réservés</p>
       </footer>
    </body>

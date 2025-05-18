@@ -1,12 +1,16 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" class="no-js">
    <head>
       <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="description" content="Portfolio de Christelle Vanessa SOUBEIGA, étudiante en BUT Informatique à l'IUT d'Orsay">
+      <meta name="description" content="Portfolio de Christelle Vanessa SOUBEIGA, étudiante en BUT Informatique à l'IUT d'Orsay, spécialisée en cybersécurité et développement">
+      <meta name="theme-color" content="#2c3e50">
+      <meta name="color-scheme" content="light dark">
       <title>Présentation – Christelle Vanessa SOUBEIGA</title>
+      
+      <!-- Préchargement des ressources critiques -->
       <link rel="preload" href="./styles/index.css" as="style">
-      <link rel="preload" href="./styles/images/avatar-christelle.png" as="image">
+      <link rel="preload" href="./styles/images/avatar-christelle.png" as="image" fetchpriority="high">
       <link rel="stylesheet" href="./styles/index.css" />
       <link rel="stylesheet" href="./styles/presentation.css" />
       <link rel="stylesheet" href="./styles/flexbox_101_nav.css" />
@@ -15,53 +19,608 @@
       <link rel="stylesheet" href="./styles/formation.css" />
       <link rel="stylesheet" href="./styles/projet.css" />
       <link rel="stylesheet" href="./styles/ambition.css" />
+      
+      <!-- Importation de polices Google avec attributs de performance -->
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap">
+      
+      <!-- Microdonnées pour améliorer le SEO -->
+      <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Christelle Vanessa SOUBEIGA",
+        "url": "https://christelle-soubeiga.fr",
+        "image": "./styles/images/avatar-christelle.png",
+        "jobTitle": "Étudiante en Informatique",
+        "worksFor": {
+          "@type": "Organization",
+          "name": "IUT d'Orsay"
+        },
+        "description": "Étudiante en BUT Informatique spécialisée en cybersécurité et développement",
+        "knowsAbout": ["Cybersécurité", "Développement Informatique", "Programmation"]
+      }
+      </script>
+      
+      <!-- Script pour détecter et réactiver JavaScript -->
+      <script>document.documentElement.classList.remove('no-js');</script>
+      
+      <!-- Script pour la gestion des langues et animations -->
       <script>
+         // Fonction pour changer de langue avec transition fluide
          function setLanguage(lang) {
-           document.querySelectorAll(".lang").forEach(el => el.style.display = "none");
-           document.querySelectorAll(".lang." + lang).forEach(el => el.style.display = "block");
+           // Masquer toutes les sections linguistiques avec transition
+           document.querySelectorAll(".lang").forEach(el => {
+             el.style.opacity = "0";
+             setTimeout(() => {
+               el.style.display = "none";
+             }, 300);
+           });
+           
+           // Afficher les sections dans la langue sélectionnée avec transition
+           setTimeout(() => {
+             document.querySelectorAll(".lang." + lang).forEach(el => {
+               el.style.display = "block";
+               setTimeout(() => {
+                 el.style.opacity = "1";
+               }, 50);
+             });
+           }, 350);
          
+           // Sauvegarder la préférence de langue
            localStorage.setItem('preferredLanguage', lang);
          
+           // Mettre à jour le titre de la page
            const pageTitles = {
-         	'fr': 'Présentation – Christelle Vanessa SOUBEIGA',
-         	'en': 'Introduction – Christelle Vanessa SOUBEIGA',
-         	'de': 'Vorstellung – Christelle Vanessa SOUBEIGA'
+             'fr': 'Présentation – Christelle Vanessa SOUBEIGA',
+             'en': 'Introduction – Christelle Vanessa SOUBEIGA',
+             'de': 'Vorstellung – Christelle Vanessa SOUBEIGA'
            };
          
            if (pageTitles[lang]) {
-         	document.title = pageTitles[lang];
+             document.title = pageTitles[lang];
            }
          
+           // Mettre à jour l'apparence des boutons de langue
            document.querySelectorAll('.language-buttons button').forEach(button => {
-         	if (button.getAttribute('onclick').includes(`'${lang}'`)) {
-         	  button.classList.add('active-lang');
-         	} else {
-         	  button.classList.remove('active-lang');
-         	}
+             if (button.getAttribute('onclick').includes(`'${lang}'`)) {
+               button.classList.add('active-lang');
+             } else {
+               button.classList.remove('active-lang');
+             }
            });
+           
+           // Mettre à jour l'audio actif si en lecture
+           stopAllAudio();
+           
+           // Mise à jour de l'URL sans recharger la page
+           const url = new URL(window.location);
+           url.searchParams.set('lang', lang);
+           window.history.replaceState({}, '', url);
+           
+           // Mise à jour des attributs lang du document
+           document.documentElement.setAttribute('lang', lang);
+           
+           // Annoncer le changement de langue pour les lecteurs d'écran
+           announce(`Langue changée en ${lang === 'fr' ? 'Français' : lang === 'en' ? 'Anglais' : 'Allemand'}`);
          }
          
+         // Fonction pour annoncer aux lecteurs d'écran
+         function announce(message) {
+           const announcer = document.getElementById('announcer') || (() => {
+             const el = document.createElement('div');
+             el.id = 'announcer';
+             el.setAttribute('aria-live', 'polite');
+             el.setAttribute('class', 'sr-only');
+             document.body.appendChild(el);
+             return el;
+           })();
+           
+           announcer.textContent = message;
+           
+           // Nettoyer après l'annonce
+           setTimeout(() => {
+             announcer.textContent = '';
+           }, 1000);
+         }
+         
+         // Fonction pour lire l'audio de bienvenue dans la langue spécifiée
+         function playWelcomeAudio(lang) {
+           stopAllAudio(); // Arrêter tous les autres audios
+           
+           const audioElement = document.getElementById(`audio-${lang}`);
+           if (!audioElement) return;
+           
+           // Mettre à jour l'apparence des boutons
+           document.querySelectorAll('.audio-button').forEach(button => {
+             button.classList.remove('playing');
+           });
+           
+           const button = document.getElementById(`play-btn-${lang}`);
+           if (button) {
+             button.classList.add('playing');
+             button.innerHTML = `<span class="audio-icon" aria-hidden="true">⏸</span> ${button.getAttribute('data-pause-text')}`;
+             button.setAttribute('aria-label', `Pause ${button.getAttribute('data-pause-text')}`);
+           }
+           
+           // Ajouter une animation à l'avatar
+           document.querySelector('.avatar').classList.add('pulsate');
+           
+           // Lire l'audio avec gestion des erreurs
+           audioElement.play().catch(e => {
+             console.warn("Impossible de lire l'audio:", e);
+             resetAudioInterface(lang);
+             
+             // Notifier l'utilisateur de l'erreur
+             announce("Erreur de lecture audio. Vérifiez que votre appareil n'est pas en mode silencieux.");
+           });
+           
+           // Réinitialiser l'interface lorsque l'audio est terminé
+           audioElement.onended = function() {
+             resetAudioInterface(lang);
+           };
+         }
+         
+         // Fonction pour arrêter l'audio de bienvenue
+         function stopWelcomeAudio(lang) {
+           const audioElement = document.getElementById(`audio-${lang}`);
+           if (!audioElement) return;
+           
+           audioElement.pause();
+           audioElement.currentTime = 0;
+           
+           resetAudioInterface(lang);
+         }
+         
+         // Fonction pour arrêter tous les audios
+         function stopAllAudio() {
+           document.querySelectorAll('audio').forEach(audio => {
+             audio.pause();
+             audio.currentTime = 0;
+           });
+           
+           // Réinitialiser tous les boutons et l'avatar
+           document.querySelectorAll('.audio-button').forEach(button => {
+             button.classList.remove('playing');
+             const playText = button.getAttribute('data-play-text');
+             if (playText) {
+               button.innerHTML = `<span class="audio-icon" aria-hidden="true">▶</span> ${playText}`;
+               button.setAttribute('aria-label', `Écouter ${playText}`);
+             }
+           });
+           
+           document.querySelector('.avatar').classList.remove('pulsate');
+         }
+         
+         // Fonction pour réinitialiser l'interface audio
+         function resetAudioInterface(lang) {
+           const button = document.getElementById(`play-btn-${lang}`);
+           if (button) {
+             button.classList.remove('playing');
+             const playText = button.getAttribute('data-play-text');
+             button.innerHTML = `<span class="audio-icon" aria-hidden="true">▶</span> ${playText}`;
+             button.setAttribute('aria-label', `Écouter ${playText}`);
+           }
+           
+           document.querySelector('.avatar').classList.remove('pulsate');
+         }
+         
+         // Fonction pour basculer la lecture/pause de l'audio
+         function toggleAudio(lang) {
+           const audioElement = document.getElementById(`audio-${lang}`);
+           if (!audioElement) return;
+           
+           if (audioElement.paused) {
+             playWelcomeAudio(lang);
+           } else {
+             stopWelcomeAudio(lang);
+           }
+         }
+         
+         // Détection du mode sombre préféré
+         function setupDarkModeDetection() {
+           const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+           const setDarkModeClass = (isDark) => {
+             if (isDark) {
+               document.documentElement.classList.add('dark-mode');
+               document.querySelector('meta[name="theme-color"]').setAttribute('content', '#1a1a1a');
+             } else {
+               document.documentElement.classList.remove('dark-mode');
+               document.querySelector('meta[name="theme-color"]').setAttribute('content', '#2c3e50');
+             }
+           };
+           
+           // Configurer la classe initiale
+           setDarkModeClass(darkModeMediaQuery.matches);
+           
+           // Écouter les changements
+           darkModeMediaQuery.addEventListener('change', (e) => {
+             setDarkModeClass(e.matches);
+           });
+           
+           // Ajouter un bouton de basculement mode clair/sombre
+           addDarkModeToggle();
+         }
+         
+         // Ajouter un bouton de basculement pour le mode sombre
+         function addDarkModeToggle() {
+           const toggle = document.createElement('button');
+           toggle.id = 'dark-mode-toggle';
+           toggle.className = 'theme-toggle';
+           toggle.setAttribute('aria-label', 'Basculer entre mode clair et sombre');
+           toggle.innerHTML = '<span class="light-icon">☀️</span><span class="dark-icon">🌙</span>';
+           
+           toggle.addEventListener('click', () => {
+             document.documentElement.classList.toggle('dark-mode');
+             const isDark = document.documentElement.classList.contains('dark-mode');
+             
+             // Mettre à jour la couleur du thème
+             document.querySelector('meta[name="theme-color"]').setAttribute(
+               'content', 
+               isDark ? '#1a1a1a' : '#2c3e50'
+             );
+             
+             // Sauvegarder la préférence
+             localStorage.setItem('darkMode', isDark ? 'true' : 'false');
+             
+             // Annoncer le changement pour les lecteurs d'écran
+             announce(`Mode ${isDark ? 'sombre' : 'clair'} activé`);
+           });
+           
+           // Appliquer la préférence sauvegardée
+           const savedDarkMode = localStorage.getItem('darkMode');
+           if (savedDarkMode) {
+             const isDark = savedDarkMode === 'true';
+             document.documentElement.classList.toggle('dark-mode', isDark);
+             document.querySelector('meta[name="theme-color"]').setAttribute(
+               'content', 
+               isDark ? '#1a1a1a' : '#2c3e50'
+             );
+           }
+           
+           document.body.appendChild(toggle);
+         }
+         
+         // Optimisation performance des images
+         function setupLazyLoading() {
+           if ('loading' in HTMLImageElement.prototype) {
+             // Le navigateur supporte nativement lazy loading
+             document.querySelectorAll('img[loading="lazy"]').forEach(img => {
+               // Assurez-vous que les dimensions sont définies pour éviter les changements de mise en page
+               if (!img.hasAttribute('width') && !img.hasAttribute('height') && img.src) {
+                 img.style.aspectRatio = 'auto';
+               }
+             });
+           } else {
+             // Fallback pour les navigateurs qui ne supportent pas le lazy loading
+             const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+             
+             if ('IntersectionObserver' in window) {
+               const imageObserver = new IntersectionObserver((entries) => {
+                 entries.forEach(entry => {
+                   if (entry.isIntersecting) {
+                     const img = entry.target;
+                     if (img.dataset.src) {
+                       img.src = img.dataset.src;
+                       img.removeAttribute('data-src');
+                     }
+                     imageObserver.unobserve(img);
+                   }
+                 });
+               });
+               
+               lazyImages.forEach(img => {
+                 if (!img.dataset.src && img.src) {
+                   img.dataset.src = img.src;
+                   // Une image de substitution très légère
+                   img.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 150"%3E%3C/svg%3E';
+                 }
+                 imageObserver.observe(img);
+               });
+             }
+           }
+         }
+         
+         // Gérer les connexions réseau lentes
+         function setupConnectionAwareness() {
+           if ('connection' in navigator) {
+             if (navigator.connection.saveData) {
+               // Mode économie de données activé
+               document.documentElement.classList.add('save-data');
+               console.log('Mode économie de données détecté. Optimisation du chargement des ressources.');
+             }
+             
+             function updateForConnectionType() {
+               const connection = navigator.connection;
+               const type = connection.effectiveType;
+               
+               // Ajouter une classe pour la qualité de connexion
+               document.documentElement.className = document.documentElement.className
+                 .replace(/connection-[^\s]+/g, '')
+                 .trim();
+               document.documentElement.classList.add(`connection-${type}`);
+               
+               console.log(`Qualité de connexion: ${type}`);
+               
+               // Adapter le site en fonction de la qualité de connexion
+               if (type === '2g' || type === 'slow-2g') {
+                 // Réduire la qualité des images, désactiver certaines animations, etc.
+                 document.documentElement.classList.add('low-bandwidth');
+               } else {
+                 document.documentElement.classList.remove('low-bandwidth');
+               }
+             }
+             
+             // Exécuter initialement
+             updateForConnectionType();
+             
+             // Écouter les changements
+             navigator.connection.addEventListener('change', updateForConnectionType);
+           }
+         }
+         
+         // Initialisation au chargement de la page
          window.addEventListener("DOMContentLoaded", () => {
+           // Gestion de la langue préférée
            const savedLanguage = localStorage.getItem('preferredLanguage') || 'fr';
            const urlParams = new URLSearchParams(window.location.search);
            const langParam = urlParams.get('lang');
            const currentLang = (langParam && ['fr', 'en', 'de'].includes(langParam)) ? langParam : savedLanguage;
          
+           // Définir la langue pour les lecteurs d'écran
+           document.documentElement.setAttribute('lang', currentLang);
+           
            setLanguage(currentLang);
          
            // Mise à jour dynamique des liens pour inclure ?lang=...
            document.querySelectorAll('nav a').forEach(link => {
-         	let href = link.getAttribute('href');
-         	if (href && href.endsWith('.html')) {
-         	  const newHref = href.split('?')[0] + `?lang=${currentLang}`;
-         	  link.setAttribute('href', newHref);
-         	}
+             let href = link.getAttribute('href');
+             if (href && href.endsWith('.html')) {
+               const newHref = href.split('?')[0] + `?lang=${currentLang}`;
+               link.setAttribute('href', newHref);
+             }
            });
+           
+           // Initialiser le bouton retour en haut
+           initBackToTopButton();
+           
+           // Animer l'entrée des éléments au défilement
+           initScrollAnimation();
+           
+           // Configuration du mode sombre
+           setupDarkModeDetection();
+           
+           // Optimiser les images
+           setupLazyLoading();
+           
+           // Gestion des connexions réseau
+           setupConnectionAwareness();
+           
+           // Initialiser les observateurs d'impression
+           setupPrintHandlers();
          });
+         
+         // Gestion améliorée de l'impression
+         function setupPrintHandlers() {
+           // Avant l'impression
+           window.addEventListener('beforeprint', () => {
+             // Afficher toutes les langues pour l'impression
+             document.querySelectorAll(".lang").forEach(el => {
+               el.style.display = "block";
+               el.style.opacity = "1";
+             });
+             
+             // Ajouter des sauts de page
+             document.querySelectorAll('section.lang').forEach((section, index) => {
+               if (index > 0) {
+                 section.style.pageBreakBefore = 'always';
+               }
+             });
+           });
+           
+           // Après l'impression
+           window.addEventListener('afterprint', () => {
+             // Restaurer l'état des langues
+             const currentLang = localStorage.getItem('preferredLanguage') || 'fr';
+             
+             document.querySelectorAll(".lang").forEach(el => {
+               if (el.classList.contains(currentLang)) {
+                 el.style.display = "block";
+                 el.style.opacity = "1";
+               } else {
+                 el.style.display = "none";
+                 el.style.opacity = "0";
+               }
+             });
+             
+             // Supprimer les sauts de page
+             document.querySelectorAll('section.lang').forEach(section => {
+               section.style.pageBreakBefore = '';
+             });
+           });
+         }
           
+        // Fonction pour initialiser le bouton retour en haut
+        function initBackToTopButton() {
+          // Créer le bouton
+          const backToTopButton = document.createElement('a');
+          backToTopButton.href = '#';
+          backToTopButton.className = 'back-to-top';
+          backToTopButton.innerHTML = '↑';
+          backToTopButton.setAttribute('aria-label', 'Retour en haut de la page');
+          document.body.appendChild(backToTopButton);
+          
+          // Optimisation de la détection du défilement avec throttling
+          let isScrolling = false;
+          let ticking = false;
+          
+          window.addEventListener('scroll', () => {
+            isScrolling = true;
+            
+            if (!ticking) {
+              window.requestAnimationFrame(() => {
+                if (isScrolling) {
+                  const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                  
+                  if (scrollTop > 300) {
+                    backToTopButton.classList.add('visible');
+                  } else {
+                    backToTopButton.classList.remove('visible');
+                  }
+                  
+                  isScrolling = false;
+                }
+                ticking = false;
+              });
+              
+              ticking = true;
+            }
+          }, { passive: true });
+          
+          // Gérer le clic sur le bouton avec un défilement progressif
+          backToTopButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            const scrollToTop = () => {
+              const position = document.documentElement.scrollTop || document.body.scrollTop;
+              if (position > 0) {
+                window.requestAnimationFrame(scrollToTop);
+                window.scrollTo(0, position - position / 8);
+              }
+            };
+            
+            // Utiliser scrollBehavior si supporté, sinon animation personnalisée
+            if ('scrollBehavior' in document.documentElement.style) {
+              window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+              });
+            } else {
+              scrollToTop();
+            }
+          });
+        }
+        
+        // Fonction pour initialiser les animations au défilement
+        function initScrollAnimation() {
+          if ('IntersectionObserver' in window) {
+            const elements = document.querySelectorAll('.bio-card, .visual-item, .welcome-section, .quote-box');
+            
+            const observer = new IntersectionObserver((entries) => {
+              entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                  // Ajouter un délai aléatoire pour l'effet cascade
+                  const delay = Math.random() * 200;
+                  setTimeout(() => {
+                    entry.target.classList.add('animated');
+                  }, delay);
+                  observer.unobserve(entry.target);
+                }
+              });
+            }, { threshold: 0.1, rootMargin: '0px 0px 50px 0px' });
+            
+            elements.forEach(element => {
+              element.classList.add('to-animate');
+              observer.observe(element);
+            });
+          }
+        }
       </script>
+      
+      <style>
+        /* Styles critiques inlined pour améliorer le First Contentful Paint */
+        .sr-only {
+          position: absolute;
+          width: 1px;
+          height: 1px;
+          padding: 0;
+          margin: -1px;
+          overflow: hidden;
+          clip: rect(0, 0, 0, 0);
+          white-space: nowrap;
+          border: 0;
+        }
+        
+        .theme-toggle {
+          position: fixed;
+          top: 20px;
+          right: 20px;
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          border: none;
+          background-color: #f1c40f;
+          color: #2c3e50;
+          cursor: pointer;
+          z-index: 50;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+          transition: all 0.3s ease;
+        }
+        
+        .theme-toggle:hover {
+          transform: rotate(15deg);
+        }
+        
+        .light-icon, .dark-icon {
+          position: absolute;
+          transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        
+        .dark-mode .light-icon {
+          opacity: 0;
+          transform: rotate(90deg);
+        }
+        
+        .light-icon {
+          opacity: 1;
+        }
+        
+        .dark-mode .dark-icon {
+          opacity: 1;
+        }
+        
+        .dark-icon {
+          opacity: 0;
+          transform: rotate(-90deg);
+        }
+        
+        .dark-mode .dark-icon {
+          transform: rotate(0);
+        }
+        
+        /* Fallback pour No-JS */
+        .no-js .to-animate {
+          opacity: 1 !important;
+          transform: none !important;
+        }
+        
+        .no-js .lang {
+          display: block !important;
+          opacity: 1 !important;
+        }
+        
+        /* Optimisation pour les connexions lentes */
+        .low-bandwidth .presentation-visuals {
+          grid-template-columns: 1fr !important;
+        }
+        
+        .low-bandwidth img {
+          filter: none !important;
+        }
+        
+        .save-data audio {
+          display: none;
+        }
+      </style>
    </head>
    <body>
+      <!-- Élément invisible pour les lecteurs d'écran -->
+      <div id="announcer" aria-live="polite" class="sr-only"></div>
+      
       <a href="#main-content" class="skip-link">Passer au contenu principal</a>
       <header>
          <h1>Christelle Vanessa SOUBEIGA</h1>
@@ -83,48 +642,199 @@
       </nav>
       <main id="main-content">
          <section class="avatar-section">
-            <img class="avatar" src="./styles/images/avatar-christelle.png" alt="Photo de Christelle Vanessa Soubeiga" onclick="document.getElementById('voix-christelle').play()" style="cursor:pointer;" />
-            <audio id="voix-christelle" preload="auto">
-               <source src="./styles/audio/audio.mp3" type="audio/mpeg">
+            <div class="avatar-container">
+               <img class="avatar" src="./styles/images/avatar-christelle.png" alt="Photo de Christelle Vanessa Soubeiga" width="200" height="200" loading="eager" fetchpriority="high" />
+            </div>
+            
+            <audio id="audio-fr" preload="metadata">
+               <source src="./styles/audio/audio-fr.mp3" type="audio/mpeg">
                Votre navigateur ne supporte pas la lecture audio.
             </audio>
-            <p class="lang fr">Cliquez sur mon avatar pour m'entendre vous souhaiter la bienvenue ! 😊</p>
-            <p class="lang en">Click on my avatar to hear me welcome you! 😊</p>
-            <p class="lang de">Klicken Sie auf meinen Avatar, um zu hören, wie ich Sie willkommen heiße! 😊</p>
+            
+            <audio id="audio-en" preload="metadata">
+               <source src="./styles/audio/audio-en.mp3" type="audio/mpeg">
+               Your browser does not support audio playback.
+            </audio>
+            
+            <audio id="audio-de" preload="metadata">
+               <source src="./styles/audio/audio-de.mp3" type="audio/mpeg">
+               Ihr Browser unterstützt keine Audiowiedergabe.
+            </audio>
+            
+            <div class="audio-controls">
+               <button id="play-btn-fr" class="audio-button" onclick="toggleAudio('fr')" 
+                     data-play-text="Écouter" data-pause-text="Pause" aria-label="Écouter présentation en français">
+                  <span class="audio-icon" aria-hidden="true">▶</span> Écouter
+                  <span class="audio-language-indicator">FR</span>
+               </button>
+               
+               <button id="play-btn-en" class="audio-button" onclick="toggleAudio('en')"
+                     data-play-text="Listen" data-pause-text="Pause" aria-label="Listen to presentation in English">
+                  <span class="audio-icon" aria-hidden="true">▶</span> Listen
+                  <span class="audio-language-indicator">EN</span>
+               </button>
+               
+               <button id="play-btn-de" class="audio-button" onclick="toggleAudio('de')"
+                     data-play-text="Hören" data-pause-text="Pause" aria-label="Präsentation auf Deutsch anhören">
+                  <span class="audio-icon" aria-hidden="true">▶</span> Hören
+                  <span class="audio-language-indicator">DE</span>
+               </button>
+            </div>
          </section>
+         
          <section class="lang fr">
-            <h2 class="message">Bonjour ! Je suis SOUBEIGA Christelle Vanessa 👋</h2>
-            <p>Étudiante passionnée par :</p>
-            <div class="presentation-visuals">
-               <img src="./styles/images/code.png" alt="Développement logiciel" title="Développement logiciel">
-               <img src="./styles/images/security.png" alt="Cybersécurité" title="Cybersécurité">
-               <img src="./styles/images/teamwork.png" alt="Travail en équipe" title="Travail en équipe">
+            <div class="welcome-section">
+               <h2 class="message">Bonjour ! Je suis SOUBEIGA Christelle Vanessa 👋</h2>
+               <p>Étudiante passionnée par l'informatique à l'IUT d'Orsay, je me spécialise dans le développement et la cybersécurité. Je combine rigueur technique et créativité pour concevoir des solutions efficaces et sécurisées.</p>
+               
+               <div class="presentation-visuals">
+                  <div class="visual-item" data-category="development">
+                     <img src="./styles/images/code.png" alt="Développement logiciel" title="Développement logiciel" width="120" height="120" loading="lazy">
+                     <h3>Développement</h3>
+                     <p>J'aime créer des applications et résoudre des problèmes par le code.</p>
+                  </div>
+                  
+                  <div class="visual-item" data-category="security">
+                     <img src="./styles/images/security.png" alt="Cybersécurité" title="Cybersécurité" width="120" height="120" loading="lazy">
+                     <h3>Cybersécurité</h3>
+                     <p>Passionnée par la protection des systèmes et des données.</p>
+                  </div>
+                  
+                  <div class="visual-item" data-category="team">
+                     <img src="./styles/images/teamwork.png" alt="Travail en équipe" title="Travail en équipe" width="120" height="120" loading="lazy">
+                     <h3>Collaboration</h3>
+                     <p>J'apprécie le travail en équipe et les projets collectifs.</p>
+                  </div>
+               </div>
             </div>
-            <p>Curieuse, rigoureuse et motivée, je m'investis dans mes projets avec détermination.</p>
+            
+            <div class="bio-grid">
+               <div class="bio-card">
+                  <h3>À propos de moi</h3>
+                  <p>Je suis une étudiante en informatique passionnée par les technologies et la résolution de problèmes. Mon parcours entre l'Afrique et l'Europe m'a donné une perspective unique sur les défis technologiques globaux.</p>
+                  <p>Curieuse, rigoureuse et motivée, je m'investis dans mes projets avec détermination et créativité, toujours à la recherche de solutions innovantes.</p>
+               </div>
+               
+            <div class="quote-box">
+               <blockquote>
+                  <p>"Le monde numérique offre d'infinies possibilités, mais c'est la façon dont nous les exploitons avec responsabilité qui détermine notre impact positif sur la société."</p>
+                  <cite>Ma philosophie personnelle</cite>
+               </blockquote>
+            </div>
+            
+            <div class="cta-container">
+               <a href="./CONTACT.html?lang=fr" class="cta-button">Me contacter</a>
+            </div>
          </section>
+         
          <section class="lang en">
-            <h2 class="message">Hello! I'm Christelle Vanessa SOUBEIGA 👋</h2>
-            <p>A passionate student in:</p>
-            <div class="presentation-visuals">
-               <img src="./styles/images/code.png" alt="Software Development" title="Software Development">
-               <img src="./styles/images/security.png" alt="Cybersecurity" title="Cybersecurity">
-               <img src="./styles/images/teamwork.png" alt="Teamwork" title="Teamwork">
+            <div class="welcome-section">
+               <h2 class="message">Hello! I'm Christelle Vanessa SOUBEIGA 👋</h2>
+               <p>A passionate computer science student at IUT d'Orsay, specializing in development and cybersecurity. I combine technical rigor and creativity to design efficient and secure solutions.</p>
+               
+               <div class="presentation-visuals">
+                  <div class="visual-item" data-category="development">
+                     <img src="./styles/images/code.png" alt="Software Development" title="Software Development" width="120" height="120" loading="lazy">
+                     <h3>Development</h3>
+                     <p>I enjoy creating applications and solving problems through code.</p>
+                  </div>
+                  
+                  <div class="visual-item" data-category="security">
+                     <img src="./styles/images/security.png" alt="Cybersecurity" title="Cybersecurity" width="120" height="120" loading="lazy">
+                     <h3>Cybersecurity</h3>
+                     <p>Passionate about protecting systems and data.</p>
+                  </div>
+                  
+                  <div class="visual-item" data-category="team">
+                     <img src="./styles/images/teamwork.png" alt="Teamwork" title="Teamwork" width="120" height="120" loading="lazy">
+                     <h3>Collaboration</h3>
+                     <p>I appreciate teamwork and collective projects.</p>
+                  </div>
+               </div>
             </div>
-            <p>Curious, rigorous and motivated, I am fully committed to my projects.</p>
+            
+            <div class="bio-grid">
+               <div class="bio-card">
+                  <h3>About Me</h3>
+                  <p>I am a computer science student passionate about technology and problem-solving. My journey between Africa and Europe has given me a unique perspective on global technological challenges.</p>
+                  <p>Curious, rigorous, and motivated, I invest in my projects with determination and creativity, always looking for innovative solutions.</p>
+               </div>
+            </div>
+            
+            <div class="quote-box">
+               <blockquote>
+                  <p>"The digital world offers infinite possibilities, but it's how we responsibly harness them that determines our positive impact on society."</p>
+                  <cite>My personal philosophy</cite>
+               </blockquote>
+            </div>
+            
+            <div class="cta-container">
+               <a href="./CONTACT.html?lang=en" class="cta-button">Contact Me</a>
+            </div>
          </section>
+         
          <section class="lang de">
-            <h2 class="message">Hallo! Ich bin Christelle Vanessa SOUBEIGA 👋</h2>
-            <p>Eine leidenschaftliche Studentin in:</p>
-            <div class="presentation-visuals">
-               <img src="./styles/images/code.png" alt="Softwareentwicklung" title="Softwareentwicklung">
-               <img src="./styles/images/security.png" alt="Cybersicherheit" title="Cybersicherheit">
-               <img src="./styles/images/teamwork.png" alt="Teamarbeit" title="Teamarbeit">
+            <div class="welcome-section">
+               <h2 class="message">Hallo! Ich bin Christelle Vanessa SOUBEIGA 👋</h2>
+               <p>Eine leidenschaftliche Informatikstudentin an der IUT d'Orsay, spezialisiert auf Entwicklung und Cybersicherheit. Ich kombiniere technische Präzision und Kreativität, um effiziente und sichere Lösungen zu konzipieren.</p>
+               
+               <div class="presentation-visuals">
+                  <div class="visual-item" data-category="development">
+                     <img src="./styles/images/code.png" alt="Softwareentwicklung" title="Softwareentwicklung" width="120" height="120" loading="lazy">
+                     <h3>Entwicklung</h3>
+                     <p>Ich entwickle gerne Anwendungen und löse Probleme durch Code.</p>
+                  </div>
+                  
+                  <div class="visual-item" data-category="security">
+                     <img src="./styles/images/security.png" alt="Cybersicherheit" title="Cybersicherheit" width="120" height="120" loading="lazy">
+                     <h3>Cybersicherheit</h3>
+                     <p>Leidenschaftlich beim Schutz von Systemen und Daten.</p>
+                  </div>
+                  
+                  <div class="visual-item" data-category="team">
+                     <img src="./styles/images/teamwork.png" alt="Teamarbeit" title="Teamarbeit" width="120" height="120" loading="lazy">
+                     <h3>Zusammenarbeit</h3>
+                     <p>Ich schätze Teamarbeit und gemeinsame Projekte.</p>
+                  </div>
+               </div>
             </div>
-            <p>Neugierig, gewissenhaft und motiviert, engagiere ich mich voll und ganz in meinen Projekten.</p>
+            
+            <div class="bio-grid">
+               <div class="bio-card">
+                  <h3>Über mich</h3>
+                  <p>Ich bin eine Informatikstudentin mit Leidenschaft für Technologie und Problemlösung. Meine Reise zwischen Afrika und Europa hat mir eine einzigartige Perspektive auf globale technologische Herausforderungen gegeben.</p>
+                  <p>Neugierig, gewissenhaft und motiviert, investiere ich in meine Projekte mit Entschlossenheit und Kreativität, immer auf der Suche nach innovativen Lösungen.</p>
+               </div>
+            </div>
+            
+            <div class="quote-box">
+               <blockquote>
+                  <p>"Die digitale Welt bietet unendliche Möglichkeiten, aber es ist die Art und Weise, wie wir sie verantwortungsvoll nutzen, die unseren positiven Einfluss auf die Gesellschaft bestimmt."</p>
+                  <cite>Meine persönliche Philosophie</cite>
+               </blockquote>
+            </div>
+            
+            <div class="cta-container">
+               <a href="./CONTACT.html?lang=de" class="cta-button">Kontaktieren Sie mich</a>
+            </div>
          </section>
       </main>
       <footer>
+         <div class="social-links">
+            <a href="https://github.com/" class="social-link" target="_blank" rel="noopener" aria-label="GitHub">
+               <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M12 0C5.37 0 0 5.37 0 12C0 17.31 3.435 21.795 8.205 23.385C8.805 23.49 9.03 23.13 9.03 22.815C9.03 22.53 9.015 21.585 9.015 20.58C6 21.135 5.22 19.845 4.98 19.17C4.845 18.825 4.26 17.76 3.75 17.475C3.33 17.25 2.73 16.695 3.735 16.68C4.68 16.665 5.355 17.55 5.58 17.91C6.66 19.725 8.385 19.215 9.075 18.9C9.18 18.12 9.495 17.595 9.84 17.295C7.17 16.995 4.38 15.96 4.38 11.37C4.38 10.065 4.845 8.985 5.61 8.145C5.49 7.845 5.07 6.615 5.73 4.965C5.73 4.965 6.735 4.65 9.03 6.195C9.99 5.925 11.01 5.79 12.03 5.79C13.05 5.79 14.07 5.925 15.03 6.195C17.325 4.635 18.33 4.965 18.33 4.965C18.99 6.615 18.57 7.845 18.45 8.145C19.215 8.985 19.68 10.05 19.68 11.37C19.68 15.975 16.875 16.995 14.205 17.295C14.64 17.67 15.015 18.39 15.015 19.515C15.015 21.12 15 22.41 15 22.815C15 23.13 15.225 23.505 15.825 23.385C18.2072 22.5807 20.2772 21.0497 21.7437 19.0074C23.2101 16.965 23.9993 14.5143 24 12C24 5.37 18.63 0 12 0Z" />
+               </svg>
+            </a>
+            <a href="https://linkedin.com/" class="social-link" target="_blank" rel="noopener" aria-label="LinkedIn">
+               <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M19 0H5C2.239 0 0 2.239 0 5V19C0 21.761 2.239 24 5 24H19C21.762 24 24 21.761 24 19V5C24 2.239 21.762 0 19 0ZM8 19H5V8H8V19ZM6.5 6.732C5.534 6.732 4.75 5.942 4.75 4.968C4.75 3.994 5.534 3.204 6.5 3.204C7.466 3.204 8.25 3.994 8.25 4.968C8.25 5.942 7.467 6.732 6.5 6.732ZM20 19H17V13.396C17 10.028 13 10.283 13 13.396V19H10V8H13V9.765C14.396 7.179 20 6.988 20 12.241V19Z" />
+               </svg>
+            </a>
+         </div>
          <p>© 2024 Christelle Vanessa Soubeiga – Tous droits réservés</p>
       </footer>
+      
+      <!-- Aucun JavaScript externe n'est chargé ici pour éviter les requêtes bloquantes -->
    </body>
 </html>

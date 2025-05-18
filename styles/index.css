@@ -57,11 +57,14 @@ nav a {
   font-weight: bold;
   padding: 0.5em 1em;
   border-radius: 4px;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
+  will-change: transform, background-color;
 }
 
-nav a:hover {
-  background-color: #2c3e50;
+@media (hover: hover) {
+  nav a:hover {
+    background-color: #2c3e50;
+  }
 }
 
 nav a.ici, nav a.active {
@@ -91,11 +94,14 @@ main {
   background-color: #f1c40f;
   color: #2c3e50;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
+  will-change: transform, background-color;
 }
 
-.language-buttons button:hover {
-  background-color: #e1b90f;
+@media (hover: hover) {
+  .language-buttons button:hover {
+    background-color: #e1b90f;
+  }
 }
 
 .language-buttons button.active-lang {
@@ -103,6 +109,7 @@ main {
   color: #f1c40f;
   transform: scale(1.1);
   box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  z-index: 1;
 }
 
 .skip-link {
@@ -113,7 +120,7 @@ main {
   color: white;
   padding: 8px;
   z-index: 100;
-  transition: top 0.3s;
+  transition: all 0.3s ease;
 }
 
 .skip-link:focus {
@@ -191,8 +198,10 @@ a {
   text-decoration: none;
 }
 
-a:hover {
-  text-decoration: underline;
+@media (hover: hover) {
+  a:hover {
+    text-decoration: underline;
+  }
 }
 
 img {
@@ -213,11 +222,14 @@ img {
   height: auto;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  transition: transform 0.3s ease;
+  transition: all 0.3s ease;
+  will-change: transform;
 }
 
-.presentation-visuals img:hover {
-  transform: scale(1.05);
+@media (hover: hover) {
+  .presentation-visuals img:hover {
+    transform: scale(1.05);
+  }
 }
 
 footer {
@@ -237,8 +249,10 @@ footer a {
   text-decoration: none;
 }
 
-footer a:hover {
-  text-decoration: underline;
+@media (hover: hover) {
+  footer a:hover {
+    text-decoration: underline;
+  }
 }
 
 aside {
@@ -275,11 +289,14 @@ form button {
   border-radius: 5px;
   cursor: pointer;
   font-size: 1em;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
+  will-change: transform, background-color;
 }
 
-form button:hover {
-  background-color: #1a252f;
+@media (hover: hover) {
+  form button:hover {
+    background-color: #1a252f;
+  }
 }
 
 .map-container {
@@ -321,8 +338,10 @@ table tr:nth-child(even) {
   background-color: #f8f9fa;
 }
 
-table tr:hover {
-  background-color: #ecf0f1;
+@media (hover: hover) {
+  table tr:hover {
+    background-color: #ecf0f1;
+  }
 }
 
 .float-quote {
@@ -370,7 +389,8 @@ table tr:hover {
 .project-icon {
   font-size: 1.5em;
   color: #3498db;
-  transition: transform 0.3s ease;
+  transition: all 0.3s ease;
+  will-change: transform;
 }
 
 .project-item.active .project-icon {
@@ -416,12 +436,16 @@ table tr:hover {
   border-radius: 8px;
   box-shadow: 0 3px 8px rgba(0,0,0,0.1);
   overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: all 0.3s ease;
+  will-change: transform, box-shadow;
 }
 
-.experience-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+@media (hover: hover) {
+  .experience-card:hover {
+    transform: translate3d(0, -5px, 0);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+    z-index: 1;
+  }
 }
 
 .experience-header {
@@ -467,6 +491,7 @@ table tr:hover {
   text-align: right;
   width: 0; 
   transition: width 1s ease-in-out;
+  will-change: width;
 }
 
 .interests-grid {
@@ -481,25 +506,32 @@ table tr:hover {
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: all 0.3s ease;
   cursor: pointer;
   position: relative;
+  will-change: transform, box-shadow;
 }
 
-.interest-item:hover, .interest-item:focus {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+@media (hover: hover) {
+  .interest-item:hover, .interest-item:focus {
+    transform: translate3d(0, -5px, 0);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+    z-index: 1;
+  }
 }
 
 .interest-item img {
   width: 100%;
   height: 120px;
   object-fit: cover;
-  transition: transform 0.5s ease;
+  transition: all 0.5s ease;
+  will-change: transform;
 }
 
-.interest-item:hover img, .interest-item:focus img {
-  transform: scale(1.05);
+@media (hover: hover) {
+  .interest-item:hover img, .interest-item:focus img {
+    transform: scale(1.05);
+  }
 }
 
 .interest-item p {
@@ -594,11 +626,14 @@ img.lazy-load.loaded {
   cursor: pointer;
   font-weight: bold;
   margin-top: 15px;
-  transition: background-color 0.3s;
+  transition: all 0.3s ease;
+  will-change: background-color;
 }
 
-.close-details:hover {
-  background-color: #e1b90f;
+@media (hover: hover) {
+  .close-details:hover {
+    background-color: #e1b90f;
+  }
 }
 
 .form-group {
@@ -617,7 +652,7 @@ img.lazy-load.loaded {
   border: 1px solid #ddd;
   border-radius: 4px;
   font-size: 1em;
-  transition: border-color 0.3s, box-shadow 0.3s;
+  transition: all 0.3s ease;
 }
 
 .form-control:focus {
@@ -637,16 +672,19 @@ img.lazy-load.loaded {
   border-radius: 4px;
   cursor: pointer;
   font-size: 1em;
-  transition: background-color 0.3s, transform 0.2s;
+  transition: all 0.3s ease;
+  will-change: transform, background-color;
 }
 
-.btn-primary:hover {
-  background-color: #1a252f;
-  transform: translateY(-2px);
+@media (hover: hover) {
+  .btn-primary:hover {
+    background-color: #1a252f;
+    transform: translate3d(0, -2px, 0);
+  }
 }
 
 .btn-primary:active {
-  transform: translateY(0);
+  transform: translate3d(0, 0, 0);
 }
 
 .contact-card {
@@ -688,6 +726,17 @@ img.lazy-load.loaded {
 [dir="rtl"] .contact-icon {
   margin-right: 0;
   margin-left: 10px;
+}
+
+/* Media queries pour responsive design */
+@media (max-width: 992px) {
+  .experience-container {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+  
+  .interests-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  }
 }
 
 @media (max-width: 768px) {
@@ -772,6 +821,41 @@ img.lazy-load.loaded {
   }
 }
 
+@media (max-width: 640px) {
+  table, thead, tbody, th, td, tr {
+    display: block;
+  }
+
+  thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+  tr {
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+  }
+
+  td {
+    border: none;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    padding-left: 50%;
+  }
+
+  td:before {
+    position: absolute;
+    top: 12px;
+    left: 6px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+    font-weight: bold;
+    content: attr(data-label);
+  }
+}
+
 @media (max-width: 480px) {
   .language-buttons button {
     margin: 0 2px;
@@ -822,40 +906,5 @@ img.lazy-load.loaded {
   .timeline-content {
     width: 85%;
     margin-left: 30px;
-  }
-}
-
-@media (max-width: 640px) {
-  table, thead, tbody, th, td, tr {
-    display: block;
-  }
-
-  thead tr {
-    position: absolute;
-    top: -9999px;
-    left: -9999px;
-  }
-
-  tr {
-    border: 1px solid #ddd;
-    margin-bottom: 10px;
-  }
-
-  td {
-    border: none;
-    border-bottom: 1px solid #eee;
-    position: relative;
-    padding-left: 50%;
-  }
-
-  td:before {
-    position: absolute;
-    top: 12px;
-    left: 6px;
-    width: 45%;
-    padding-right: 10px;
-    white-space: nowrap;
-    font-weight: bold;
-    content: attr(data-label);
   }
 }
