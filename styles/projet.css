@@ -55,9 +55,13 @@
       font-weight: bold;
       transition: transform 0.3s ease;
     }
-    
+   
     .project-item.active .project-icon {
       transform: rotate(45deg);
+    }
+    
+    .project-item.active .project-details {
+      display: block;
     }
     
     .project-tech-list {
