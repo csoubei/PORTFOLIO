@@ -3,7 +3,7 @@
    <head>
       <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Expériences & Projets – Christelle Vanessa SOUBEIGA</title>
+      <title>Expériences &amp; Projets – Christelle Vanessa SOUBEIGA</title>
       <link rel="preload" href="./styles/index.css" as="style">
       <link rel="stylesheet" href="./styles/index.css" />
       <link rel="stylesheet" href="./styles/flexbox_101_nav.css" />
@@ -11,9 +11,6 @@
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
       <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
       <link rel="stylesheet" href="./styles/projet.css" />
-
-      
-
       <script>
         function setLanguage(lang) {
           document.querySelectorAll(".lang").forEach(el => el.style.display = "none");
@@ -21,16 +18,13 @@
           localStorage.setItem('preferredLanguage', lang);
           document.documentElement.setAttribute('lang', lang);
           document.querySelectorAll('.language-buttons button').forEach(btn =>
-            btn.classList.toggle('active-lang', btn.getAttribute('onclick').includes(`'${lang}'`))
-          );
+            btn.classList.toggle('active-lang', btn.getAttribute('onclick').includes("'"+lang+"'")));
         }
-
         function togglePanel(cardId, panelId) {
-          const card  = document.getElementById(cardId);
+          const card = document.getElementById(cardId);
           const panel = document.getElementById(panelId);
           if (!card || !panel) return;
           const isOpen = panel.classList.contains('visible');
-          // Ferme tout
           document.querySelectorAll('.formation-detail-panel.visible').forEach(p => p.classList.remove('visible'));
           document.querySelectorAll('.formation-card-new.active').forEach(c => c.classList.remove('active'));
           if (!isOpen) {
@@ -39,22 +33,19 @@
             setTimeout(() => panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
           }
         }
-
         function closePanel(panelId) {
           const panel = document.getElementById(panelId);
           if (panel) panel.classList.remove('visible');
           document.querySelectorAll('.formation-card-new.active').forEach(c => c.classList.remove('active'));
         }
-
         window.addEventListener("DOMContentLoaded", () => {
           const saved = localStorage.getItem('preferredLanguage') || 'fr';
           const param = new URLSearchParams(window.location.search).get('lang');
-          const lang  = (param && ['fr','en','de'].includes(param)) ? param : saved;
+          const lang = (param && ['fr','en','de'].includes(param)) ? param : saved;
           setLanguage(lang);
           document.querySelectorAll('nav a').forEach(link => {
             const href = link.getAttribute('href');
-            if (href?.includes('.html'))
-              link.setAttribute('href', `${href.split('?')[0]}?lang=${lang}`);
+            if (href?.includes('.html')) link.setAttribute('href', href.split('?')[0]+'?lang='+lang);
           });
         });
       </script>
@@ -73,414 +64,748 @@
       <nav class="flex-nav" aria-label="Navigation principale">
          <a href="./PRESENTATION.html">PRESENTATION</a>
          <a href="./FORMATION.html">FORMATIONS</a>
-         <a class="active" href="./EXPERIENCE-PROJET.html">EXPERIENCES & PROJETS</a>
+         <a class="active" href="./EXPERIENCE-PROJET.html">EXPERIENCES &amp; PROJETS</a>
          <a href="./COMPETENCES.html">COMPETENCES</a>
          <a href="./CENTRE-D'INTERET.html">CENTRES D'INTERETS</a>
          <a href="./AMBITION.html">AMBITIONS</a>
          <a href="./CONTACT.html">CONTACTS</a>
       </nav>
-
       <main id="main-content">
 
-      <!-- ════════════════════════════════ FRANÇAIS ════════════════════════════════ -->
       <div class="lang fr">
-
         <div class="projet-page-header">
           <h2>Projets <span>informatiques</span></h2>
           <p>Cliquez sur un projet pour découvrir les détails</p>
         </div>
-
-        <!-- ── GRILLE ── -->
         <div class="projets-grid">
 
-          <!-- Raspberry Pi -->
           <div id="card-raspi-fr" class="formation-card-new" tabindex="0" role="button"
                onclick="togglePanel('card-raspi-fr','panel-raspi-fr')"
                onkeypress="if(event.key==='Enter') togglePanel('card-raspi-fr','panel-raspi-fr')">
             <div class="card-image-wrap">
-              <img src="./styles/images/raspberry.jpeg" alt="Raspberry Pi" onerror="this.style.display='none'">
+              <img src="./styles/images/raspberry.jpeg" alt="Poste de développement – Raspberry Pi" onerror="this.style.display='none'">
               <div class="card-overlay"></div>
             </div>
             <div class="card-body">
               <div class="card-year">BUT 1ère année · S103</div>
               <div class="card-title">Poste de développement – Raspberry Pi</div>
               <div class="card-subtitle">Configuration système & base de données</div>
-              <div class="card-tags">
-                <span class="card-tag highlight">Linux</span>
-                <span class="card-tag">MariaDB</span>
-                <span class="card-tag">SQL</span>
-                <span class="card-tag">Administration</span>
-              </div>
+              <div class="card-tags"><span class="card-tag highlight">Linux</span><span class="card-tag">MariaDB</span><span class="card-tag">SQL</span><span class="card-tag">Administration</span></div>
             </div>
             <div class="card-footer-btn">
               <span>Voir les détails</span>
               <span class="arrow">↓</span>
             </div>
           </div>
-        <div id="panel-raspi-fr" class="formation-detail-panel grid-full-width">
-          <div class="detail-inner">
-            <div class="detail-header">
-              <h4> Poste de développement – Raspberry Pi (S103)</h4>
-              <div class="detail-header-actions">
-                <!-- Remplacez href="#" par votre lien GitHub quand prêt -->
-                <a href="#" class="btn-github soon" title="Bientôt sur GitHub">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-1.275-4.035-1.95-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-                  GitHub (bientôt)
-                </a>
-                <button class="btn-close" onclick="closePanel('panel-raspi-fr')">✕ Fermer</button>
-              </div>
-            </div>
-            <div class="detail-body">
-              <div class="detail-col">
-                <h5>Description</h5>
-                <ul class="detail-list">
-                  <li>Configuration complète d'un Raspberry Pi 400 comme poste de développement</li>
-                  <li>Installation et configuration du système d'exploitation Linux (Debian)</li>
-                  <li>Mise en place du SGBD MariaDB et création d'une base de données</li>
-                  <li>Tests et validation avec des scripts d'évaluation fournis</li>
-                  <li>Rédaction d'un rapport technique détaillé</li>
-                  <li><strong>Équipe :</strong> Mihary RAJAONARISON, Onitiana ANDRIAMIALISOA</li>
-                </ul>
-                <div class="detail-tags">
-                  <span class="detail-tag">Raspberry Pi</span>
-                  <span class="detail-tag">Linux</span>
-                  <span class="detail-tag">MariaDB</span>
-                  <span class="detail-tag">SQL</span>
-                  <span class="detail-tag">Administration système</span>
+
+          <div id="panel-raspi-fr" class="formation-detail-panel grid-full-width">
+            <div class="detail-inner">
+              <div class="detail-header">
+                <h4>Poste de développement – Raspberry Pi (S103)</h4>
+                <div class="detail-header-actions">
+                  <a href="#" class="btn-github soon"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-1.275-4.035-1.95-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg> GitHub (bientôt)</a>
+                  <button class="btn-close" onclick="closePanel('panel-raspi-fr')">✕ Fermer</button>
                 </div>
               </div>
-              <div class="detail-col">
-                <h5>Rapport</h5>
-                <a class="pdf-link" href="./styles/projets/Rapport projet S103.pdf" target="_blank" rel="noopener">
-                  📄 Télécharger le rapport S103
-                </a>
-                <iframe class="pdf-frame" src="./styles/projets/Rapport projet S103.pdf">
-                  <a href="./styles/projets/Rapport projet S103.pdf">Télécharger</a>
-                </iframe>
+              <div class="detail-body">
+                <div class="detail-col">
+                  <h5>Description</h5>
+                  <ul class="detail-list"><li>Configuration complète d'un Raspberry Pi 400 comme poste de développement</li><li>Installation et configuration du système d'exploitation Linux (Debian)</li><li>Mise en place du SGBD MariaDB et création d'une base de données</li><li>Tests et validation avec des scripts d'évaluation fournis</li><li>Rédaction d'un rapport technique détaillé</li><li><strong>Équipe :</strong> Mihary RAJAONARISON, Onitiana ANDRIAMIALISOA</li></ul>
+                  <div class="detail-tags"><span class="detail-tag">Raspberry Pi</span><span class="detail-tag">Linux</span><span class="detail-tag">MariaDB</span><span class="detail-tag">SQL</span><span class="detail-tag">Administration système</span></div>
+                </div>
+                <div class="detail-col">
+                  <h5>Rapport</h5>
+                  <a class="pdf-link" href="./styles/projets/Rapport projet S103.pdf" target="_blank" rel="noopener">📄 Télécharger le rapport S103</a><iframe class="pdf-frame" src="./styles/projets/Rapport projet S103.pdf"><a href="./styles/projets/Rapport projet S103.pdf">DL</a></iframe>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-          <!-- Mammiafore -->
           <div id="card-mammi-fr" class="formation-card-new" tabindex="0" role="button"
                onclick="togglePanel('card-mammi-fr','panel-mammi-fr')"
                onkeypress="if(event.key==='Enter') togglePanel('card-mammi-fr','panel-mammi-fr')">
             <div class="card-image-wrap">
-              <img src="./styles/images/mammiafore.jpg" alt="Base de données" onerror="this.style.display='none'">
+              <img src="./styles/images/mammiafore.jpg" alt="Base de données Mammiafore" onerror="this.style.display='none'">
               <div class="card-overlay"></div>
             </div>
             <div class="card-body">
               <div class="card-year">BUT 1ère année · Bases de données</div>
               <div class="card-title">Base de données Mammiafore</div>
               <div class="card-subtitle">Conception & modélisation relationnelle</div>
-              <div class="card-tags">
-                <span class="card-tag highlight">Oracle SQL</span>
-                <span class="card-tag">PL/SQL</span>
-                <span class="card-tag">Merise</span>
-                <span class="card-tag">MCD/MLD</span>
-              </div>
+              <div class="card-tags"><span class="card-tag highlight">Oracle SQL</span><span class="card-tag">PL/SQL</span><span class="card-tag">Merise</span><span class="card-tag">MCD/MLD</span></div>
             </div>
             <div class="card-footer-btn">
               <span>Voir les détails</span>
               <span class="arrow">↓</span>
             </div>
           </div>
-        <div id="panel-mammi-fr" class="formation-detail-panel grid-full-width">
-          <div class="detail-inner">
-            <div class="detail-header">
-              <h4> Base de données Mammiafore</h4>
-              <div class="detail-header-actions">
-                <a href="#" class="btn-github soon">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-1.275-4.035-1.95-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-                  GitHub (bientôt)
-                </a>
-                <button class="btn-close" onclick="closePanel('panel-mammi-fr')">✕ Fermer</button>
-              </div>
-            </div>
-            <div class="detail-body">
-              <div class="detail-col">
-                <h5>Description</h5>
-                <ul class="detail-list">
-                  <li>Modélisation complète MCD et MLD via la méthode Merise</li>
-                  <li>Développement de triggers PL/SQL pour l'automatisation des règles métier</li>
-                  <li>Analyse et mise en œuvre d'une stratégie d'indexation</li>
-                  <li>Gestion d'une base complexe de plus de 500 dossiers</li>
-                  <li>Réduction de 40% du temps de réponse des requêtes</li>
-                  <li><strong>Binôme :</strong> Miguel NONGNI</li>
-                </ul>
-                <div class="detail-tags">
-                  <span class="detail-tag">Oracle SQL</span>
-                  <span class="detail-tag">PL/SQL</span>
-                  <span class="detail-tag">Merise</span>
-                  <span class="detail-tag">PowerAMC</span>
-                  <span class="detail-tag">MCD / MLD</span>
+
+          <div id="panel-mammi-fr" class="formation-detail-panel grid-full-width">
+            <div class="detail-inner">
+              <div class="detail-header">
+                <h4>Base de données Mammiafore</h4>
+                <div class="detail-header-actions">
+                  <a href="#" class="btn-github soon"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-1.275-4.035-1.95-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg> GitHub (bientôt)</a>
+                  <button class="btn-close" onclick="closePanel('panel-mammi-fr')">✕ Fermer</button>
                 </div>
               </div>
-              <div class="detail-col">
-                <h5>Rapport</h5>
-                <a class="pdf-link" href="./styles/projets/rapport_nongni_soubeiga.pdf" target="_blank" rel="noopener">
-                  📄 Télécharger le rapport Mammiafore
-                </a>
-                <iframe class="pdf-frame" src="./styles/projets/rapport_nongni_soubeiga.pdf">
-                  <a href="./styles/projets/rapport_nongni_soubeiga.pdf">Télécharger</a>
-                </iframe>
+              <div class="detail-body">
+                <div class="detail-col">
+                  <h5>Description</h5>
+                  <ul class="detail-list"><li>Modélisation complète MCD et MLD via la méthode Merise</li><li>Développement de triggers PL/SQL pour l'automatisation des règles métier</li><li>Analyse et mise en œuvre d'une stratégie d'indexation</li><li>Gestion d'une base complexe de plus de 500 dossiers</li><li>Réduction de 40% du temps de réponse des requêtes</li><li><strong>Binôme :</strong> Miguel NONGNI</li></ul>
+                  <div class="detail-tags"><span class="detail-tag">Oracle SQL</span><span class="detail-tag">PL/SQL</span><span class="detail-tag">Merise</span><span class="detail-tag">PowerAMC</span><span class="detail-tag">MCD / MLD</span></div>
+                </div>
+                <div class="detail-col">
+                  <h5>Rapport</h5>
+                  <a class="pdf-link" href="./styles/projets/rapport_nongni_soubeiga.pdf" target="_blank" rel="noopener">📄 Télécharger le rapport Mammiafore</a><iframe class="pdf-frame" src="./styles/projets/rapport_nongni_soubeiga.pdf"><a href="./styles/projets/rapport_nongni_soubeiga.pdf">DL</a></iframe>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <!-- Jeu C++ -->
-
-          <!-- Jeu C++ -->
           <div id="card-game-fr" class="formation-card-new" tabindex="0" role="button"
                onclick="togglePanel('card-game-fr','panel-game-fr')"
                onkeypress="if(event.key==='Enter') togglePanel('card-game-fr','panel-game-fr')">
             <div class="card-image-wrap">
-              <img src="./styles/images/jeu.jpeg" alt="Jeu C++" onerror="this.style.display='none'">
+              <img src="./styles/images/jeu.jpeg" alt="Jeu 2D en C++" onerror="this.style.display='none'">
               <div class="card-overlay"></div>
             </div>
             <div class="card-body">
               <div class="card-year">BUT 1ère année · Développement</div>
               <div class="card-title">Jeu 2D en C++</div>
               <div class="card-subtitle">Développement avec la bibliothèque SDL2</div>
-              <div class="card-tags">
-                <span class="card-tag highlight">C++</span>
-                <span class="card-tag">SDL2</span>
-                <span class="card-tag">POO</span>
-              </div>
+              <div class="card-tags"><span class="card-tag highlight">C++</span><span class="card-tag">SDL2</span><span class="card-tag">POO</span></div>
             </div>
             <div class="card-footer-btn">
               <span>Voir les détails</span>
               <span class="arrow">↓</span>
             </div>
           </div>
-        <div id="panel-game-fr" class="formation-detail-panel grid-full-width">
-          <div class="detail-inner">
-            <div class="detail-header">
-              <h4> Jeu 2D en C++ avec SDL2</h4>
-              <div class="detail-header-actions">
-                <a href="#" class="btn-github soon">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-1.275-4.035-1.95-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-                  GitHub (bientôt)
-                </a>
-                <button class="btn-close" onclick="closePanel('panel-game-fr')">✕ Fermer</button>
-              </div>
-            </div>
-            <div class="detail-body">
-              <div class="detail-col">
-                <h5>Description</h5>
-                <ul class="detail-list">
-                  <li>Conception de l'architecture du jeu orienté objet en C++</li>
-                  <li>Implémentation des mécaniques de jeu et de la physique</li>
-                  <li>Gestion des événements clavier/souris et des collisions via SDL2</li>
-                  <li>Création de l'interface de jeu et des niveaux</li>
-                </ul>
-                <div class="detail-tags">
-                  <span class="detail-tag">C++</span>
-                  <span class="detail-tag">SDL2</span>
-                  <span class="detail-tag">POO</span>
+
+          <div id="panel-game-fr" class="formation-detail-panel grid-full-width">
+            <div class="detail-inner">
+              <div class="detail-header">
+                <h4>Jeu 2D en C++ avec SDL2</h4>
+                <div class="detail-header-actions">
+                  <a href="#" class="btn-github soon"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-1.275-4.035-1.95-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg> GitHub (bientôt)</a>
+                  <button class="btn-close" onclick="closePanel('panel-game-fr')">✕ Fermer</button>
                 </div>
               </div>
-              <div class="detail-col">
-                <h5>Aperçu</h5>
-                <img src="./styles/images/jeu.jpeg" alt="Aperçu du jeu"
-                     onerror="this.style.display='none'"
-                     style="width:100%;border-radius:8px;border:1px solid var(--border);">
-                <p style="font-size:.82rem;color:var(--muted);margin:.75rem 0 0;">
-                  Projet académique · BUT Informatique 1ère année
-                </p>
+              <div class="detail-body">
+                <div class="detail-col">
+                  <h5>Description</h5>
+                  <ul class="detail-list"><li>Conception de l'architecture du jeu orienté objet en C++</li><li>Implémentation des mécaniques de jeu et de la physique</li><li>Gestion des événements clavier/souris et des collisions via SDL2</li><li>Création de l'interface de jeu et des niveaux</li></ul>
+                  <div class="detail-tags"><span class="detail-tag">C++</span><span class="detail-tag">SDL2</span><span class="detail-tag">POO</span></div>
+                </div>
+                <div class="detail-col">
+                  <h5>Aperçu</h5>
+                  <img src="./styles/images/jeu.jpeg" alt="Projet académique · BUT Informatique 1ère année" onerror="this.style.display='none'" style="width:100%;border-radius:8px;border:1px solid var(--border);"><p style="font-size:.82rem;color:var(--muted);margin:.75rem 0 0;">Projet académique · BUT Informatique 1ère année</p>
+                </div>
               </div>
             </div>
+          </div>
+
+          <div id="card-cite-fr" class="formation-card-new" tabindex="0" role="button"
+               onclick="togglePanel('card-cite-fr','panel-cite-fr')"
+               onkeypress="if(event.key==='Enter') togglePanel('card-cite-fr','panel-cite-fr')">
+            <div class="card-image-wrap">
+              <div class="card-overlay"></div>
+            </div>
+            <div class="card-body">
+              <div class="card-year">BUT 1ère année · Java</div>
+              <div class="card-title">Gestion d'une cité universitaire</div>
+              <div class="card-subtitle">Application Java orientée objet en groupe</div>
+              <div class="card-tags"><span class="card-tag highlight">Java</span><span class="card-tag">POO</span><span class="card-tag">Travail en groupe</span></div>
+            </div>
+            <div class="card-footer-btn">
+              <span>Voir les détails</span>
+              <span class="arrow">↓</span>
+            </div>
+          </div>
+
+          <div id="panel-cite-fr" class="formation-detail-panel grid-full-width">
+            <div class="detail-inner">
+              <div class="detail-header">
+                <h4>Gestion d'une cité universitaire parisienne</h4>
+                <div class="detail-header-actions">
+                  <a href="#" class="btn-github soon"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-1.275-4.035-1.95-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg> GitHub (bientôt)</a>
+                  <button class="btn-close" onclick="closePanel('panel-cite-fr')">✕ Fermer</button>
+                </div>
+              </div>
+              <div class="detail-body">
+                <div class="detail-col">
+                  <h5>Description</h5>
+                  <ul class="detail-list"><li>Modélisation des entités (résidents, chambres, bâtiments)</li><li>Développement Java orienté objet — entrées/sorties résidents</li><li>Suivi de l'occupation et de la disponibilité des logements</li><li><strong>Travail en groupe</strong> de 3 personnes</li></ul>
+                  <div class="detail-tags"><span class="detail-tag">Java</span><span class="detail-tag">POO</span><span class="detail-tag">Travail en équipe</span></div>
+                </div>
+                <div class="detail-col">
+                  <h5>Sujet</h5>
+                  <a class="pdf-link" href="./styles/projets/SujetDuProjetConstitutiondeGroupe.pdf" target="_blank" rel="noopener">📄 Télécharger le sujet</a><iframe class="pdf-frame" src="./styles/projets/SujetDuProjetConstitutiondeGroupe.pdf"><a href="./styles/projets/SujetDuProjetConstitutiondeGroupe.pdf">DL</a></iframe>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="card-sae-fr" class="formation-card-new" tabindex="0" role="button"
+               onclick="togglePanel('card-sae-fr','panel-sae-fr')"
+               onkeypress="if(event.key==='Enter') togglePanel('card-sae-fr','panel-sae-fr')">
+            <div class="card-image-wrap">
+              <div class="card-overlay"></div>
+            </div>
+            <div class="card-body">
+              <div class="card-year">BUT 2ème année · SAE S3</div>
+              <div class="card-title">Plateforme de création de groupes TD/TP</div>
+              <div class="card-subtitle">Application web full-stack</div>
+              <div class="card-tags"><span class="card-tag highlight">Java · API REST</span><span class="card-tag">PHP · MVC</span><span class="card-tag">SQL</span><span class="card-tag">Algorithmique</span></div>
+            </div>
+            <div class="card-footer-btn">
+              <span>Voir les détails</span>
+              <span class="arrow">↓</span>
+            </div>
+          </div>
+
+          <div id="panel-sae-fr" class="formation-detail-panel grid-full-width">
+            <div class="detail-inner">
+              <div class="detail-header">
+                <h4>Plateforme de création de groupes TD/TP – SAE S3</h4>
+                <div class="detail-header-actions">
+                  <a href="#" class="btn-github soon"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-1.275-4.035-1.95-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg> GitHub (bientôt)</a>
+                  <button class="btn-close" onclick="closePanel('panel-sae-fr')">✕ Fermer</button>
+                </div>
+              </div>
+              <div class="detail-body">
+                <div class="detail-col">
+                  <h5>Description</h5>
+                  <ul class="detail-list"><li>Analyse des besoins pour 3 profils : responsables, enseignants, étudiants</li><li><strong>API REST en Java</strong> pour la communication front/back</li><li><strong>Site web PHP</strong> avec architecture MVC</li><li>Algorithme de répartition automatique selon critères configurables</li><li>Sondages, gestion des rôles, authentification sécurisée</li><li>Import/export CSV, interface de contrôle qualité en temps réel</li></ul>
+                  <div class="detail-tags"><span class="detail-tag">Java</span><span class="detail-tag">API REST</span><span class="detail-tag">PHP</span><span class="detail-tag">MVC</span><span class="detail-tag">SQL</span><span class="detail-tag">Algorithmique</span><span class="detail-tag">Sécurité</span></div>
+                </div>
+                <div class="detail-col">
+                  <h5>Sujet</h5>
+                  <a class="pdf-link" href="./styles/projets/SujetDuProjetConstitutiondeGroupe.pdf" target="_blank" rel="noopener">📄 Télécharger le sujet SAE S3</a><iframe class="pdf-frame" src="./styles/projets/SujetDuProjetConstitutiondeGroupe.pdf"><a href="./styles/projets/SujetDuProjetConstitutiondeGroupe.pdf">DL</a></iframe>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /projets-grid -->
+
+        <div class="section-title"> Autres expériences</div>
+        <div class="experience-grid">
+          <div class="exp-card">
+            <div class="card-image-wrap" style="height:120px;"><img src="./styles/images/aide.jpeg" alt="Aide-soignante" style="width:100%;height:100%;object-fit:cover;opacity:.8;"><div class="card-overlay"></div></div>
+            <div class="exp-head"><h3>Aide-soignante</h3><span class="exp-period">2018 – 2022</span></div>
+            <div class="exp-body"><p><strong>Infirmerie scolaire</strong></p><ul><li>Accueil et prise en charge des élèves malades ou blessés</li><li>Assistance aux infirmières pour les soins courants</li><li>Gestion administrative des dossiers médicaux</li></ul></div>
+          </div>
+          <div class="exp-card">
+            <div class="card-image-wrap" style="height:120px;"><img src="./styles/images/responsable.jpeg" alt="Responsable de groupe" style="width:100%;height:100%;object-fit:cover;opacity:.8;"><div class="card-overlay"></div></div>
+            <div class="exp-head"><h3>Responsable de groupe</h3><span class="exp-period">2020 – 2022</span></div>
+            <div class="exp-body"><p>Coordination d'un groupe de <strong>16 élèves</strong> pour l'organisation d'événements et de projets académiques.</p><ul><li>Planification des réunions et coordination des activités</li><li>Médiation et représentation auprès de l'administration</li></ul></div>
+          </div>
+          <div class="exp-card">
+            <div class="card-image-wrap" style="height:120px;"><img src="./styles/images/note.jpeg" alt="Preneuse de notes" style="width:100%;height:100%;object-fit:cover;opacity:.8;"><div class="card-overlay"></div></div>
+            <div class="exp-head"><h3>Preneuse de notes</h3><span class="exp-period">Depuis 2025</span></div>
+            <div class="exp-body"><p><strong>IUT d'Orsay</strong> — Accompagnement d'étudiants en situation de handicap</p><ul><li>Rédaction de synthèses claires et structurées</li><li>Adaptation des supports pédagogiques</li></ul></div>
+          </div>
+          <div class="exp-card">
+            <div class="card-image-wrap" style="height:120px;"><img src="./styles/images/benevole.png" alt="Bénévole logistique" style="width:100%;height:100%;object-fit:cover;opacity:.8;"><div class="card-overlay"></div></div>
+            <div class="exp-head"><h3>Bénévole logistique</h3><span class="exp-period">Depuis 2025</span></div>
+            <div class="exp-body"><p><strong>Secours Populaire</strong></p><ul><li>Organisation et rangement des stocks de dons</li><li>Gestion des flux en équipe</li></ul></div>
           </div>
         </div>
 
-          <!-- Portfolio web -->
-                    <div class="card-body"><div class="card-year">1st Year BUT · S103</div><div class="card-title">Development Workstation – Raspberry Pi</div><div class="card-subtitle">System configuration & database</div><div class="card-tags"><span class="card-tag highlight">Linux</span><span class="card-tag">MariaDB</span><span class="card-tag">SQL</span></div></div>
-            <div class="card-footer-btn"><span>View details</span><span class="arrow">↓</span></div>
-          </div>
-        <div id="panel-raspi-en" class="formation-detail-panel grid-full-width"><div class="detail-inner">
-          <div class="detail-header"><h4> Development Workstation – Raspberry Pi (S103)</h4><div class="detail-header-actions"><a href="#" class="btn-github soon"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-1.275-4.035-1.95-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>GitHub (coming soon)</a><button class="btn-close" onclick="closePanel('panel-raspi-en')">✕ Close</button></div></div>
-          <div class="detail-body">
-            <div class="detail-col"><h5>Description</h5><ul class="detail-list"><li>Full configuration of Raspberry Pi 400 as development workstation</li><li>Linux (Debian) installation and configuration</li><li>MariaDB DBMS setup and database creation</li><li>Testing with evaluation scripts</li><li><strong>Team:</strong> Mihary RAJAONARISON, Onitiana ANDRIAMIALISOA</li></ul><div class="detail-tags"><span class="detail-tag">Raspberry Pi</span><span class="detail-tag">Linux</span><span class="detail-tag">MariaDB</span><span class="detail-tag">SQL</span></div></div>
-            <div class="detail-col"><h5>Report</h5><a class="pdf-link" href="./styles/projets/Rapport projet S103.pdf" target="_blank">📄 Download S103 report</a><iframe class="pdf-frame" src="./styles/projets/Rapport projet S103.pdf"><a href="./styles/projets/Rapport projet S103.pdf">Download</a></iframe></div>
-          </div>
-        </div></div>
+      </div><!-- /lang -->
 
-          <div id="card-mammi-en" class="formation-card-new" tabindex="0" role="button" onclick="togglePanel('card-mammi-en','panel-mammi-en')" onkeypress="if(event.key==='Enter') togglePanel('card-mammi-en','panel-mammi-en')">
-            <div class="card-image-wrap"><img src="./styles/images/mammiafore.jpg" alt="" onerror="this.style.display='none'"><div class="card-overlay"></div></div>
-            <div class="card-body"><div class="card-year">1st Year BUT · Databases</div><div class="card-title">Mammiafore Database</div><div class="card-subtitle">Relational design & modelling</div><div class="card-tags"><span class="card-tag highlight">Oracle SQL</span><span class="card-tag">PL/SQL</span><span class="card-tag">Merise</span></div></div>
-            <div class="card-footer-btn"><span>View details</span><span class="arrow">↓</span></div>
-          </div>
-        <div id="panel-mammi-en" class="formation-detail-panel grid-full-width"><div class="detail-inner">
-          <div class="detail-header"><h4> Mammiafore Database</h4><div class="detail-header-actions"><a href="#" class="btn-github soon"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-1.275-4.035-1.95-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>GitHub (coming soon)</a><button class="btn-close" onclick="closePanel('panel-mammi-en')">✕ Close</button></div></div>
-          <div class="detail-body">
-            <div class="detail-col"><h5>Description</h5><ul class="detail-list"><li>Full CDM/LDM modelling via Merise</li><li>PL/SQL triggers for business automation</li><li>40% query time reduction via indexation strategy</li><li><strong>Pair:</strong> Miguel NONGNI</li></ul><div class="detail-tags"><span class="detail-tag">Oracle SQL</span><span class="detail-tag">PL/SQL</span><span class="detail-tag">Merise</span></div></div>
-            <div class="detail-col"><h5>Report</h5><a class="pdf-link" href="./styles/projets/rapport_nongni_soubeiga.pdf" target="_blank">📄 Download Mammiafore report</a><iframe class="pdf-frame" src="./styles/projets/rapport_nongni_soubeiga.pdf"><a href="./styles/projets/rapport_nongni_soubeiga.pdf">Download</a></iframe></div>
-          </div>
-        </div></div>
+      <div class="lang en">
+        <div class="projet-page-header">
+          <h2>IT <span>Projects</span></h2>
+          <p>Click on a project to discover the details</p>
+        </div>
+        <div class="projets-grid">
 
-          <div id="card-game-en" class="formation-card-new" tabindex="0" role="button" onclick="togglePanel('card-game-en','panel-game-en')" onkeypress="if(event.key==='Enter') togglePanel('card-game-en','panel-game-en')">
-            <div class="card-image-wrap"><div class="card-emoji"></div><div class="card-overlay"></div></div>
-            <div class="card-body"><div class="card-year">1st Year BUT · Development</div><div class="card-title">2D Game in C++</div><div class="card-subtitle">Built with SDL2 library</div><div class="card-tags"><span class="card-tag highlight">C++</span><span class="card-tag">SDL2</span><span class="card-tag">OOP</span></div></div>
-            <div class="card-footer-btn"><span>View details</span><span class="arrow">↓</span></div>
+          <div id="card-raspi-en" class="formation-card-new" tabindex="0" role="button"
+               onclick="togglePanel('card-raspi-en','panel-raspi-en')"
+               onkeypress="if(event.key==='Enter') togglePanel('card-raspi-en','panel-raspi-en')">
+            <div class="card-image-wrap">
+              <img src="./styles/images/raspberry.jpeg" alt="Development Workstation – Raspberry Pi" onerror="this.style.display='none'">
+              <div class="card-overlay"></div>
+            </div>
+            <div class="card-body">
+              <div class="card-year">1st Year BUT · S103</div>
+              <div class="card-title">Development Workstation – Raspberry Pi</div>
+              <div class="card-subtitle">System configuration & database</div>
+              <div class="card-tags"><span class="card-tag highlight">Linux</span><span class="card-tag">MariaDB</span><span class="card-tag">SQL</span></div>
+            </div>
+            <div class="card-footer-btn">
+              <span>View details</span>
+              <span class="arrow">↓</span>
+            </div>
           </div>
-        <div id="panel-game-en" class="formation-detail-panel grid-full-width"><div class="detail-inner">
-          <div class="detail-header"><h4> 2D Game in C++ with SDL2</h4><div class="detail-header-actions"><a href="#" class="btn-github soon"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-1.275-4.035-1.95-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>GitHub (coming soon)</a><button class="btn-close" onclick="closePanel('panel-game-en')">✕ Close</button></div></div>
-          <div class="detail-body">
-            <div class="detail-col"><h5>Description</h5><ul class="detail-list"><li>OOP game architecture design in C++</li><li>Game mechanics and physics implementation</li><li>Keyboard/mouse events and collision handling via SDL2</li></ul><div class="detail-tags"><span class="detail-tag">C++</span><span class="detail-tag">SDL2</span><span class="detail-tag">OOP</span></div></div>
-            <div class="detail-col"><h5>Preview</h5><p style="font-size:.85rem;color:var(--muted);">Academic project · 1st year BUT</p></div>
-          </div>
-        </div></div>
 
-                  <div class="detail-body">
-            <div class="detail-col"><h5>Description</h5><ul class="detail-list"><li>Semantic HTML structure and responsive CSS</li><li>FR/EN/DE language switcher in JavaScript</li><li>Animations and user interactions</li></ul><div class="detail-tags"><span class="detail-tag">HTML5</span><span class="detail-tag">CSS3</span><span class="detail-tag">JavaScript</span></div></div>
-            <div class="detail-col"><h5>Preview</h5><p style="font-size:.88rem;color:var(--muted);">You are currently viewing this project — this portfolio!</p></div>
+          <div id="panel-raspi-en" class="formation-detail-panel grid-full-width">
+            <div class="detail-inner">
+              <div class="detail-header">
+                <h4>Development Workstation – Raspberry Pi (S103)</h4>
+                <div class="detail-header-actions">
+                  <a href="#" class="btn-github soon"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-1.275-4.035-1.95-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg> GitHub (coming soon)</a>
+                  <button class="btn-close" onclick="closePanel('panel-raspi-en')">✕ Close</button>
+                </div>
+              </div>
+              <div class="detail-body">
+                <div class="detail-col">
+                  <h5>Description</h5>
+                  <ul class="detail-list"><li>Full configuration of Raspberry Pi 400 as development workstation</li><li>Linux (Debian) installation and configuration</li><li>MariaDB DBMS setup and database creation</li><li>Testing with evaluation scripts</li><li><strong>Team:</strong> Mihary RAJAONARISON, Onitiana ANDRIAMIALISOA</li></ul>
+                  <div class="detail-tags"><span class="detail-tag">Raspberry Pi</span><span class="detail-tag">Linux</span><span class="detail-tag">MariaDB</span><span class="detail-tag">SQL</span></div>
+                </div>
+                <div class="detail-col">
+                  <h5>Report</h5>
+                  <a class="pdf-link" href="./styles/projets/Rapport projet S103.pdf" target="_blank" rel="noopener">📄 Download S103 report</a><iframe class="pdf-frame" src="./styles/projets/Rapport projet S103.pdf"><a href="./styles/projets/Rapport projet S103.pdf">DL</a></iframe>
+                </div>
+              </div>
+            </div>
           </div>
-        </div></div>
 
-          <div id="card-cite-en" class="formation-card-new" tabindex="0" role="button" onclick="togglePanel('card-cite-en','panel-cite-en')" onkeypress="if(event.key==='Enter') togglePanel('card-cite-en','panel-cite-en')">
-            <div class="card-image-wrap"><div class="card-overlay"></div></div>
-            <div class="card-body"><div class="card-year">1st Year BUT · Java</div><div class="card-title">University Residence Management</div><div class="card-subtitle">OOP Java group application</div><div class="card-tags"><span class="card-tag highlight">Java</span><span class="card-tag">OOP</span><span class="card-tag">Group work</span></div></div>
-            <div class="card-footer-btn"><span>View details</span><span class="arrow">↓</span></div>
+          <div id="card-mammi-en" class="formation-card-new" tabindex="0" role="button"
+               onclick="togglePanel('card-mammi-en','panel-mammi-en')"
+               onkeypress="if(event.key==='Enter') togglePanel('card-mammi-en','panel-mammi-en')">
+            <div class="card-image-wrap">
+              <img src="./styles/images/mammiafore.jpg" alt="Mammiafore Database" onerror="this.style.display='none'">
+              <div class="card-overlay"></div>
+            </div>
+            <div class="card-body">
+              <div class="card-year">1st Year BUT · Databases</div>
+              <div class="card-title">Mammiafore Database</div>
+              <div class="card-subtitle">Relational design & modelling</div>
+              <div class="card-tags"><span class="card-tag highlight">Oracle SQL</span><span class="card-tag">PL/SQL</span><span class="card-tag">Merise</span></div>
+            </div>
+            <div class="card-footer-btn">
+              <span>View details</span>
+              <span class="arrow">↓</span>
+            </div>
           </div>
-        <div id="panel-cite-en" class="formation-detail-panel grid-full-width"><div class="detail-inner">
-          <div class="detail-header"><h4> University Residence Management App</h4><div class="detail-header-actions"><a href="#" class="btn-github soon"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-1.275-4.035-1.95-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>GitHub (coming soon)</a><button class="btn-close" onclick="closePanel('panel-cite-en')">✕ Close</button></div></div>
-          <div class="detail-body">
-            <div class="detail-col"><h5>Description</h5><ul class="detail-list"><li>Business entity modelling (residents, rooms, buildings)</li><li>OOP Java application with check-in/check-out management</li><li><strong>Group work</strong> of 3 people</li></ul><div class="detail-tags"><span class="detail-tag">Java</span><span class="detail-tag">OOP</span></div></div>
-            <div class="detail-col"><h5>Brief</h5><a class="pdf-link" href="./styles/projets/SujetDuProjetConstitutiondeGroupe.pdf" target="_blank">📄 Download brief</a><iframe class="pdf-frame" src="./styles/projets/SujetDuProjetConstitutiondeGroupe.pdf"><a href="./styles/projets/SujetDuProjetConstitutiondeGroupe.pdf">Download</a></iframe></div>
-          </div>
-        </div></div>
 
-          <div id="card-sae-en" class="formation-card-new" tabindex="0" role="button" onclick="togglePanel('card-sae-en','panel-sae-en')" onkeypress="if(event.key==='Enter') togglePanel('card-sae-en','panel-sae-en')">
-            <div class="card-image-wrap"><div class="card-overlay"></div></div>
-            <div class="card-body"><div class="card-year">2nd Year BUT</div><div class="card-title">Tutorial Group Creation Platform</div><div class="card-subtitle">Full-stack web application</div><div class="card-tags"><span class="card-tag highlight">Java · REST API</span><span class="card-tag highlight">PHP · MVC</span><span class="card-tag">SQL</span></div></div>
-            <div class="card-footer-btn"><span>View details</span><span class="arrow">↓</span></div>
+          <div id="panel-mammi-en" class="formation-detail-panel grid-full-width">
+            <div class="detail-inner">
+              <div class="detail-header">
+                <h4>Mammiafore Database</h4>
+                <div class="detail-header-actions">
+                  <a href="#" class="btn-github soon"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-1.275-4.035-1.95-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg> GitHub (coming soon)</a>
+                  <button class="btn-close" onclick="closePanel('panel-mammi-en')">✕ Close</button>
+                </div>
+              </div>
+              <div class="detail-body">
+                <div class="detail-col">
+                  <h5>Description</h5>
+                  <ul class="detail-list"><li>Full CDM/LDM modelling via Merise</li><li>PL/SQL triggers for business automation</li><li>40% query time reduction via indexation strategy</li><li><strong>Pair:</strong> Miguel NONGNI</li></ul>
+                  <div class="detail-tags"><span class="detail-tag">Oracle SQL</span><span class="detail-tag">PL/SQL</span><span class="detail-tag">Merise</span></div>
+                </div>
+                <div class="detail-col">
+                  <h5>Report</h5>
+                  <a class="pdf-link" href="./styles/projets/rapport_nongni_soubeiga.pdf" target="_blank" rel="noopener">📄 Download Mammiafore report</a><iframe class="pdf-frame" src="./styles/projets/rapport_nongni_soubeiga.pdf"><a href="./styles/projets/rapport_nongni_soubeiga.pdf">DL</a></iframe>
+                </div>
+              </div>
+            </div>
           </div>
-        <div id="panel-sae-en" class="formation-detail-panel grid-full-width"><div class="detail-inner">
-          <div class="detail-header"><h4>Tutorial Group Creation Platform</h4><div class="detail-header-actions"><a href="#" class="btn-github soon"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-1.275-4.035-1.95-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>GitHub (coming soon)</a><button class="btn-close" onclick="closePanel('panel-sae-en')">✕ Close</button></div></div>
-          <div class="detail-body">
-            <div class="detail-col"><h5>Description</h5><ul class="detail-list"><li>Requirements analysis for 3 user profiles</li><li><strong>REST API in Java</strong> for front/back communication</li><li><strong>PHP website</strong> with MVC architecture</li><li>Automatic allocation algorithm with configurable criteria</li><li>Surveys, role management, secure authentication, CSV import/export</li></ul><div class="detail-tags"><span class="detail-tag">Java</span><span class="detail-tag">REST API</span><span class="detail-tag">PHP</span><span class="detail-tag">MVC</span><span class="detail-tag">SQL</span></div></div>
-            <div class="detail-col"><h5>Brief</h5><a class="pdf-link" href="./styles/projets/SujetDuProjetConstitutiondeGroupe.pdf" target="_blank">📄 Download SAE S3 brief</a><iframe class="pdf-frame" src="./styles/projets/SujetDuProjetConstitutiondeGroupe.pdf"><a href="./styles/projets/SujetDuProjetConstitutiondeGroupe.pdf">Download</a></iframe></div>
+
+          <div id="card-game-en" class="formation-card-new" tabindex="0" role="button"
+               onclick="togglePanel('card-game-en','panel-game-en')"
+               onkeypress="if(event.key==='Enter') togglePanel('card-game-en','panel-game-en')">
+            <div class="card-image-wrap">
+              <img src="./styles/images/jeu.jpeg" alt="2D Game in C++" onerror="this.style.display='none'">
+              <div class="card-overlay"></div>
+            </div>
+            <div class="card-body">
+              <div class="card-year">1st Year BUT · Development</div>
+              <div class="card-title">2D Game in C++</div>
+              <div class="card-subtitle">Built with SDL2 library</div>
+              <div class="card-tags"><span class="card-tag highlight">C++</span><span class="card-tag">SDL2</span><span class="card-tag">OOP</span></div>
+            </div>
+            <div class="card-footer-btn">
+              <span>View details</span>
+              <span class="arrow">↓</span>
+            </div>
           </div>
-        </div></div>
+
+          <div id="panel-game-en" class="formation-detail-panel grid-full-width">
+            <div class="detail-inner">
+              <div class="detail-header">
+                <h4>2D Game in C++ with SDL2</h4>
+                <div class="detail-header-actions">
+                  <a href="#" class="btn-github soon"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-1.275-4.035-1.95-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg> GitHub (coming soon)</a>
+                  <button class="btn-close" onclick="closePanel('panel-game-en')">✕ Close</button>
+                </div>
+              </div>
+              <div class="detail-body">
+                <div class="detail-col">
+                  <h5>Description</h5>
+                  <ul class="detail-list"><li>OOP game architecture design in C++</li><li>Game mechanics and physics implementation</li><li>Keyboard/mouse events and collision handling via SDL2</li></ul>
+                  <div class="detail-tags"><span class="detail-tag">C++</span><span class="detail-tag">SDL2</span><span class="detail-tag">OOP</span></div>
+                </div>
+                <div class="detail-col">
+                  <h5>Preview</h5>
+                  <img src="./styles/images/jeu.jpeg" alt="Academic project · 1st year BUT" onerror="this.style.display='none'" style="width:100%;border-radius:8px;border:1px solid var(--border);"><p style="font-size:.82rem;color:var(--muted);margin:.75rem 0 0;">Academic project · 1st year BUT</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="card-cite-en" class="formation-card-new" tabindex="0" role="button"
+               onclick="togglePanel('card-cite-en','panel-cite-en')"
+               onkeypress="if(event.key==='Enter') togglePanel('card-cite-en','panel-cite-en')">
+            <div class="card-image-wrap">
+              <div class="card-overlay"></div>
+            </div>
+            <div class="card-body">
+              <div class="card-year">1st Year BUT · Java</div>
+              <div class="card-title">University Residence Management</div>
+              <div class="card-subtitle">OOP Java group application</div>
+              <div class="card-tags"><span class="card-tag highlight">Java</span><span class="card-tag">OOP</span><span class="card-tag">Group work</span></div>
+            </div>
+            <div class="card-footer-btn">
+              <span>View details</span>
+              <span class="arrow">↓</span>
+            </div>
+          </div>
+
+          <div id="panel-cite-en" class="formation-detail-panel grid-full-width">
+            <div class="detail-inner">
+              <div class="detail-header">
+                <h4>University Residence Management App</h4>
+                <div class="detail-header-actions">
+                  <a href="#" class="btn-github soon"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-1.275-4.035-1.95-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg> GitHub (coming soon)</a>
+                  <button class="btn-close" onclick="closePanel('panel-cite-en')">✕ Close</button>
+                </div>
+              </div>
+              <div class="detail-body">
+                <div class="detail-col">
+                  <h5>Description</h5>
+                  <ul class="detail-list"><li>Business entity modelling (residents, rooms, buildings)</li><li>OOP Java application with check-in/check-out management</li><li><strong>Group work</strong> of 3 people</li></ul>
+                  <div class="detail-tags"><span class="detail-tag">Java</span><span class="detail-tag">OOP</span></div>
+                </div>
+                <div class="detail-col">
+                  <h5>Brief</h5>
+                  <a class="pdf-link" href="./styles/projets/SujetDuProjetConstitutiondeGroupe.pdf" target="_blank" rel="noopener">📄 Download brief</a><iframe class="pdf-frame" src="./styles/projets/SujetDuProjetConstitutiondeGroupe.pdf"><a href="./styles/projets/SujetDuProjetConstitutiondeGroupe.pdf">DL</a></iframe>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="card-sae-en" class="formation-card-new" tabindex="0" role="button"
+               onclick="togglePanel('card-sae-en','panel-sae-en')"
+               onkeypress="if(event.key==='Enter') togglePanel('card-sae-en','panel-sae-en')">
+            <div class="card-image-wrap">
+              <div class="card-overlay"></div>
+            </div>
+            <div class="card-body">
+              <div class="card-year">2nd Year BUT · SAE S3</div>
+              <div class="card-title">Tutorial Group Creation Platform</div>
+              <div class="card-subtitle">Full-stack web application</div>
+              <div class="card-tags"><span class="card-tag highlight">Java · REST API</span><span class="card-tag">PHP · MVC</span><span class="card-tag">SQL</span></div>
+            </div>
+            <div class="card-footer-btn">
+              <span>View details</span>
+              <span class="arrow">↓</span>
+            </div>
+          </div>
+
+          <div id="panel-sae-en" class="formation-detail-panel grid-full-width">
+            <div class="detail-inner">
+              <div class="detail-header">
+                <h4>Tutorial Group Creation Platform – SAE S3</h4>
+                <div class="detail-header-actions">
+                  <a href="#" class="btn-github soon"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-1.275-4.035-1.95-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg> GitHub (coming soon)</a>
+                  <button class="btn-close" onclick="closePanel('panel-sae-en')">✕ Close</button>
+                </div>
+              </div>
+              <div class="detail-body">
+                <div class="detail-col">
+                  <h5>Description</h5>
+                  <ul class="detail-list"><li>Requirements analysis for 3 user profiles</li><li><strong>REST API in Java</strong> for front/back communication</li><li><strong>PHP website</strong> with MVC architecture</li><li>Automatic allocation algorithm with configurable criteria</li><li>Surveys, role management, secure authentication, CSV import/export</li></ul>
+                  <div class="detail-tags"><span class="detail-tag">Java</span><span class="detail-tag">REST API</span><span class="detail-tag">PHP</span><span class="detail-tag">MVC</span><span class="detail-tag">SQL</span></div>
+                </div>
+                <div class="detail-col">
+                  <h5>Brief</h5>
+                  <a class="pdf-link" href="./styles/projets/SujetDuProjetConstitutiondeGroupe.pdf" target="_blank" rel="noopener">📄 Download SAE S3 brief</a><iframe class="pdf-frame" src="./styles/projets/SujetDuProjetConstitutiondeGroupe.pdf"><a href="./styles/projets/SujetDuProjetConstitutiondeGroupe.pdf">DL</a></iframe>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /projets-grid -->
 
         <div class="section-title"> Other experiences</div>
         <div class="experience-grid">
-          <div class="exp-card"><div class="card-image-wrap" style="height:120px;"><img src="./styles/images/aide.jpeg" alt="Care Assistant" style="width:100%;height:100%;object-fit:cover;opacity:.8;"><div class="card-overlay"></div></div><div class="exp-head"><h3>Care Assistant</h3><span class="exp-period">2018 – 2022</span></div><div class="exp-body"><p><strong>School infirmary</strong></p><ul><li>Reception and care of sick or injured students</li><li>Assistance to nurses for routine care</li><li>Medical records management</li></ul></div></div>
-          <div class="exp-card"><div class="card-image-wrap" style="height:120px;"><img src="./styles/images/responsable.jpeg" alt="Group Leader" style="width:100%;height:100%;object-fit:cover;opacity:.8;"><div class="card-overlay"></div></div><div class="exp-head"><h3>Group Leader</h3><span class="exp-period">2020 – 2022</span></div><div class="exp-body"><p>Coordination of a <strong>16-student group</strong> for events and academic projects.</p><ul><li>Meeting planning and activity coordination</li><li>Mediation and representation to administration</li></ul></div></div>
-          <div class="exp-card"><div class="card-image-wrap" style="height:120px;"><img src="./styles/images/note.jpeg" alt="Note Taker" style="width:100%;height:100%;object-fit:cover;opacity:.8;"><div class="card-overlay"></div></div><div class="exp-head"><h3>Note Taker</h3><span class="exp-period">Since 2025</span></div><div class="exp-body"><p><strong>IUT d'Orsay</strong> — Support for students with disabilities</p><ul><li>Clear and structured lecture summaries</li><li>Adaptation of learning materials</li></ul></div></div>
-          <div class="exp-card"><div class="card-image-wrap" style="height:120px;"><img src="./styles/images/benevole.png" alt="Bénévolat" style="width:100%;height:100%;object-fit:cover;opacity:.8;"><div class="card-overlay"></div></div><div class="exp-head"><h3>Logistics Volunteer</h3><span class="exp-period">Since 2025</span></div><div class="exp-body"><p><strong>Secours Populaire</strong></p><ul><li>Organising and sorting donation stock</li><li>Managing flows as a team</li></ul></div></div>
+          <div class="exp-card">
+            <div class="card-image-wrap" style="height:120px;"><img src="./styles/images/aide.jpeg" alt="Care Assistant" style="width:100%;height:100%;object-fit:cover;opacity:.8;"><div class="card-overlay"></div></div>
+            <div class="exp-head"><h3>Care Assistant</h3><span class="exp-period">2018 – 2022</span></div>
+            <div class="exp-body"><p><strong>School infirmary</strong></p><ul><li>Reception and care of sick or injured students</li><li>Assistance to nurses for routine care</li><li>Medical records management</li></ul></div>
+          </div>
+          <div class="exp-card">
+            <div class="card-image-wrap" style="height:120px;"><img src="./styles/images/responsable.jpeg" alt="Group Leader" style="width:100%;height:100%;object-fit:cover;opacity:.8;"><div class="card-overlay"></div></div>
+            <div class="exp-head"><h3>Group Leader</h3><span class="exp-period">2020 – 2022</span></div>
+            <div class="exp-body"><p>Coordination of a <strong>16-student group</strong> for events and academic projects.</p><ul><li>Meeting planning and activity coordination</li><li>Mediation and representation to administration</li></ul></div>
+          </div>
+          <div class="exp-card">
+            <div class="card-image-wrap" style="height:120px;"><img src="./styles/images/note.jpeg" alt="Note Taker" style="width:100%;height:100%;object-fit:cover;opacity:.8;"><div class="card-overlay"></div></div>
+            <div class="exp-head"><h3>Note Taker</h3><span class="exp-period">Since 2025</span></div>
+            <div class="exp-body"><p><strong>IUT d'Orsay</strong> — Support for students with disabilities</p><ul><li>Clear and structured lecture summaries</li><li>Adaptation of learning materials</li></ul></div>
+          </div>
+          <div class="exp-card">
+            <div class="card-image-wrap" style="height:120px;"><img src="./styles/images/benevole.png" alt="Logistics Volunteer" style="width:100%;height:100%;object-fit:cover;opacity:.8;"><div class="card-overlay"></div></div>
+            <div class="exp-head"><h3>Logistics Volunteer</h3><span class="exp-period">Since 2025</span></div>
+            <div class="exp-body"><p><strong>Secours Populaire</strong></p><ul><li>Organising and sorting donation stock</li><li>Managing flows as a team</li></ul></div>
+          </div>
         </div>
 
-      </div>
-        </div>
+      </div><!-- /lang -->
 
-
-
-      <!-- ════════════════════════════════ DEUTSCH ════════════════════════════════ -->
       <div class="lang de">
-
         <div class="projet-page-header">
           <h2>IT-<span>Projekte</span></h2>
           <p>Klicken Sie auf ein Projekt, um die Details zu entdecken</p>
         </div>
-
         <div class="projets-grid">
-          <div id="card-raspi-de" class="formation-card-new" tabindex="0" role="button" onclick="togglePanel('card-raspi-de','panel-raspi-de')" onkeypress="if(event.key==='Enter') togglePanel('card-raspi-de','panel-raspi-de')">
-            <div class="card-image-wrap"><img src="./styles/images/raspberry.jpeg" alt="" onerror="this.style.display='none'"><div class="card-emoji">🍓</div><div class="card-overlay"></div></div>
-            <div class="card-body"><div class="card-year">1. Jahr BUT</div><div class="card-title">Entwicklungsarbeitsplatz – Raspberry Pi</div><div class="card-subtitle">Systemkonfiguration & Datenbank</div><div class="card-tags"><span class="card-tag highlight">Linux</span><span class="card-tag">MariaDB</span><span class="card-tag">SQL</span></div></div>
-            <div class="card-footer-btn"><span>Details anzeigen</span><span class="arrow">↓</span></div>
-          </div>
-        <div id="panel-raspi-de" class="formation-detail-panel grid-full-width"><div class="detail-inner">
-          <div class="detail-header"><h4> Entwicklungsarbeitsplatz – Raspberry Pi (S103)</h4><div class="detail-header-actions"><a href="#" class="btn-github soon"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-1.275-4.035-1.95-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>GitHub (demnächst)</a><button class="btn-close" onclick="closePanel('panel-raspi-de')">✕ Schließen</button></div></div>
-          <div class="detail-body">
-            <div class="detail-col"><h5>Beschreibung</h5><ul class="detail-list"><li>Vollständige Konfiguration des Raspberry Pi 400</li><li>Linux (Debian) Installation und Konfiguration</li><li>MariaDB-Einrichtung und Datenbankentwicklung</li><li><strong>Team:</strong> Mihary RAJAONARISON, Onitiana ANDRIAMIALISOA</li></ul><div class="detail-tags"><span class="detail-tag">Raspberry Pi</span><span class="detail-tag">Linux</span><span class="detail-tag">MariaDB</span></div></div>
-            <div class="detail-col"><h5>Bericht</h5><a class="pdf-link" href="./styles/projets/Rapport projet S103.pdf" target="_blank">📄 S103-Bericht herunterladen</a><iframe class="pdf-frame" src="./styles/projets/Rapport projet S103.pdf"><a href="./styles/projets/Rapport projet S103.pdf">Herunterladen</a></iframe></div>
-          </div>
-        </div></div>
 
-          <div id="card-mammi-de" class="formation-card-new" tabindex="0" role="button" onclick="togglePanel('card-mammi-de','panel-mammi-de')" onkeypress="if(event.key==='Enter') togglePanel('card-mammi-de','panel-mammi-de')">
-            <div class="card-image-wrap"><div class="card-overlay"></div></div>
-            <div class="card-body"><div class="card-year">1. Jahr BUT · Datenbanken</div><div class="card-title">Mammiafore-Datenbank</div><div class="card-subtitle">Relationales Design & Modellierung</div><div class="card-tags"><span class="card-tag highlight">Oracle SQL</span><span class="card-tag">PL/SQL</span><span class="card-tag">Merise</span></div></div>
-            <div class="card-footer-btn"><span>Details anzeigen</span><span class="arrow">↓</span></div>
+          <div id="card-raspi-de" class="formation-card-new" tabindex="0" role="button"
+               onclick="togglePanel('card-raspi-de','panel-raspi-de')"
+               onkeypress="if(event.key==='Enter') togglePanel('card-raspi-de','panel-raspi-de')">
+            <div class="card-image-wrap">
+              <img src="./styles/images/raspberry.jpeg" alt="Entwicklungsarbeitsplatz – Raspberry Pi" onerror="this.style.display='none'">
+              <div class="card-overlay"></div>
+            </div>
+            <div class="card-body">
+              <div class="card-year">1. Jahr BUT · S103</div>
+              <div class="card-title">Entwicklungsarbeitsplatz – Raspberry Pi</div>
+              <div class="card-subtitle">Systemkonfiguration & Datenbank</div>
+              <div class="card-tags"><span class="card-tag highlight">Linux</span><span class="card-tag">MariaDB</span><span class="card-tag">SQL</span></div>
+            </div>
+            <div class="card-footer-btn">
+              <span>Details anzeigen</span>
+              <span class="arrow">↓</span>
+            </div>
           </div>
-        <div id="panel-mammi-de" class="formation-detail-panel grid-full-width"><div class="detail-inner">
-          <div class="detail-header"><h4> Mammiafore-Datenbank</h4><div class="detail-header-actions"><a href="#" class="btn-github soon"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-1.275-4.035-1.95-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>GitHub (demnächst)</a><button class="btn-close" onclick="closePanel('panel-mammi-de')">✕ Schließen</button></div></div>
-          <div class="detail-body">
-            <div class="detail-col"><h5>Beschreibung</h5><ul class="detail-list"><li>Vollständige KDM/LDM-Modellierung via Merise</li><li>PL/SQL-Trigger für Geschäftsautomatisierung</li><li>40% Reduzierung der Abfragezeit durch Indexierung</li><li><strong>Partner:</strong> Miguel NONGNI</li></ul><div class="detail-tags"><span class="detail-tag">Oracle SQL</span><span class="detail-tag">PL/SQL</span><span class="detail-tag">Merise</span></div></div>
-            <div class="detail-col"><h5>Bericht</h5><a class="pdf-link" href="./styles/projets/rapport_nongni_soubeiga.pdf" target="_blank">📄 Mammiafore-Bericht herunterladen</a><iframe class="pdf-frame" src="./styles/projets/rapport_nongni_soubeiga.pdf"><a href="./styles/projets/rapport_nongni_soubeiga.pdf">Herunterladen</a></iframe></div>
-          </div>
-        </div></div>
 
-          <div id="card-game-de" class="formation-card-new" tabindex="0" role="button" onclick="togglePanel('card-game-de','panel-game-de')" onkeypress="if(event.key==='Enter') togglePanel('card-game-de','panel-game-de')">
-            <div class="card-image-wrap"><div class="card-overlay"></div></div>
-            <div class="card-body"><div class="card-year">1. Jahr BUT · Entwicklung</div><div class="card-title">2D-Spiel in C++</div><div class="card-subtitle">Mit SDL2-Bibliothek entwickelt</div><div class="card-tags"><span class="card-tag highlight">C++</span><span class="card-tag">SDL2</span><span class="card-tag">OOP</span></div></div>
-            <div class="card-footer-btn"><span>Details anzeigen</span><span class="arrow">↓</span></div>
+          <div id="panel-raspi-de" class="formation-detail-panel grid-full-width">
+            <div class="detail-inner">
+              <div class="detail-header">
+                <h4>Entwicklungsarbeitsplatz – Raspberry Pi (S103)</h4>
+                <div class="detail-header-actions">
+                  <a href="#" class="btn-github soon"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-1.275-4.035-1.95-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg> GitHub (demnächst)</a>
+                  <button class="btn-close" onclick="closePanel('panel-raspi-de')">✕ Schließen</button>
+                </div>
+              </div>
+              <div class="detail-body">
+                <div class="detail-col">
+                  <h5>Beschreibung</h5>
+                  <ul class="detail-list"><li>Vollständige Konfiguration des Raspberry Pi 400</li><li>Linux (Debian) Installation und Konfiguration</li><li>MariaDB-Einrichtung und Datenbankentwicklung</li><li><strong>Team:</strong> Mihary RAJAONARISON, Onitiana ANDRIAMIALISOA</li></ul>
+                  <div class="detail-tags"><span class="detail-tag">Raspberry Pi</span><span class="detail-tag">Linux</span><span class="detail-tag">MariaDB</span></div>
+                </div>
+                <div class="detail-col">
+                  <h5>Bericht</h5>
+                  <a class="pdf-link" href="./styles/projets/Rapport projet S103.pdf" target="_blank" rel="noopener">📄 S103-Bericht herunterladen</a><iframe class="pdf-frame" src="./styles/projets/Rapport projet S103.pdf"><a href="./styles/projets/Rapport projet S103.pdf">DL</a></iframe>
+                </div>
+              </div>
+            </div>
           </div>
-        <div id="panel-game-de" class="formation-detail-panel grid-full-width"><div class="detail-inner">
-          <div class="detail-header"><h4>2D-Spiel in C++ mit SDL2</h4><div class="detail-header-actions"><a href="#" class="btn-github soon"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-1.275-4.035-1.95-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>GitHub (demnächst)</a><button class="btn-close" onclick="closePanel('panel-game-de')">✕ Schließen</button></div></div>
-          <div class="detail-body">
-            <div class="detail-col"><h5>Beschreibung</h5><ul class="detail-list"><li>OOP-Spielarchitektur in C++</li><li>Spielmechanik und Physikimplementierung</li><li>Tastatur/Maus-Ereignisse und Kollisionen via SDL2</li></ul><div class="detail-tags"><span class="detail-tag">C++</span><span class="detail-tag">SDL2</span><span class="detail-tag">OOP</span></div></div>
-            <div class="detail-col"><h5>Vorschau</h5><p style="font-size:.85rem;color:var(--muted);">Akademisches Projekt · 1. Jahr BUT</p></div>
-          </div>
-        </div></div>
 
-                  <div class="detail-body">
-            <div class="detail-col"><h5>Beschreibung</h5><ul class="detail-list"><li>Semantisches HTML und responsives CSS</li><li>FR/EN/DE-Sprachumschalter in JavaScript</li><li>Animationen und Benutzerinteraktionen</li></ul><div class="detail-tags"><span class="detail-tag">HTML5</span><span class="detail-tag">CSS3</span><span class="detail-tag">JavaScript</span></div></div>
-            <div class="detail-col"><h5>Vorschau</h5><p style="font-size:.88rem;color:var(--muted);">Sie sehen dieses Projekt gerade — dieses Portfolio!</p></div>
+          <div id="card-mammi-de" class="formation-card-new" tabindex="0" role="button"
+               onclick="togglePanel('card-mammi-de','panel-mammi-de')"
+               onkeypress="if(event.key==='Enter') togglePanel('card-mammi-de','panel-mammi-de')">
+            <div class="card-image-wrap">
+              <img src="./styles/images/mammiafore.jpg" alt="Mammiafore-Datenbank" onerror="this.style.display='none'">
+              <div class="card-overlay"></div>
+            </div>
+            <div class="card-body">
+              <div class="card-year">1. Jahr BUT · Datenbanken</div>
+              <div class="card-title">Mammiafore-Datenbank</div>
+              <div class="card-subtitle">Relationales Design & Modellierung</div>
+              <div class="card-tags"><span class="card-tag highlight">Oracle SQL</span><span class="card-tag">PL/SQL</span><span class="card-tag">Merise</span></div>
+            </div>
+            <div class="card-footer-btn">
+              <span>Details anzeigen</span>
+              <span class="arrow">↓</span>
+            </div>
           </div>
-        </div></div>
 
-          <div id="card-cite-de" class="formation-card-new" tabindex="0" role="button" onclick="togglePanel('card-cite-de','panel-cite-de')" onkeypress="if(event.key==='Enter') togglePanel('card-cite-de','panel-cite-de')">
-            <div class="card-image-wrap"><div class="card-emoji"></div><div class="card-overlay"></div></div>
-            <div class="card-body"><div class="card-year">1. Jahr BUT · Java</div><div class="card-title">Studentenwohnheim-Verwaltung</div><div class="card-subtitle">Java OOP-Gruppenanwendung</div><div class="card-tags"><span class="card-tag highlight">Java</span><span class="card-tag">OOP</span></div></div>
-            <div class="card-footer-btn"><span>Details anzeigen</span><span class="arrow">↓</span></div>
+          <div id="panel-mammi-de" class="formation-detail-panel grid-full-width">
+            <div class="detail-inner">
+              <div class="detail-header">
+                <h4>Mammiafore-Datenbank</h4>
+                <div class="detail-header-actions">
+                  <a href="#" class="btn-github soon"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-1.275-4.035-1.95-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg> GitHub (demnächst)</a>
+                  <button class="btn-close" onclick="closePanel('panel-mammi-de')">✕ Schließen</button>
+                </div>
+              </div>
+              <div class="detail-body">
+                <div class="detail-col">
+                  <h5>Beschreibung</h5>
+                  <ul class="detail-list"><li>Vollständige KDM/LDM-Modellierung via Merise</li><li>PL/SQL-Trigger für Geschäftsautomatisierung</li><li>40% Reduzierung der Abfragezeit durch Indexierung</li><li><strong>Partner:</strong> Miguel NONGNI</li></ul>
+                  <div class="detail-tags"><span class="detail-tag">Oracle SQL</span><span class="detail-tag">PL/SQL</span><span class="detail-tag">Merise</span></div>
+                </div>
+                <div class="detail-col">
+                  <h5>Bericht</h5>
+                  <a class="pdf-link" href="./styles/projets/rapport_nongni_soubeiga.pdf" target="_blank" rel="noopener">📄 Mammiafore-Bericht herunterladen</a><iframe class="pdf-frame" src="./styles/projets/rapport_nongni_soubeiga.pdf"><a href="./styles/projets/rapport_nongni_soubeiga.pdf">DL</a></iframe>
+                </div>
+              </div>
+            </div>
           </div>
-        <div id="panel-cite-de" class="formation-detail-panel grid-full-width"><div class="detail-inner">
-          <div class="detail-header"><h4> Studentenwohnheim-Verwaltungsanwendung</h4><div class="detail-header-actions"><a href="#" class="btn-github soon"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-1.275-4.035-1.95-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>GitHub (demnächst)</a><button class="btn-close" onclick="closePanel('panel-cite-de')">✕ Schließen</button></div></div>
-          <div class="detail-body">
-            <div class="detail-col"><h5>Beschreibung</h5><ul class="detail-list"><li>Modellierung der Geschäftsobjekte (Bewohner, Zimmer, Gebäude)</li><li>Java OOP-Anwendung mit Ein-/Auszugsverwaltung</li><li><strong>Gruppenarbeit</strong> mit 3 Personen</li></ul><div class="detail-tags"><span class="detail-tag">Java</span><span class="detail-tag">OOP</span></div></div>
-            <div class="detail-col"><h5>Aufgabenstellung</h5><a class="pdf-link" href="./styles/projets/SujetDuProjetConstitutiondeGroupe.pdf" target="_blank">📄 Aufgabenstellung herunterladen</a><iframe class="pdf-frame" src="./styles/projets/SujetDuProjetConstitutiondeGroupe.pdf"><a href="./styles/projets/SujetDuProjetConstitutiondeGroupe.pdf">Herunterladen</a></iframe></div>
-          </div>
-        </div></div>
 
-          <div id="card-sae-de" class="formation-card-new" tabindex="0" role="button" onclick="togglePanel('card-sae-de','panel-sae-de')" onkeypress="if(event.key==='Enter') togglePanel('card-sae-de','panel-sae-de')">
-            <div class="card-image-wrap"><div class="card-overlay"></div></div>
-            <div class="card-body"><div class="card-year">2. Jahr BUT</div><div class="card-title">Plattform zur TD/TP-Gruppenbildung</div><div class="card-subtitle">Full-Stack-Webanwendung</div><div class="card-tags"><span class="card-tag highlight">Java · REST-API</span><span class="card-tag highlight">PHP · MVC</span><span class="card-tag">SQL</span></div></div>
-            <div class="card-footer-btn"><span>Details anzeigen</span><span class="arrow">↓</span></div>
+          <div id="card-game-de" class="formation-card-new" tabindex="0" role="button"
+               onclick="togglePanel('card-game-de','panel-game-de')"
+               onkeypress="if(event.key==='Enter') togglePanel('card-game-de','panel-game-de')">
+            <div class="card-image-wrap">
+              <img src="./styles/images/jeu.jpeg" alt="2D-Spiel in C++" onerror="this.style.display='none'">
+              <div class="card-overlay"></div>
+            </div>
+            <div class="card-body">
+              <div class="card-year">1. Jahr BUT · Entwicklung</div>
+              <div class="card-title">2D-Spiel in C++</div>
+              <div class="card-subtitle">Mit SDL2-Bibliothek entwickelt</div>
+              <div class="card-tags"><span class="card-tag highlight">C++</span><span class="card-tag">SDL2</span><span class="card-tag">OOP</span></div>
+            </div>
+            <div class="card-footer-btn">
+              <span>Details anzeigen</span>
+              <span class="arrow">↓</span>
+            </div>
           </div>
-        <div id="panel-sae-de" class="formation-detail-panel grid-full-width"><div class="detail-inner">
-          <div class="detail-header"><h4> TD/TP-Gruppenbildungsplattform</h4><div class="detail-header-actions"><a href="#" class="btn-github soon"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-1.275-4.035-1.95-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>GitHub (demnächst)</a><button class="btn-close" onclick="closePanel('panel-sae-de')">✕ Schließen</button></div></div>
-          <div class="detail-body">
-            <div class="detail-col"><h5>Beschreibung</h5><ul class="detail-list"><li>Anforderungsanalyse für 3 Nutzerprofile</li><li><strong>REST-API in Java</strong> für die Front/Back-Kommunikation</li><li><strong>PHP-Website</strong> mit MVC-Architektur</li><li>Automatischer Zuweisungsalgorithmus</li><li>Umfragen, Rollenverwaltung, CSV-Import/Export</li></ul><div class="detail-tags"><span class="detail-tag">Java</span><span class="detail-tag">REST-API</span><span class="detail-tag">PHP</span><span class="detail-tag">MVC</span><span class="detail-tag">SQL</span></div></div>
-            <div class="detail-col"><h5>Aufgabenstellung</h5><a class="pdf-link" href="./styles/projets/SujetDuProjetConstitutiondeGroupe.pdf" target="_blank">📄 SAE S3 Aufgabenstellung herunterladen</a><iframe class="pdf-frame" src="./styles/projets/SujetDuProjetConstitutiondeGroupe.pdf"><a href="./styles/projets/SujetDuProjetConstitutiondeGroupe.pdf">Herunterladen</a></iframe></div>
+
+          <div id="panel-game-de" class="formation-detail-panel grid-full-width">
+            <div class="detail-inner">
+              <div class="detail-header">
+                <h4>2D-Spiel in C++ mit SDL2</h4>
+                <div class="detail-header-actions">
+                  <a href="#" class="btn-github soon"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-1.275-4.035-1.95-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg> GitHub (demnächst)</a>
+                  <button class="btn-close" onclick="closePanel('panel-game-de')">✕ Schließen</button>
+                </div>
+              </div>
+              <div class="detail-body">
+                <div class="detail-col">
+                  <h5>Beschreibung</h5>
+                  <ul class="detail-list"><li>OOP-Spielarchitektur in C++</li><li>Spielmechanik und Physikimplementierung</li><li>Tastatur/Maus-Ereignisse und Kollisionen via SDL2</li></ul>
+                  <div class="detail-tags"><span class="detail-tag">C++</span><span class="detail-tag">SDL2</span><span class="detail-tag">OOP</span></div>
+                </div>
+                <div class="detail-col">
+                  <h5>Vorschau</h5>
+                  <img src="./styles/images/jeu.jpeg" alt="Akademisches Projekt · 1. Jahr BUT" onerror="this.style.display='none'" style="width:100%;border-radius:8px;border:1px solid var(--border);"><p style="font-size:.82rem;color:var(--muted);margin:.75rem 0 0;">Akademisches Projekt · 1. Jahr BUT</p>
+                </div>
+              </div>
+            </div>
           </div>
-        </div></div>
+
+          <div id="card-cite-de" class="formation-card-new" tabindex="0" role="button"
+               onclick="togglePanel('card-cite-de','panel-cite-de')"
+               onkeypress="if(event.key==='Enter') togglePanel('card-cite-de','panel-cite-de')">
+            <div class="card-image-wrap">
+              <div class="card-overlay"></div>
+            </div>
+            <div class="card-body">
+              <div class="card-year">1. Jahr BUT · Java</div>
+              <div class="card-title">Studentenwohnheim-Verwaltung</div>
+              <div class="card-subtitle">Java OOP-Gruppenanwendung</div>
+              <div class="card-tags"><span class="card-tag highlight">Java</span><span class="card-tag">OOP</span></div>
+            </div>
+            <div class="card-footer-btn">
+              <span>Details anzeigen</span>
+              <span class="arrow">↓</span>
+            </div>
+          </div>
+
+          <div id="panel-cite-de" class="formation-detail-panel grid-full-width">
+            <div class="detail-inner">
+              <div class="detail-header">
+                <h4>Studentenwohnheim-Verwaltungsanwendung</h4>
+                <div class="detail-header-actions">
+                  <a href="#" class="btn-github soon"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-1.275-4.035-1.95-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg> GitHub (demnächst)</a>
+                  <button class="btn-close" onclick="closePanel('panel-cite-de')">✕ Schließen</button>
+                </div>
+              </div>
+              <div class="detail-body">
+                <div class="detail-col">
+                  <h5>Beschreibung</h5>
+                  <ul class="detail-list"><li>Modellierung der Geschäftsobjekte (Bewohner, Zimmer, Gebäude)</li><li>Java OOP-Anwendung mit Ein-/Auszugsverwaltung</li><li><strong>Gruppenarbeit</strong> mit 3 Personen</li></ul>
+                  <div class="detail-tags"><span class="detail-tag">Java</span><span class="detail-tag">OOP</span></div>
+                </div>
+                <div class="detail-col">
+                  <h5>Aufgabenstellung</h5>
+                  <a class="pdf-link" href="./styles/projets/SujetDuProjetConstitutiondeGroupe.pdf" target="_blank" rel="noopener">📄 Aufgabenstellung herunterladen</a><iframe class="pdf-frame" src="./styles/projets/SujetDuProjetConstitutiondeGroupe.pdf"><a href="./styles/projets/SujetDuProjetConstitutiondeGroupe.pdf">DL</a></iframe>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="card-sae-de" class="formation-card-new" tabindex="0" role="button"
+               onclick="togglePanel('card-sae-de','panel-sae-de')"
+               onkeypress="if(event.key==='Enter') togglePanel('card-sae-de','panel-sae-de')">
+            <div class="card-image-wrap">
+              <div class="card-overlay"></div>
+            </div>
+            <div class="card-body">
+              <div class="card-year">2. Jahr BUT · SAE S3</div>
+              <div class="card-title">Plattform zur TD/TP-Gruppenbildung</div>
+              <div class="card-subtitle">Full-Stack-Webanwendung</div>
+              <div class="card-tags"><span class="card-tag highlight">Java · REST-API</span><span class="card-tag">PHP · MVC</span><span class="card-tag">SQL</span></div>
+            </div>
+            <div class="card-footer-btn">
+              <span>Details anzeigen</span>
+              <span class="arrow">↓</span>
+            </div>
+          </div>
+
+          <div id="panel-sae-de" class="formation-detail-panel grid-full-width">
+            <div class="detail-inner">
+              <div class="detail-header">
+                <h4>TD/TP-Gruppenbildungsplattform – SAE S3</h4>
+                <div class="detail-header-actions">
+                  <a href="#" class="btn-github soon"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-1.275-4.035-1.95-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg> GitHub (demnächst)</a>
+                  <button class="btn-close" onclick="closePanel('panel-sae-de')">✕ Schließen</button>
+                </div>
+              </div>
+              <div class="detail-body">
+                <div class="detail-col">
+                  <h5>Beschreibung</h5>
+                  <ul class="detail-list"><li>Anforderungsanalyse für 3 Nutzerprofile</li><li><strong>REST-API in Java</strong> für die Front/Back-Kommunikation</li><li><strong>PHP-Website</strong> mit MVC-Architektur</li><li>Automatischer Zuweisungsalgorithmus</li><li>Umfragen, Rollenverwaltung, CSV-Import/Export</li></ul>
+                  <div class="detail-tags"><span class="detail-tag">Java</span><span class="detail-tag">REST-API</span><span class="detail-tag">PHP</span><span class="detail-tag">MVC</span><span class="detail-tag">SQL</span></div>
+                </div>
+                <div class="detail-col">
+                  <h5>Aufgabenstellung</h5>
+                  <a class="pdf-link" href="./styles/projets/SujetDuProjetConstitutiondeGroupe.pdf" target="_blank" rel="noopener">📄 SAE S3 Aufgabenstellung herunterladen</a><iframe class="pdf-frame" src="./styles/projets/SujetDuProjetConstitutiondeGroupe.pdf"><a href="./styles/projets/SujetDuProjetConstitutiondeGroupe.pdf">DL</a></iframe>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /projets-grid -->
 
         <div class="section-title"> Andere Erfahrungen</div>
         <div class="experience-grid">
-          <div class="exp-card"><div class="card-image-wrap" style="height:120px;"><img src="./styles/images/aide.jpeg" alt="Pflegeassistentin" style="width:100%;height:100%;object-fit:cover;opacity:.8;"><div class="card-overlay"></div></div><div class="exp-head"><h3>Pflegeassistentin</h3><span class="exp-period">2018 – 2022</span></div><div class="exp-body"><p><strong>Schulkrankenzimmer</strong></p><ul><li>Empfang und Betreuung kranker oder verletzter Schüler</li><li>Unterstützung der Krankenschwestern</li></ul></div></div>
-          <div class="exp-card"><div class="card-image-wrap" style="height:120px;"><img src="./styles/images/responsable.jpeg" alt="Gruppenleitung" style="width:100%;height:100%;object-fit:cover;opacity:.8;"><div class="card-overlay"></div></div><div class="exp-head"><h3>Gruppenleitung</h3><span class="exp-period">2020 – 2022</span></div><div class="exp-body"><p>Koordination einer <strong>16-köpfigen Gruppe</strong> für Veranstaltungen und akademische Projekte.</p><ul><li>Aktivitätskoordination und Besprechungsplanung</li><li>Vermittlung und Vertretung bei der Verwaltung</li></ul></div></div>
-          <div class="exp-card"><div class="card-image-wrap" style="height:120px;"><img src="./styles/images/note.jpeg" alt="Mitschreiberin" style="width:100%;height:100%;object-fit:cover;opacity:.8;"><div class="card-overlay"></div></div><div class="exp-head"><h3>Mitschreiberin</h3><span class="exp-period">Seit 2025</span></div><div class="exp-body"><p><strong>IUT d'Orsay</strong> — Begleitung von Studierenden mit Behinderungen</p><ul><li>Klare und strukturierte Vorlesungszusammenfassungen</li></ul></div></div>
-          <div class="exp-card"><div class="card-image-wrap" style="height:120px;"><img src="./styles/images/benevole.png" alt="Bénévolat" style="width:100%;height:100%;object-fit:cover;opacity:.8;"><div class="card-overlay"></div></div><div class="exp-head"><h3>Freiwillige Logistikhelferin</h3><span class="exp-period">Seit 2025</span></div><div class="exp-body"><p><strong>Secours Populaire</strong></p><ul><li>Organisation der Spendenbestände im Team</li></ul></div></div>
+          <div class="exp-card">
+            <div class="card-image-wrap" style="height:120px;"><img src="./styles/images/aide.jpeg" alt="Pflegeassistentin" style="width:100%;height:100%;object-fit:cover;opacity:.8;"><div class="card-overlay"></div></div>
+            <div class="exp-head"><h3>Pflegeassistentin</h3><span class="exp-period">2018 – 2022</span></div>
+            <div class="exp-body"><p><strong>Schulkrankenzimmer</strong></p><ul><li>Empfang und Betreuung kranker oder verletzter Schüler</li><li>Unterstützung der Krankenschwestern</li></ul></div>
+          </div>
+          <div class="exp-card">
+            <div class="card-image-wrap" style="height:120px;"><img src="./styles/images/responsable.jpeg" alt="Gruppenleitung" style="width:100%;height:100%;object-fit:cover;opacity:.8;"><div class="card-overlay"></div></div>
+            <div class="exp-head"><h3>Gruppenleitung</h3><span class="exp-period">2020 – 2022</span></div>
+            <div class="exp-body"><p>Koordination einer <strong>16-köpfigen Gruppe</strong> für Veranstaltungen und akademische Projekte.</p><ul><li>Aktivitätskoordination und Besprechungsplanung</li><li>Vermittlung und Vertretung bei der Verwaltung</li></ul></div>
+          </div>
+          <div class="exp-card">
+            <div class="card-image-wrap" style="height:120px;"><img src="./styles/images/note.jpeg" alt="Mitschreiberin" style="width:100%;height:100%;object-fit:cover;opacity:.8;"><div class="card-overlay"></div></div>
+            <div class="exp-head"><h3>Mitschreiberin</h3><span class="exp-period">Seit 2025</span></div>
+            <div class="exp-body"><p><strong>IUT d'Orsay</strong> — Begleitung von Studierenden mit Behinderungen</p><ul><li>Klare und strukturierte Vorlesungszusammenfassungen</li></ul></div>
+          </div>
+          <div class="exp-card">
+            <div class="card-image-wrap" style="height:120px;"><img src="./styles/images/benevole.png" alt="Freiwillige Logistikhelferin" style="width:100%;height:100%;object-fit:cover;opacity:.8;"><div class="card-overlay"></div></div>
+            <div class="exp-head"><h3>Freiwillige Logistikhelferin</h3><span class="exp-period">Seit 2025</span></div>
+            <div class="exp-body"><p><strong>Secours Populaire</strong></p><ul><li>Organisation der Spendenbestände im Team</li></ul></div>
+          </div>
         </div>
 
-      </div>
-        </div>
-
-
+      </div><!-- /lang -->
 
       </main>
-
       <footer>
          <div class="social-links">
-            <a href="https://github.com/" class="social-link" target="_blank" rel="noopener" aria-label="GitHub">
-               <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12C0 17.31 3.435 21.795 8.205 23.385C8.805 23.49 9.03 23.13 9.03 22.815C9.03 22.53 9.015 21.585 9.015 20.58C6 21.135 5.22 19.845 4.98 19.17C4.845 18.825 4.26 17.76 3.75 17.475C3.33 17.25 2.73 16.695 3.735 16.68C4.68 16.665 5.355 17.55 5.58 17.91C6.66 19.725 8.385 19.215 9.075 18.9C9.18 18.12 9.495 17.595 9.84 17.295C7.17 16.995 4.38 15.96 4.38 11.37C4.38 10.065 4.845 8.985 5.61 8.145C5.49 7.845 5.07 6.615 5.73 4.965C5.73 4.965 6.735 4.65 9.03 6.195C9.99 5.925 11.01 5.79 12.03 5.79C13.05 5.79 14.07 5.925 15.03 6.195C17.325 4.635 18.33 4.965 18.33 4.965C18.99 6.615 18.57 7.845 18.45 8.145C19.215 8.985 19.68 10.05 19.68 11.37C19.68 15.975 16.875 16.995 14.205 17.295C14.64 17.67 15.015 18.39 15.015 19.515C15.015 21.12 15 22.41 15 22.815C15 23.13 15.225 23.505 15.825 23.385C18.2072 22.5807 20.2772 21.0497 21.7437 19.0074C23.2101 16.965 23.9993 14.5143 24 12C24 5.37 18.63 0 12 0Z"/></svg>
-            </a>
-            <a href="https://linkedin.com/" class="social-link" target="_blank" rel="noopener" aria-label="LinkedIn">
-               <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0H5C2.239 0 0 2.239 0 5V19C0 21.761 2.239 24 5 24H19C21.762 24 24 21.761 24 19V5C24 2.239 21.762 0 19 0ZM8 19H5V8H8V19ZM6.5 6.732C5.534 6.732 4.75 5.942 4.75 4.968C4.75 3.994 5.534 3.204 6.5 3.204C7.466 3.204 8.25 3.994 8.25 4.968C8.25 5.942 7.467 6.732 6.5 6.732ZM20 19H17V13.396C17 10.028 13 10.283 13 13.396V19H10V8H13V9.765C14.396 7.179 20 6.988 20 12.241V19Z"/></svg>
-            </a>
+            <a href="https://github.com/" class="social-link" target="_blank" rel="noopener" aria-label="GitHub"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12C0 17.31 3.435 21.795 8.205 23.385C8.805 23.49 9.03 23.13 9.03 22.815C9.03 22.53 9.015 21.585 9.015 20.58C6 21.135 5.22 19.845 4.98 19.17C4.845 18.825 4.26 17.76 3.75 17.475C3.33 17.25 2.73 16.695 3.735 16.68C4.68 16.665 5.355 17.55 5.58 17.91C6.66 19.725 8.385 19.215 9.075 18.9C9.18 18.12 9.495 17.595 9.84 17.295C7.17 16.995 4.38 15.96 4.38 11.37C4.38 10.065 4.845 8.985 5.61 8.145C5.49 7.845 5.07 6.615 5.73 4.965C5.73 4.965 6.735 4.65 9.03 6.195C9.99 5.925 11.01 5.79 12.03 5.79C13.05 5.79 14.07 5.925 15.03 6.195C17.325 4.635 18.33 4.965 18.33 4.965C18.99 6.615 18.57 7.845 18.45 8.145C19.215 8.985 19.68 10.05 19.68 11.37C19.68 15.975 16.875 16.995 14.205 17.295C14.64 17.67 15.015 18.39 15.015 19.515C15.015 21.12 15 22.41 15 22.815C15 23.13 15.225 23.505 15.825 23.385C18.2072 22.5807 20.2772 21.0497 21.7437 19.0074C23.2101 16.965 23.9993 14.5143 24 12C24 5.37 18.63 0 12 0Z"/></svg></a>
+            <a href="https://linkedin.com/" class="social-link" target="_blank" rel="noopener" aria-label="LinkedIn"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0H5C2.239 0 0 2.239 0 5V19C0 21.761 2.239 24 5 24H19C21.762 24 24 21.761 24 19V5C24 2.239 21.762 0 19 0ZM8 19H5V8H8V19ZM6.5 6.732C5.534 6.732 4.75 5.942 4.75 4.968C4.75 3.994 5.534 3.204 6.5 3.204C7.466 3.204 8.25 3.994 8.25 4.968C8.25 5.942 7.467 6.732 6.5 6.732ZM20 19H17V13.396C17 10.028 13 10.283 13 13.396V19H10V8H13V9.765C14.396 7.179 20 6.988 20 12.241V19Z"/></svg></a>
          </div>
          <p>© 2024 Christelle Vanessa Soubeiga – Tous droits réservés</p>
       </footer>
