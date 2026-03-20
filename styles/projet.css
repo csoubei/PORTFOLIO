@@ -526,3 +526,14 @@ body {
   .detail-header,
   .detail-col { padding: 1.1rem; }
 }
+
+/* ── PANNEAU PLEINE LARGEUR DANS LA GRILLE ───────────────── */
+/* Quand le panneau est enfant de .projets-grid,
+   il doit s'étendre sur toutes les colonnes */
+.projets-grid .formation-detail-panel,
+.projets-grid .grid-full-width {
+  grid-column: 1 / -1;
+  padding-left: 0;
+  padding-right: 0;
+  margin-bottom: 0;
+}
