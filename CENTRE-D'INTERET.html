@@ -27,9 +27,13 @@
           if (!activeLangEl) return;
           const lang = [...activeLangEl.classList].find(c => ['fr','en','de'].includes(c));
           const fullId = lang === 'fr' ? baseId : baseId + '-' + lang;
-          document.querySelectorAll(".interest-details").forEach(el => el.style.display = "none");
           const detail = document.getElementById(fullId);
-          if (detail) {
+          const isAlreadyOpen = detail && detail.style.display === 'block';
+          // Fermer tous les panneaux
+          document.querySelectorAll(".interest-details").forEach(el => el.style.display = "none");
+          document.querySelectorAll(".interest-item").forEach(el => el.removeAttribute('data-open'));
+          // Si pas déjà ouvert, ouvrir
+          if (!isAlreadyOpen && detail) {
             detail.style.display = "block";
             setTimeout(() => detail.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
           }
