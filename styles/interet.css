@@ -1,0 +1,253 @@
+/*
+ * interet.css – Centres d'intérêt
+ * Cohérent avec projet.css / formation.css (gold, dark, navy)
+ */
+
+:root {
+  --gold:         #f1c40f;
+  --gold-soft:    #fff8d6;
+  --gold-text:    #7a6000;
+  --dark:         #0f1923;
+  --navy:         #1a2a3a;
+  --card-bg:      #ffffff;
+  --page-bg:      #f5f7fa;
+  --text:         #2c3e50;
+  --muted:        #6b7c93;
+  --border:       #e8edf2;
+  --radius:       14px;
+  --shadow:       0 4px 24px rgba(15,25,35,.10);
+  --shadow-hover: 0 12px 40px rgba(15,25,35,.18);
+  --transition:   .35s cubic-bezier(.4,0,.2,1);
+}
+
+body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--page-bg); }
+
+/* EN-TÊTE */
+section.lang > h2 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 800; color: var(--dark);
+  text-align: center; padding: 3rem 1.5rem 0;
+  margin: 0 0 2.5rem; letter-spacing: -.02em;
+}
+
+/* CONTENEUR */
+.interests-container {
+  max-width: 1100px; margin: 0 auto; padding: 0 1.5rem 2rem;
+}
+
+/* TITRE CATÉGORIE */
+.interests-container > h3 {
+  font-family: 'Syne', sans-serif;
+  font-size: 1rem; font-weight: 800; color: var(--dark);
+  text-transform: uppercase; letter-spacing: .1em;
+  margin: 2.5rem 0 1rem;
+  display: flex; align-items: center; gap: .75rem;
+}
+.interests-container > h3::before {
+  content: ''; display: inline-block;
+  width: 28px; height: 3px;
+  background: var(--gold); border-radius: 2px; flex-shrink: 0;
+}
+.interests-container > h3::after {
+  content: ''; flex: 1; height: 1px; background: var(--border);
+}
+
+/* GRILLE */
+.interests-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
+  gap: 1rem; margin-bottom: .5rem;
+}
+
+/* CARTE */
+.interest-item {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 2px solid transparent;
+  overflow: hidden; cursor: pointer;
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+  outline: none;
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+  position: relative;
+}
+.interest-item:hover, .interest-item:focus {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--gold);
+}
+.interest-item[aria-expanded="true"] { border-color: var(--gold); }
+
+/* Image de carte */
+.interest-item img {
+  width: 100%; height: 110px;
+  object-fit: cover; display: block;
+  background: var(--navy);
+  transition: opacity var(--transition), transform var(--transition);
+}
+.interest-item:hover img { opacity: .88; transform: scale(1.05); }
+
+/* Placeholder emoji */
+.interest-item .interest-placeholder {
+  width: 100%; height: 110px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2.8rem;
+  background: linear-gradient(135deg, var(--dark) 0%, var(--navy) 100%);
+}
+
+/* Label */
+.interest-item p {
+  font-family: 'Syne', sans-serif;
+  font-size: .8rem; font-weight: 700; color: var(--dark);
+  padding: .65rem .75rem .7rem; margin: 0; line-height: 1.3;
+}
+
+/* Badge NEW */
+.interest-item.is-new::after {
+  content: 'Nouveau';
+  position: absolute; top: 8px; right: 8px;
+  font-size: .6rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase;
+  background: var(--gold); color: var(--dark);
+  padding: 2px 7px; border-radius: 20px;
+}
+
+/* PANNEAU DÉTAIL */
+.interest-details {
+  display: none;
+  max-width: 1100px; margin: .75rem auto 1.5rem; padding: 0 1.5rem;
+  animation: idSlideDown .4s cubic-bezier(.4,0,.2,1) both;
+}
+@keyframes idSlideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Wrapper interne */
+.interest-details-inner {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border-left: 4px solid var(--gold);
+  overflow: hidden;
+}
+
+/* En-tête panneau */
+.interest-detail-header {
+  padding: 1.25rem 1.75rem 1rem;
+  background: linear-gradient(135deg, var(--dark) 0%, var(--navy) 100%);
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 1rem; flex-wrap: wrap;
+}
+.interest-detail-header h3 {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.1rem; font-weight: 700; color: #fff; margin: 0;
+}
+
+/* Corps panneau */
+.interest-detail-body {
+  display: grid; grid-template-columns: 200px 1fr;
+}
+.interest-detail-img img {
+  width: 100%; height: 100%; min-height: 180px;
+  object-fit: cover; opacity: .8; display: block;
+}
+.interest-detail-img .interest-placeholder {
+  width: 100%; min-height: 180px; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 4rem;
+  background: linear-gradient(135deg, var(--dark), var(--navy));
+}
+.interest-detail-text {
+  padding: 1.5rem 1.75rem;
+  border-left: 1px solid var(--border);
+}
+.interest-detail-text p {
+  font-size: .88rem; color: var(--text); line-height: 1.75; margin: 0 0 .75rem;
+}
+.interest-tags { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: 1rem; }
+.interest-tag {
+  font-size: .72rem; font-weight: 600;
+  padding: 4px 11px; border-radius: 20px;
+  background: var(--gold-soft); color: var(--gold-text);
+}
+
+/* Bouton fermer */
+.interest-close-btn,
+.close-details {
+  background: rgba(255,255,255,.15);
+  border: 1px solid rgba(255,255,255,.25);
+  color: #fff; padding: 6px 16px; border-radius: 20px;
+  font-size: .8rem; font-weight: 500; cursor: pointer;
+  transition: background var(--transition); white-space: nowrap;
+  font-family: 'DM Sans', sans-serif;
+}
+.interest-close-btn:hover, .close-details:hover { background: rgba(255,255,255,.28); }
+
+/* ANCIENS STYLES — compatibilité avec le HTML existant */
+.interest-detail-content {
+  display: grid; grid-template-columns: 200px 1fr;
+}
+.interest-detail-content img {
+  width: 100%; height: 100%; min-height: 160px;
+  object-fit: cover; opacity: .8; display: block;
+}
+.interest-detail-content video {
+  width: 100%; min-height: 180px; display: block; background: #000;
+}
+.interest-description {
+  padding: 1.5rem 1.75rem;
+  border-left: 1px solid var(--border);
+}
+.interest-description p {
+  font-size: .88rem; color: var(--text); line-height: 1.75; margin: 0 0 .75rem;
+}
+.interest-description h4 {
+  font-family: 'Syne', sans-serif;
+  font-size: .8rem; font-weight: 700; color: var(--dark);
+  text-transform: uppercase; letter-spacing: .08em;
+  margin: 1rem 0 .5rem;
+  display: flex; align-items: center; gap: .5rem;
+}
+.interest-description h4::before {
+  content: ''; width: 12px; height: 3px;
+  background: var(--gold); border-radius: 2px; flex-shrink: 0;
+}
+.programming-languages img { width: 100%; border-radius: 8px; margin-top: .5rem; }
+
+/* Titre h3 dans le panneau ancien style */
+.interest-details > h3 {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.1rem; font-weight: 700;
+  background: linear-gradient(135deg, var(--dark) 0%, var(--navy) 100%);
+  color: #fff; padding: 1.25rem 1.75rem 1rem; margin: 0;
+}
+
+/* Envelopper le panneau existant */
+.interest-details {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border-left: 4px solid var(--gold);
+  overflow: hidden;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .interests-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
+  .interest-detail-body,
+  .interest-detail-content { grid-template-columns: 1fr; }
+  .interest-detail-img img,
+  .interest-detail-content img { min-height: 200px; max-height: 220px; }
+  .interest-detail-text,
+  .interest-description { border-left: none; border-top: 1px solid var(--border); }
+}
+@media (max-width: 600px) {
+  .interests-container { padding: 0 1rem 2rem; }
+  .interests-grid { grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: .75rem; }
+  .interest-item img,
+  .interest-item .interest-placeholder { height: 90px; }
+  .interest-detail-header { padding: 1rem; }
+  .interest-description,
+  .interest-detail-text { padding: 1rem; }
+}
